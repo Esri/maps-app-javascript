@@ -1,2 +1,13 @@
-.sass-cache/
-*.css.map
+node_modules/*
+.vscode/*
+build/*
+dist/*
+html-report/*
+.baseDir*
+.tsdrc
+.tscache
+npm-debug.log
+yarn.lock
+coverage-final.*
+.firebaserc
+firebase.json

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang=en class="mdc-typography">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>ArcGIS Maps App JavaScript</title>
+  <link rel="stylesheet" href="app/styles/main.css" media="none" onload="if(media!='all')media='all'">
+  <link rel="manifest" href="manifest.json">
+  <!-- Add to home screen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="EsriJS App">
+  <link rel="apple-touch-icon" href="assets/icons/icon-152x152.png">
+  <meta name="msapplication-TileImage" content="assets/icons/icon-152x152.png">
+  <meta name="msapplication-TileColor" content="#338033">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#338033">
+</head>
+
+<body>
+
+  <header class="mdc-toolbar">
+    <div class="mdc-toolbar__row">
+      <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+        <a href="#" class="app-menu material-icons mdc-toolbar__icon--menu">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" class="svg-icon"><path d="M0 0v32h32V0H0zm17.028 11.947l.022.106c.175.863.272 1.669-.461 2.066-.52.281-.792.766-1.013 1.156-.28.497-.414.684-.715.684-.159 0-.284-.084-.487-.241-.249-.191-.559-.425-1.03-.425-.692 0-1.255.606-1.255 1.35 0 .475-.421 1.353-1.021 1.353-.491 0-.652-.172-.763-.369-.297-.531-.666-1.194-1.512-1.194-.849 0-1.541.734-1.541 1.634 0 .288.059.509.11.703.044.166.083.309.083.478 0 .244-.102.428-.23.666-.152.278-.339.622-.339 1.091 0 .612.562 1.112 1.255 1.112.392 0 .653-.103.863-.184.195-.078.332-.125.559-.103.104.009.212.3.212.5 0 .322-.275.597-.591.912-.514.513-1.219 1.213-.638 2.369.22.444.758.569 1.277.691.24.056.416.094.559.131 0 0 .256.339.32.536a.616.616 0 0 0 .013.23.92.92 0 0 1-.17.506c-.253.381-.548.597-.862.825-.623.456-1.141.534-1.156 1.469H2v-28h21.479c.03.578-.902 1.219-.902 1.219l-.98.581c-1.054.672-2.254 1.703-2.254 2.559 0 .378.15.647.269.859.1.178.157.284.157.419 0 .191-.126.316-.411.559-.248.216-.533.453-.662.841-.043.131-.064.263-.064.4s.029.306.063.488c.028.153.089.472.042.547 0 0-.055.041-.259.041l-.173-.006c-.371 0-.75.303-.981.581-.171.206-.362.528-.297.859zM30 30h-9.231c-.206-1.22-1.348-1.258-2.167-1.556-.288-.106-.584-.212-.858-.353-.354-.184-.35-.586-.295-.891 0 0 .102-.303.091-.369l.002-.003-.002-.002c-.005-.034-.012-.066-.012-.109 0-.23.212-.339.698-.573.508-.248 1.201-.576 1.201-1.391 0-.292-.129-.488-.216-.619-.054-.081-.07-.109-.07-.133 0-.172.067-.286.331-.524.283-.253.628-.6.628-1.191v-.928c0-.094.269-.197.605-.031.166.078.411.188.715.188.673 0 1.039-.494 1.299-.853.241-.331.332-.516.566-.478.234.041.148.05.324.409.121.25.261.537.52.763.454.397.979.528 1.506.569a6.122 6.122 0 0 0 1.996.006l.168-.028a4.14 4.14 0 0 1 .981-.067s.089.022.137.006c.39.044.719.176.981.458l.1.248c.003.005-.003.009 0 .014v7.437z"/></svg>
+        </a>
+        <div class="app-actions">
+          <search></search>
+          <directions class="top-nav-link margin-left-1"></directions>
+        </div>
+      </section>
+    </div>
+  </header>
+
+  <aside class="mdc-temporary-drawer mdc-typography">
+    <nav class="mdc-temporary-drawer__drawer">
+      <header class="mdc-temporary-drawer__header">
+        <div class="mdc-temporary-drawer__header-content">
+          Maps App
+        </div>
+      </header>
+      <nav id="icon-with-text-demo" class="mdc-temporary-drawer__content mdc-list">
+          <authentication class="mdc-list-item margin-left-1"></authentication>
+      </nav>
+    </nav>
+  </aside>
+
+  <main class="main">
+    <webmap>
+      <div>
+        <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+          <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+        </svg>
+      </div>
+    </webmap>
+  </main>
+
+  <link rel="stylesheet" href="https://js.arcgis.com/4.5/esri/css/main.css" media="none" onload="if(media!='all')media='all'">
+  <script>
+    /*
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+              .register("./service-worker.js")
+              .then(function() { console.log("Service Worker Registered"); })
+              .catch(function(error) {
+                console.log("Service Worker Failed to Register: ", error);
+              });
+    }
+    */
+    var locationPath = location.pathname.replace(/\/[^\/]+$/, "");
+
+    window.dojoConfig = {
+      deps: ["app/main"],
+      packages: [
+        {
+          name: "app",
+          location: locationPath + "app"
+        },
+        {
+          name: "config",
+          location: locationPath + "config"
+        },
+        {
+          name: "@material",
+          location: locationPath + "../node_modules/@material"
+        }
+      ]
+    };
+  </script>
+  <script src="https://js.arcgis.com/4.5/"></script>
+</body>
+
+</html>

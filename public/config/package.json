@@ -1,0 +1,6 @@
+{
+  "name": "config",
+  "description": "Application Configuration",
+  "version": "1.0",
+  "dojoBuild": "package.js"
+}

@@ -1,0 +1,19 @@
+CACHE MANIFEST
+# v0.1
+index.html
+oauth-callback.html
+app/main.js
+assets/icons/icon-256x256.png
+
+http://js.arcgis.com/4.5/dojo/nls/dojo_en-us.js
+http://js.arcgis.com/4.5/esri/views/MapView.js
+http://js.arcgis.com/4.5/esri/WebMap.js
+
+app/styles/main.css
+
+https://js.arcgis.com/4.5/esri/themes/base/icons/fonts/CalciteWebCoreIcons.ttf?erniwi
+https://js.arcgis.com/4.5/esri/themes/base/fonts/avenir-next/Avenir_Next_W00_400.woff2
+https://js.arcgis.com/4.5/esri/themes/base/fonts/avenir-next/Avenir_Next_W00_600.woff2
+
+NETWORK:
+*

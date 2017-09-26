@@ -1,0 +1,46 @@
+{
+  "compilerOptions": {
+    "plugins": [
+      {
+        "name": "tslint-language-service"
+      }
+    ],
+    "module": "amd",
+    "noImplicitAny": true,
+    "outDir": "./dist",
+    "removeComments": false,
+    "sourceMap": true,
+    "jsx": "react",
+    "jsxFactory": "tsx",
+    "lib": ["dom", "es2015.promise", "es5", "es6"],
+    "target": "es5",
+    "moduleResolution": "node",
+    "isolatedModules": false,
+    "experimentalDecorators": true,
+    "noEmitHelpers": false,
+    "declaration": false,
+    "noLib": false,
+    "preserveConstEnums": true,
+    "suppressImplicitAnyIndexErrors": true
+  },
+  "typeRoots": [
+    "./node_modules/@types",
+    "./node_modules/intern/types"
+  ],
+  "types": [
+    "arcgis-js-api",
+    "chai",
+    "intern"
+  ],
+  "include": [
+    "./src/app/**/*",
+    "./src/config/**/*",
+    "./src/tests/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "files": [
+    "typings/extensions.d.ts"
+  ]
+}

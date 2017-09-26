@@ -1,0 +1,69 @@
+{
+  "loader": {
+    "script": "dojo",
+    "options": {
+      "paths": {
+        "@material/drawer/index": "node_modules/@material/drawer/dist/mdc.drawer"
+      },
+      "packages": [
+        { "name": "dist", "location": "dist" },
+        {
+          "name": "dojo",
+          "location": "node_modules/dojo"
+        },
+        {
+          "name": "dijit",
+          "location": "node_modules/dijit"
+        },
+        {
+          "name": "dojox",
+          "location": "node_modules/dojox"
+        },
+        {
+          "name": "dgrid",
+          "location": "node_modules/dgrid"
+        },
+        {
+          "name": "dstore",
+          "location": "node_modules/dstore"
+        },
+        {
+          "name": "moment",
+          "location": "node_modules/moment"
+        },
+        {
+          "name": "esri",
+          "location": "node_modules/arcgis-js-api"
+        },
+        {
+          "name": "chai",
+          "location": "node_modules/chai",
+          "main": "chai"
+        },
+        {
+          "name": "sinon",
+          "location": "node_modules/sinon/pkg",
+          "main": "sinon"
+        },
+        {
+          "name": "testdouble",
+          "location": "node_modules/testdouble/dist",
+          "main": "testdouble"
+        },
+        {
+          "name": "@material",
+          "location": "node_modules/@material"
+        }
+      ]
+    }
+  },
+  "environments": [
+    {
+      "browserName": "chrome",
+      "chromeOptions": { "args": [ "headless", "disable-gpu" ] },
+      "fixSessionCapabilities": false
+    }
+  ],
+  "suites": "dist/tests/unit/app/main.js",
+  "maxConcurrency": 2
+}
