@@ -11,7 +11,6 @@ import {
 import { join, renderable, tsx } from "esri/widgets/support/widget";
 
 import Credential = require("esri/identity/Credential");
-import View = require("esri/views/View");
 import Widget = require("esri/widgets/Widget");
 
 import * as i18n from "dojo/i18n!./Authenticate/nls/Authenticate";
@@ -23,7 +22,6 @@ import esri = __esri;
 
 interface AuthenticateProperties extends esri.WidgetProperties {
   appId?: string;
-  view?: esri.View;
   showLabel?: boolean;
   viewModel?: AuthenticateViewModel;
 }
@@ -47,8 +45,6 @@ class Authenticate extends declared(Widget) {
   showLabel = true;
 
   @aliasOf("viewModel.appId") appId: string;
-
-  @aliasOf("viewModel.view") view: View = null;
 
   @aliasOf("viewModel.checkStatus") checkStatus: () => IPromise<Credential>;
 
@@ -81,12 +77,14 @@ class Authenticate extends declared(Widget) {
 
     const text = this.isSignedIn ? i18n.signout : i18n.signin;
 
-    const content = !this.showLabel
-      ? <span aria-label={text}>{icon}</span>
-      : <span>
-          <span aria-label={text}>{icon}</span>
-          <span class={join(CSS.label, CSS.margin)}>{text}</span>
-        </span>;
+    const content = !this.showLabel ? (
+      <span aria-label={text}>{icon}</span>
+    ) : (
+      <span>
+        <span aria-label={text}>{icon}</span>
+        <span class={join(CSS.label, CSS.margin)}>{text}</span>
+      </span>
+    );
 
     return (
       <div

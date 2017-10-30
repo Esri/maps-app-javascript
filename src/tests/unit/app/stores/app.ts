@@ -1,6 +1,6 @@
-import { assert } from "chai";
-import * as registerSuite from "intern/lib/interfaces/object";
+import {} from "intern";
 import { mock, SinonSpy, spy, stub } from "sinon";
+import td = require("testdouble");
 
 import promiseUtils = require("esri/core/promiseUtils");
 
@@ -10,15 +10,11 @@ import esriRequest = require("esri/request");
 
 import FeatureLayer = require("esri/layers/FeatureLayer");
 
-registerSuite({
-  name: "app/stores/app",
-  setup() {},
-  beforeEach() {
-  },
-  afterEach() {},
-  teardown() {},
+const { suite, test } = intern.getInterface("tdd");
+const { assert } = intern.getPlugin("chai");
 
-  "will retrieve a user layer when available": () => {
+suite("app/stores/app", () => {
+  test("will retrieve a user layer when available", () => {
     assert.equal("awesome", "awesome");
-  }
+  });
 });

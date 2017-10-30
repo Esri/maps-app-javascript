@@ -107,7 +107,7 @@ header.mdc-toolbar,
   }
 }
 
-authenticate {
+authentication {
   color: var(--color-black);
   text-decoration: none;
   letter-spacing: 2px;
@@ -118,6 +118,7 @@ authenticate {
   line-height: var(--align);
   display: inline-block;
   vertical-align: top;
+  cursor: pointer;
 }
 
 .top-nav {

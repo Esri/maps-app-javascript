@@ -7,7 +7,6 @@
     ],
     "module": "amd",
     "noImplicitAny": true,
-    "outDir": "./dist",
     "removeComments": false,
     "sourceMap": true,
     "jsx": "react",
@@ -38,7 +37,7 @@
     "./src/tests/**/*"
   ],
   "exclude": [
-    "node_modules"
+    "./node_modules"
   ],
   "files": [
     "typings/extensions.d.ts"

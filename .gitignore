@@ -11,3 +11,4 @@ yarn.lock
 coverage-final.*
 .firebaserc
 firebase.json
+coverage/*

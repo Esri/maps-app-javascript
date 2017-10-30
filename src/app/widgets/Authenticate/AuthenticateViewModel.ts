@@ -7,8 +7,6 @@ import watchUtils = require("esri/core/watchUtils");
 import Credential = require("esri/identity/Credential");
 import IdentityManager = require("esri/identity/IdentityManager");
 import OAuthInfo = require("esri/identity/OAuthInfo");
-import MapView = require("esri/views/MapView");
-import SceneView = require("esri/views/SceneView");
 
 import {
   aliasOf,
@@ -39,8 +37,6 @@ class AuthenticateViewModel extends declared(Accessor) {
   @property() appId: string;
 
   @property() info: OAuthInfo = null;
-
-  @property() view: MapView | SceneView = null;
 
   constructor(params?: AuthenticateParams) {
     super(params);
@@ -89,7 +85,7 @@ class AuthenticateViewModel extends declared(Accessor) {
   }
 
   private _checkStatus(resolve: Resolver) {
-    if (window.navigator["standalone"] !== true) {
+    if (window.navigator.standalone !== true) {
       IdentityManager.registerOAuthInfos([this.info]);
     }
     IdentityManager.checkSignInStatus(
@@ -101,7 +97,7 @@ class AuthenticateViewModel extends declared(Accessor) {
   }
 
   private _login(resolve: Resolver, reject: Rejector) {
-    if (window.navigator["standalone"] !== true) {
+    if (window.navigator.standalone !== true) {
       IdentityManager.registerOAuthInfos([this.info]);
     }
     IdentityManager.checkSignInStatus(`${this.info.portalUrl}/sharing`)

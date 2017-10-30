@@ -1,39 +1,39 @@
 {
   "loader": {
-    "script": "dojo",
+    "script": "dojo2",
     "options": {
       "paths": {
         "@material/drawer/index": "node_modules/@material/drawer/dist/mdc.drawer"
       },
       "packages": [
-        { "name": "dist", "location": "dist" },
+        { "name": "dist", "location": "~tmp" },
         {
           "name": "dojo",
-          "location": "node_modules/dojo"
+          "location": "https://js.arcgis.com/4.5/dojo"
         },
         {
           "name": "dijit",
-          "location": "node_modules/dijit"
+          "location": "https://js.arcgis.com/4.5/dijit"
         },
         {
           "name": "dojox",
-          "location": "node_modules/dojox"
+          "location": "https://js.arcgis.com/4.5/dojox"
         },
         {
           "name": "dgrid",
-          "location": "node_modules/dgrid"
+          "location": "https://js.arcgis.com/4.5/dgrid"
         },
         {
           "name": "dstore",
-          "location": "node_modules/dstore"
+          "location": "https://js.arcgis.com/4.5/dstore"
         },
         {
           "name": "moment",
-          "location": "node_modules/moment"
+          "location": "https://js.arcgis.com/4.5/moment"
         },
         {
           "name": "esri",
-          "location": "node_modules/arcgis-js-api"
+          "location": "https://js.arcgis.com/4.5/esri"
         },
         {
           "name": "chai",
@@ -64,6 +64,12 @@
       "fixSessionCapabilities": false
     }
   ],
-  "suites": "dist/tests/unit/app/main.js",
+  "browser": {
+    "suites": "~tmp/tests/unit/all.js"
+  },
+  "coverage": [
+    "~tmp/app/**/*.js",
+    "!node_modules/"
+  ],
   "maxConcurrency": 2
 }

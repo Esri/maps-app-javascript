@@ -21,8 +21,8 @@ import Home = require("esri/widgets/Home");
 import Locate = require("esri/widgets/Locate");
 import Search = require("esri/widgets/Search");
 
-import Authenticate = require("./../widgets/Authenticate");
 import Directions from "./../widgets/Directions";
+import MenuContainer from "./../widgets/MenuContainer";
 
 import {
   aliasOf,
@@ -33,8 +33,6 @@ import {
 
 import { appId, webMapItem } from "../../config/main";
 
-import { MDCTemporaryDrawer } from "@material/drawer/index";
-
 interface Store {
   webmap: WebMap;
   view: MapView;
@@ -43,9 +41,6 @@ interface Store {
 const { watch, whenOnce } = watchUtils;
 
 const element = () => document.createElement("div");
-
-const drawerEl = document.querySelector(".mdc-temporary-drawer") || element();
-const drawerElem = new MDCTemporaryDrawer(drawerEl);
 
 @subclass("app.stores.app")
 class AppStore extends declared(Accessor) implements Store {
@@ -58,7 +53,7 @@ class AppStore extends declared(Accessor) implements Store {
 
   @property() view: MapView;
 
-  @property() drawerSlider = drawerElem;
+  @property() menuContainer: MenuContainer;
 
   @aliasOf("webmap.add") addLayer: (layer: __esri.Layer) => void;
 
@@ -67,35 +62,39 @@ class AppStore extends declared(Accessor) implements Store {
   constructor(params?: any) {
     super(params);
 
-    document.querySelector(".app-menu").addEventListener("click", () => {
-      drawerElem.open = true;
-    });
+    const menu = document.querySelector(".app-menu");
+    if (menu) {
+      menu.addEventListener("click", () => {
+        this.menuContainer.open();
+      });
+    }
   }
 
   loadWidgets() {
-    const authNode = document.querySelector("authentication") || element();
-    const searchNode = document.querySelector("search") || element();
-    const directionsNode = document.querySelector("directions") || element();
+    const menuNode = (document.querySelector("menu-container") ||
+      element()) as HTMLElement;
+    const authNode = (document.querySelector("authentication") ||
+      element()) as HTMLElement;
+    const searchNode = (document.querySelector("search") ||
+      element()) as HTMLElement;
+    const directionsNode = (document.querySelector("directions") ||
+      element()) as HTMLElement;
 
-    const login = new Authenticate({
-      appId,
-      container: authNode,
-      showLabel: true
+    this.menuContainer = new MenuContainer({
+      container: menuNode
     });
 
-    watch(login, "credential", credential => {
+    watch(this, "menuContainer.signedIn", credential => {
       this.signedIn = !!credential;
-      this.drawerSlider.open = false;
+      this.menuContainer.close();
     });
 
     whenOnce(this, "view")
       .then(({ value: view }) => {
-
         const directions = new Directions({
           container: directionsNode
         });
 
-        login.view = view;
         directions.view = view;
 
         const search = new Search({
