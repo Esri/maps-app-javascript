@@ -45,66 +45,18 @@ header.mdc-toolbar,
   background: url("./../../assets/green-blue-small.png") no-repeat top center, linear-gradient(to right, #502070 0%, #2f3c90 100%);
 }
 
-.site-header {
-  display: flex;
-  align-items: center;
-  background: var(--color-theme);
+a.app-menu {
   color: var(--color-theme-font);
-  //z-index: 999;
-
-  @media (--small-main-viewport) {
-    flex-wrap: wrap;
-    .site-nav {
-      background: var(--color-black);
-      order: 2;
-      flex-basis: 100%;
-    }
-    .site-nav span {
-      font-size: 1rem;
-    }
-    .app-actions {
-      margin-left: auto;
-    }
-  }
-
-  & a {
-    color: var(--color-theme-font);
-    text-transform: uppercase;
-  }
-
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .app-actions {
   display: flex;
   align-items: center;
   padding-right: 10px;
-}
-
-.site-nav {
-  text-align: center;
-  flex: 1;
-
-  & > ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: inline-flex;
-  }
-
-  & .active a {
-    background: var(--color-blue);
-    color: var(--color-theme-font);
-  }
-
-  & a {
-    color: var(--color-theme-font);
-    text-decoration: none;
-    text-transform: uppercase;
-    padding: 20px;
-    display: inline-block;
-    font-size: 1.3rem;
-    font-weight: bold;
-  }
 }
 
 authentication {

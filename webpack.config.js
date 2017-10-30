@@ -58,7 +58,9 @@ module.exports = env => {
                 loader: "postcss-loader",
                 options: {
                   warnings: false,
-                  path: "../postcss.config.js"
+                  config: {
+                    path: "postcss.config.js"
+                  }
                 }
               }
             ]
