@@ -83,13 +83,12 @@ class AppStore extends declared(Accessor) implements Store {
     this.menuContainer = new MenuContainer({
       container: menuNode
     });
-
     watch(this, "menuContainer.signedIn", credential => {
       this.signedIn = !!credential;
       this.menuContainer.close();
     });
 
-    whenOnce(this, "view")
+    return whenOnce(this, "view")
       .then(({ value: view }) => {
         const directions = new Directions({
           container: directionsNode
@@ -112,7 +111,6 @@ class AppStore extends declared(Accessor) implements Store {
         const locate = new Locate({ view });
 
         directions.locate = locate;
-
         return [
           {
             component: new Home({
@@ -143,7 +141,7 @@ class AppStore extends declared(Accessor) implements Store {
         ];
       })
       .then(widgets => {
-        this.addToUI(widgets);
+        return this.addToUI(widgets);
       });
   }
 }

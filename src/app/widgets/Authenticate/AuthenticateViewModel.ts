@@ -85,7 +85,10 @@ class AuthenticateViewModel extends declared(Accessor) {
   }
 
   private _checkStatus(resolve: Resolver) {
-    if (window.navigator.standalone !== true) {
+    if (
+      "standalone" in window.navigator &&
+      !(window.navigator as any).standalone
+    ) {
       IdentityManager.registerOAuthInfos([this.info]);
     }
     IdentityManager.checkSignInStatus(
@@ -97,7 +100,10 @@ class AuthenticateViewModel extends declared(Accessor) {
   }
 
   private _login(resolve: Resolver, reject: Rejector) {
-    if (window.navigator.standalone !== true) {
+    if (
+      "standalone" in window.navigator &&
+      !(window.navigator as any).standalone
+    ) {
       IdentityManager.registerOAuthInfos([this.info]);
     }
     IdentityManager.checkSignInStatus(`${this.info.portalUrl}/sharing`)

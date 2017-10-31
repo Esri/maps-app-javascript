@@ -32,12 +32,11 @@
     "prettify": "prettier 'src/**/*.{ts,tsx}' --write && tslint 'src/**/*.{ts,tsx}' --fix",
     "precommit": "lint-staged",
     "start": "tsc && npm run watch",
-    "test": "intern serve --config ./dist/tests/intern-local.js",
     "test:coverage": "npm run coverage:start",
     "watch": "npm-watch",
     "webpack": "del dist && webpack --config webpack.build.config.js --env.NODE_ENV=local --env.production --progress",
     "serve": "npm run webpack && webpack-dev-server --hot",
-    "intern": "del ~tmp && npm run copy:js && tsc --outDir './~tmp' && intern && del ~tmp"
+    "test": "del ~tmp && npm run copy:js && tsc --outDir './~tmp' && intern && del ~tmp"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
@@ -88,7 +87,7 @@
     "ts-loader": "^3.1.1",
     "tslint": "^5.8.0",
     "tslint-eslint-rules": "^4.1.1",
-    "typescript": "^2.5.2",
+    "typescript": "^2.6.1",
     "uglify-js": "^3.1.6",
     "webpack": "^3.8.1",
     "webpack-dev-server": "^2.9.3"
@@ -98,7 +97,7 @@
     "awesome-typescript-loader": "^3.2.3",
     "dojo": "github:dojo/dojo#master",
     "intern": "^4.0.2",
-    "material-components-web": "^0.23.0",
+    "material-components-web": "^0.24.0",
     "postcss-load-config": "^1.2.0",
     "postcss-nesting": "^4.0.1",
     "testdouble": "^3.1.1",
