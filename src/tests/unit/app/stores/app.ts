@@ -9,7 +9,7 @@ import MapView = require("esri/views/MapView");
 
 const { suite, test, before, after } = intern.getInterface("tdd");
 
-suite("app/stores/app", () => {
+suite("app/stores/app", async () => {
   const addToUI = td.function("addToUI");
   const originalAdd = store.addToUI;
 
