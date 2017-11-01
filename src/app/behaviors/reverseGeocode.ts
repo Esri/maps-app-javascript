@@ -8,14 +8,13 @@ const DISTANCE = 500;
 
 interface GeocodeOptions {
   mapPoint: __esri.Point;
-  view: MapView | SceneView;
 }
 
 const locator = new Locator({
   url: geocodeUrl
 });
 
-export function reverseGeocode({ mapPoint, view }: GeocodeOptions) {
+export function reverseGeocode({ mapPoint }: GeocodeOptions) {
   return locator.locationToAddress(mapPoint, DISTANCE);
 }
 
@@ -26,7 +25,7 @@ export function applyBehavior(
   locator.outSpatialReference = view.spatialReference;
 
   const handler = view.on("hold", ({ mapPoint }) => {
-    reverseGeocode({ mapPoint, view }).then(({ address }) => {
+    reverseGeocode({ mapPoint }).then(({ address }) => {
       callback(address);
     });
   });

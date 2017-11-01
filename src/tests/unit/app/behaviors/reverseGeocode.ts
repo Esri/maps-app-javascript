@@ -30,12 +30,12 @@ suite("app/behaviors/reverseGeocode", () => {
   });
 
   test("reverseGeocode behavior will listen to View hold event", () => {
-    const behavior = applyBehavior(view);
+    const behavior = applyBehavior(view, () => {});
     td.verify(onHold("hold", td.matchers.anything()));
   });
 
   test("reverseGeocode behavior can be disabled", () => {
-    const behavior = applyBehavior(view);
+    const behavior = applyBehavior(view, () => {});
     behavior.disable();
     td.verify(disable());
   });
