@@ -6,7 +6,7 @@ import { SignIn, SignOut } from "../../../../app/widgets/AuthIcons";
 const { suite, test } = intern.getInterface("tdd");
 const { assert } = intern.getPlugin("chai");
 
-suite("app/widgets/AuthIcons", async () => {
+suite("app/widgets/AuthIcons", () => {
   const icon1 = "icon-1";
   const icon2 = "icon-2";
 

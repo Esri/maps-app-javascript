@@ -24,6 +24,8 @@ import Search = require("esri/widgets/Search");
 import Directions from "./../widgets/Directions";
 import MenuContainer from "./../widgets/MenuContainer";
 
+import { applyBehavior } from "./../behaviors/reverseGeocode";
+
 import {
   aliasOf,
   declared,
@@ -111,6 +113,12 @@ class AppStore extends declared(Accessor) implements Store {
         const locate = new Locate({ view });
 
         directions.locate = locate;
+
+        applyBehavior(view, address => {
+          search.searchTerm = address;
+          search.search();
+        });
+
         return [
           {
             component: new Home({
