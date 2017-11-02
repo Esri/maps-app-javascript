@@ -10,8 +10,6 @@ import {
   subclass
 } from "esri/core/accessorSupport/decorators";
 
-import { geocodeUrl } from "../../config/main";
-
 import Behavior from "./Behavior";
 
 import esri = __esri;
@@ -22,38 +20,38 @@ interface GeocodeOptions {
 
 interface ReverseGeocodeOptions {
   view: MapView;
+  search: esri.Search;
 }
 
 @subclass("app.behaviors.ReverseGeocode")
 export class ReverseGeocode extends declared(Behavior)<string> {
-  @property() distance = 500;
-
-  @property()
-  locator = new Locator({
-    url: geocodeUrl
-  });
+  @property() search: esri.Search;
 
   constructor(params?: ReverseGeocodeOptions) {
     super(params);
     this.reverseGeocode = this.reverseGeocode.bind(this);
     this.watch("view", () => {
-      this.locator.outSpatialReference = this.view.spatialReference;
       const handler = this.view.on("hold", this.reverseGeocode);
       this.handlers.push(handler);
     });
   }
 
   reverseGeocode({ mapPoint }: GeocodeOptions) {
-    this.locator
-      .locationToAddress(mapPoint, this.distance)
-      .then(({ address }) => {
-        this.value = address;
-      })
-      .otherwise(error => console.warn(error)); // tslint:disable-line: no-console
+    this.search.search(mapPoint).then(({ results }) => {
+      if (
+        results.length &&
+        results[0] &&
+        results[0].results &&
+        results[0].results[0]
+      ) {
+        const result = results[0].results[0];
+        this.search.search(result.name);
+      }
+    });
   }
 }
 
-export function applyBehavior(view: MapView): any {
-  const behavior = new ReverseGeocode({ view });
+export function applyBehavior(view: MapView, search: esri.Search): any {
+  const behavior = new ReverseGeocode({ view, search });
   return behavior;
 }

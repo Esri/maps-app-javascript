@@ -114,10 +114,7 @@ class AppStore extends declared(Accessor) implements Store {
 
         directions.locate = locate;
 
-        applyBehavior(view).subscribe((address: string) => {
-          search.searchTerm = address;
-          search.search();
-        });
+        applyBehavior(view, search);
 
         return [
           {

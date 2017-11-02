@@ -2,6 +2,7 @@ import {} from "intern";
 import td = require("testdouble");
 
 import Accessor = require("esri/core/Accessor");
+import Search = require("esri/widgets/Search");
 
 import promiseUtils = require("esri/core/promiseUtils");
 
@@ -23,18 +24,20 @@ suite("app/behaviors/reverseGeocode", () => {
 
   let originalAddressFunc: any;
 
+  const search = new Search();
+
   before(() => {
     view = {
       on: onHold,
       spatialReference: { wkid: 4326 }
     };
     td.when(onHold("hold", td.matchers.anything())).thenReturn({ remove });
-    behavior = applyBehavior(view);
-    originalAddressFunc = behavior.locator.locationToAddress;
+    behavior = applyBehavior(view, search);
+    originalAddressFunc = search.search;
   });
 
   after(() => {
-    behavior.locator.locationToAddress = originalAddressFunc;
+    search.search = originalAddressFunc;
   });
 
   test("reverseGeocode behavior will listen to View hold event", function() {
@@ -51,10 +54,10 @@ suite("app/behaviors/reverseGeocode", () => {
   test("reverseGeocode will use locator to find address", () => {
     const data = { mapPoint: { x: 0, y: 0 } };
     td
-      .when(locationToAddress(data.mapPoint, td.matchers.isA(Number)))
-      .thenReturn(promiseUtils.resolve({ address: "Hello" }));
-    behavior.locator.locationToAddress = locationToAddress;
+      .when(locationToAddress(data.mapPoint))
+      .thenReturn(promiseUtils.resolve({ results: [{ results: [] }] }));
+    search.search = locationToAddress as any;
     behavior.reverseGeocode(data);
-    td.verify(locationToAddress(data.mapPoint, td.matchers.isA(Number)));
+    td.verify(locationToAddress(data.mapPoint));
   });
 });
