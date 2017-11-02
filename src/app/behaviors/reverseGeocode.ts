@@ -51,7 +51,10 @@ export class ReverseGeocode extends declared(Behavior)<string> {
   }
 }
 
-export function applyBehavior(view: MapView, search: esri.Search): any {
+export function applyReverseGeocodeBehavior(
+  view: MapView,
+  search: esri.Search
+): any {
   const behavior = new ReverseGeocode({ view, search });
   return behavior;
 }

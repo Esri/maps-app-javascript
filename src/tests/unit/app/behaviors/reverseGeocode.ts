@@ -6,7 +6,7 @@ import Search = require("esri/widgets/Search");
 
 import promiseUtils = require("esri/core/promiseUtils");
 
-import { applyBehavior } from "../../../../app/behaviors/reverseGeocode";
+import { applyReverseGeocodeBehavior } from "../../../../app/behaviors/reverseGeocode";
 
 const { after, before, suite, test } = intern.getInterface("tdd");
 const { assert } = intern.getPlugin("chai");
@@ -32,7 +32,7 @@ suite("app/behaviors/reverseGeocode", () => {
       spatialReference: { wkid: 4326 }
     };
     td.when(onHold("hold", td.matchers.anything())).thenReturn({ remove });
-    behavior = applyBehavior(view, search);
+    behavior = applyReverseGeocodeBehavior(view, search);
     originalAddressFunc = search.search;
   });
 
