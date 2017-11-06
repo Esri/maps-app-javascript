@@ -96,7 +96,7 @@ class Directions extends declared(Widget) {
     );
   }
 
-  private onClickHandler(event: MouseEvent) {
+  onClickHandler(event: MouseEvent) {
     if (this.searchResult && this.locate.graphic.geometry) {
       this.working = true;
       this.viewModel

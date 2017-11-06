@@ -3,23 +3,13 @@ import td = require("testdouble");
 
 import promiseUtils = require("esri/core/promiseUtils");
 
-import maquetteQuery = require("maquette-query/dist/test-projector");
-
 import Directions from "../../../../app/widgets/Directions";
 
 const { suite, test } = intern.getInterface("tdd");
 const { assert } = intern.getPlugin("chai");
-const { createTestProjector } = maquetteQuery;
 
 suite("app/widgets/Directions", () => {
   const directions = new Directions();
-
-  const projector = createTestProjector(directions.render() as any);
-
-  test("can render component correctly", () => {
-    const svg = projector.query("svg");
-    assert.ok(svg);
-  });
 
   test("will call route when search or location graphic defined", () => {
     const route = td.function("route");

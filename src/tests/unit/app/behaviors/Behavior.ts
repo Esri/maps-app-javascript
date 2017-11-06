@@ -26,14 +26,7 @@ suite("app/behaviors/Behavior", () => {
     behavior.value = "Test";
     setTimeout(
       dfd.callback(() => {
-        td.verify(
-          sub(
-            "Test",
-            td.matchers.anything(),
-            td.matchers.anything(),
-            td.matchers.anything()
-          )
-        );
+        td.verify(sub("Test", undefined, "value", behavior));
       }),
       500
     );
