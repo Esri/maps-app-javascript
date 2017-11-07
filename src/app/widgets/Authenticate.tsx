@@ -46,11 +46,11 @@ class Authenticate extends declared(Widget) {
 
   @aliasOf("viewModel.appId") appId: string;
 
-  @aliasOf("viewModel.checkStatus") checkStatus: () => IPromise<Credential>;
+  @aliasOf("viewModel.checkStatus") checkStatus: () => Promise<Credential>;
 
   @aliasOf("viewModel.signout") signout: () => void;
 
-  @aliasOf("viewModel.signin") signin: () => IPromise<void>;
+  @aliasOf("viewModel.signin") signin: () => Promise<void>;
 
   @property({
     readOnly: true,

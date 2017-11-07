@@ -7,7 +7,7 @@ const { whenTrueOnce } = watchUtils;
 
 export const empty = (element: Element) => (element.innerHTML = "");
 
-export default async function init(): Promise<any> {
+export default async function init(): Promise<void> {
   store.loadWidgets();
   let viewDiv = document.querySelector("webmap") as HTMLDivElement;
   if (viewDiv) {

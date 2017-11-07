@@ -55,7 +55,7 @@ class DirectionsViewModel extends declared(Accessor) {
 
   @property() startGraphic: Graphic;
 
-  @property() view: MapView = null; // | SceneView = null;
+  @property() view: MapView;
 
   @property()
   routeLayer = new GraphicsLayer({

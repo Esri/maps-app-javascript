@@ -15,9 +15,7 @@ suite("app/behaviors/Behavior", () => {
     behavior = new TestBehavior();
   });
 
-  after(() => {
-    behavior = null;
-  });
+  after(() => {});
 
   test("Behavior will subscribe to value changes", function() {
     const dfd = this.async();

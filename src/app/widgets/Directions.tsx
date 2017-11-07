@@ -37,7 +37,7 @@ class Directions extends declared(Widget) {
   })
   viewModel = new DirectionsViewModel();
 
-  @aliasOf("viewModel.view") view: View = null;
+  @aliasOf("viewModel.view") view: View;
 
   @property() locate: Locate;
 

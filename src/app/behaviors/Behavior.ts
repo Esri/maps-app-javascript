@@ -2,6 +2,7 @@
 /// <amd-dependency path="esri/core/tsSupport/decorateHelper" name="__decorate" />
 
 import Accessor = require("esri/core/Accessor");
+import Collection = require("esri/core/Collection");
 import MapView = require("esri/views/MapView");
 
 import {
@@ -16,18 +17,18 @@ import esri = __esri;
 export default abstract class Behavior<T> extends declared(Accessor) {
   @property() value: T;
 
-  handlers: esri.WatchHandle[] = [];
+  handlers: Collection<esri.WatchHandle> = new Collection();
 
   @property() view: MapView;
 
   subscribe(callback: (value: T) => void) {
     const handler = this.watch("value", callback);
-    this.handlers.push(handler);
+    this.handlers.add(handler);
     return handler;
   }
 
   unsubscribe() {
     this.handlers.map(x => x.remove);
-    this.handlers.length = 0;
+    this.handlers.removeAll();
   }
 }

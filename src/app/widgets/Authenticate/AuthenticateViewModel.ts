@@ -19,7 +19,7 @@ type Resolver = (value?: any) => void;
 type Rejector = (error?: any) => void;
 
 interface AuthenticateViewModel {
-  credential: Credential;
+  credential: Credential | null;
   signin(): Promise<Credential>;
   signout(): void;
 }
@@ -32,11 +32,11 @@ const { watch, whenOnce } = watchUtils;
 
 @subclass()
 class AuthenticateViewModel extends declared(Accessor) {
-  @property() credential: Credential;
+  @property() credential: Credential | null;
 
   @property() appId: string;
 
-  @property() info: OAuthInfo = null;
+  @property() info: OAuthInfo;
 
   constructor(params?: AuthenticateParams) {
     super(params);
@@ -117,10 +117,10 @@ class AuthenticateViewModel extends declared(Accessor) {
     this.credential = await IdentityManager.getCredential(
       `${this.info.portalUrl}/sharing`,
       {
-        error: null,
+        error: null as any,
         oAuthPopupConfirmation: false,
         retry: false,
-        token: null
+        token: null as any
       }
     );
     return this.credential;

@@ -20,7 +20,8 @@
     "declaration": false,
     "noLib": false,
     "preserveConstEnums": true,
-    "suppressImplicitAnyIndexErrors": true
+    "suppressImplicitAnyIndexErrors": true,
+    "strictNullChecks": true
   },
   "typeRoots": [
     "./node_modules/@types",
