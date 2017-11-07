@@ -78,9 +78,10 @@ class DirectionsViewModel extends declared(Accessor) {
     watch(this, "view.map", () => {
       this.view.map.add(this.routeLayer);
     });
+    this.handleRouteResult = this.handleRouteResult.bind(this);
   }
 
-  route(start: Graphic, end: Graphic) {
+  async route(start: Graphic, end: Graphic) {
     const [startG, endG] = this.copyGraphics(start, end);
 
     this.startGraphic = startG;
@@ -88,9 +89,8 @@ class DirectionsViewModel extends declared(Accessor) {
     (this.routeParams.stops as any).features.length = 0;
     (this.routeParams.stops as any).features.push(start);
     (this.routeParams.stops as any).features.push(end);
-    return this.routeTask
-      .solve(this.routeParams)
-      .then(this.handleRouteResult.bind(this));
+    const data: any = await this.routeTask.solve(this.routeParams);
+    return this.handleRouteResult(data);
   }
 
   private handleRouteResult(data: any) {
@@ -98,11 +98,13 @@ class DirectionsViewModel extends declared(Accessor) {
     routeResult.symbol = routeSymbol;
     this.routeLayer.removeAll();
     this.routeLayer.addMany([routeResult, this.startGraphic, this.endGraphic]);
-    const unioned = union([
-      this.startGraphic.geometry,
-      this.endGraphic.geometry
-    ]);
-    this.view.goTo(unioned.extent.expand(2));
+    // const unioned = union([
+    //   this.startGraphic.geometry,
+    //   this.endGraphic.geometry
+    // ]);
+    // temporary fix for 4.6, should use unioned property
+    // this.view.goTo(routeResult.extent.expand(2));
+    this.view.goTo(routeResult);
     return data;
   }
 

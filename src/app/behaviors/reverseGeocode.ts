@@ -37,17 +37,7 @@ export class ReverseGeocode extends declared(Behavior)<string> {
   }
 
   reverseGeocode({ mapPoint }: GeocodeOptions) {
-    this.search.search(mapPoint).then(({ results }) => {
-      if (
-        results.length &&
-        results[0] &&
-        results[0].results &&
-        results[0].results[0]
-      ) {
-        const result = results[0].results[0];
-        this.search.search(result.name);
-      }
-    });
+    this.search.search(mapPoint);
   }
 }
 

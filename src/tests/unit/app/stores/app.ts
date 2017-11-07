@@ -13,24 +13,17 @@ suite("app/stores/app", () => {
   const addToUI = td.function("addToUI");
   const originalAdd = store.addToUI;
 
-  before(() => {
-    store.addToUI = addToUI as any;
-  });
+  before(() => {});
 
-  after(() => {
-    store.addToUI = originalAdd;
-  });
+  after(() => {});
 
-  test("Store can load widgets when view is ready", function() {
+  test("Store can load widgets when view is ready", async () => {
     const view = new MapView({
       container: document.createElement("div")
     });
-    const dfd = this.async(5000);
-    store.loadWidgets().then(
-      dfd.callback(() => {
-        td.verify(addToUI(td.matchers.anything()));
-      })
-    );
+    view.ui.add = addToUI as any;
     store.view = view;
+    await store.loadWidgets();
+    td.verify(addToUI(td.matchers.anything()));
   });
 });

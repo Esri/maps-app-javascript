@@ -46,7 +46,7 @@
     </webmap>
   </main>
 
-  <link rel="stylesheet" href="https://js.arcgis.com/4.5/esri/css/main.css" media="none" onload="if(media!='all')media='all'">
+  <link rel="stylesheet" href="https://jsdev.arcgis.com/4.6/esri/css/main.css" media="none" onload="if(media!='all')media='all'">
   <script>
     /*
     if ("serviceWorker" in navigator) {
@@ -62,6 +62,10 @@
 
     window.dojoConfig = {
       deps: ["app/main"],
+      has: {
+        "esri-promise-compatibility": 1,
+        "esri-featurelayer-webgl": 1
+      },
       packages: [
         {
           name: "app",
@@ -78,7 +82,8 @@
       ]
     };
   </script>
-  <script src="https://js.arcgis.com/4.5/"></script>
+  <script src="https://jsdev.arcgis.com/4.6/"></script>
 </body>
 
 </html>
+

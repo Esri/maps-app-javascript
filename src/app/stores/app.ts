@@ -72,7 +72,7 @@ class AppStore extends declared(Accessor) implements Store {
     }
   }
 
-  loadWidgets() {
+  async loadWidgets() {
     const menuNode = (document.querySelector("menu-container") ||
       element()) as HTMLElement;
     const authNode = (document.querySelector("authentication") ||
@@ -85,69 +85,66 @@ class AppStore extends declared(Accessor) implements Store {
     this.menuContainer = new MenuContainer({
       container: menuNode
     });
+
     watch(this, "menuContainer.signedIn", credential => {
       this.signedIn = !!credential;
       this.menuContainer.close();
     });
 
-    return whenOnce(this, "view")
-      .then(({ value: view }) => {
-        const directions = new Directions({
-          container: directionsNode
-        });
+    const { value: view } = await whenOnce(this, "view");
+    const directions = new Directions({
+      container: directionsNode
+    });
 
-        directions.view = view;
+    directions.view = view;
 
-        const search = new Search({
-          container: searchNode,
-          view
-        });
+    const search = new Search({
+      container: searchNode,
+      view
+    });
 
-        directions.search = search;
+    directions.search = search;
 
-        const basemapGallery = new BasemapGallery({
+    const basemapGallery = new BasemapGallery({
+      container: element(),
+      view
+    });
+
+    const locate = new Locate({ view });
+
+    directions.locate = locate;
+
+    applyReverseGeocodeBehavior(view, search);
+
+    const widgets = [
+      {
+        component: new Home({
           container: element(),
           view
-        });
-
-        const locate = new Locate({ view });
-
-        directions.locate = locate;
-
-        applyReverseGeocodeBehavior(view, search);
-
-        return [
-          {
-            component: new Home({
-              container: element(),
-              view
-            }),
-            position: "top-left"
-          },
-          {
-            component: new Expand({
-              view,
-              content: basemapGallery.container,
-              expandIconClass: "esri-icon-basemap"
-            }),
-            position: "top-right"
-          },
-          {
-            component: locate,
-            position: "bottom-right"
-          },
-          {
-            component: new Compass({
-              container: element(),
-              view
-            }),
-            position: "top-left"
-          }
-        ];
-      })
-      .then(widgets => {
-        return this.addToUI(widgets);
-      });
+        }),
+        position: "top-left"
+      },
+      {
+        component: new Expand({
+          view,
+          content: basemapGallery.container,
+          expandIconClass: "esri-icon-basemap"
+        }),
+        position: "top-right"
+      },
+      {
+        component: locate,
+        position: "bottom-right"
+      },
+      {
+        component: new Compass({
+          container: element(),
+          view
+        }),
+        position: "top-left"
+      }
+    ];
+    return this.addToUI(widgets);
   }
 }
 

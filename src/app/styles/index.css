@@ -126,6 +126,11 @@ webmap {
   justify-content: center;
 }
 
+.esri-view-root {
+  width: 100%;
+  height: 100%;
+}
+
 .main::after {
   content: "";
   background: url("./../../assets/icons/icon-256x256.png") no-repeat center;

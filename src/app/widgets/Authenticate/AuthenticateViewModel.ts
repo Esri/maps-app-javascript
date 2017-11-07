@@ -20,7 +20,7 @@ type Rejector = (error?: any) => void;
 
 interface AuthenticateViewModel {
   credential: Credential;
-  signin(): IPromise<Credential>;
+  signin(): Promise<Credential>;
   signout(): void;
 }
 
@@ -57,25 +57,23 @@ class AuthenticateViewModel extends declared(Accessor) {
   }
 
   checkStatus() {
-    return (promiseUtils as any).create(
-      (resolve: Resolver, reject: Rejector) => {
-        if (!this.info) {
-          return whenOnce(this, "info", info => this._checkStatus(resolve));
-        }
+    return new Promise(async (resolve, reject) => {
+      if (!this.info) {
+        const { value: info } = await whenOnce(this, "info");
         return this._checkStatus(resolve);
       }
-    );
+      return this._checkStatus(resolve);
+    });
   }
 
   signin() {
-    return (promiseUtils as any).create(
-      (resolve: Resolver, reject: Rejector) => {
-        if (!this.info) {
-          return whenOnce(this, "info", info => this._login(resolve, reject));
-        }
+    return new Promise(async (resolve, reject) => {
+      if (!this.info) {
+        const { value: info } = await whenOnce(this, "info");
         return this._login(resolve, reject);
       }
-    );
+      return this._login(resolve, reject);
+    });
   }
 
   signout() {
@@ -84,43 +82,48 @@ class AuthenticateViewModel extends declared(Accessor) {
     location.reload();
   }
 
-  private _checkStatus(resolve: Resolver) {
+  private async _checkStatus(resolve: Resolver) {
     if ((window.navigator as any).standalone !== true) {
       IdentityManager.registerOAuthInfos([this.info]);
     }
-    IdentityManager.checkSignInStatus(
-      `${this.info.portalUrl}/sharing`
-    ).then(credential => {
-      this.credential = credential;
-      resolve(credential);
-    });
+    try {
+      this.credential = await IdentityManager.checkSignInStatus(
+        `${this.info.portalUrl}/sharing`
+      );
+      resolve(this.credential);
+    } catch (error) {}
   }
 
-  private _login(resolve: Resolver, reject: Rejector) {
+  private async _login(resolve: Resolver, reject: Rejector) {
     if ((window.navigator as any).standalone !== true) {
       IdentityManager.registerOAuthInfos([this.info]);
     }
-    IdentityManager.checkSignInStatus(`${this.info.portalUrl}/sharing`)
-      .then(credential => {
-        this.credential = credential;
+    try {
+      this.credential = await IdentityManager.checkSignInStatus(
+        `${this.info.portalUrl}/sharing`
+      );
+      resolve(this.credential);
+    } catch (error) {
+      try {
+        const credential = await this.fetchCredentials();
         resolve(credential);
-      })
-      .otherwise(() => {
-        this.fetchCredentials()
-          .then(credential => {
-            resolve(credential);
-          })
-          .otherwise(reject);
-      });
+      } catch (err) {
+        reject(err);
+      }
+    }
   }
 
-  private fetchCredentials() {
-    return IdentityManager.getCredential(`${this.info.portalUrl}/sharing`, {
-      error: null,
-      oAuthPopupConfirmation: false,
-      retry: false,
-      token: null
-    }).then(credential => (this.credential = credential));
+  private async fetchCredentials() {
+    this.credential = await IdentityManager.getCredential(
+      `${this.info.portalUrl}/sharing`,
+      {
+        error: null,
+        oAuthPopupConfirmation: false,
+        retry: false,
+        token: null
+      }
+    );
+    return this.credential;
   }
 }
 

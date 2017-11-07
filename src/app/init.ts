@@ -7,7 +7,7 @@ const { whenTrueOnce } = watchUtils;
 
 export const empty = (element: Element) => (element.innerHTML = "");
 
-export default function init() {
+export default async function init(): Promise<any> {
   store.loadWidgets();
   let viewDiv = document.querySelector("webmap") as HTMLDivElement;
   if (viewDiv) {
@@ -15,9 +15,6 @@ export default function init() {
   } else {
     viewDiv = document.createElement("div");
   }
-  return whenTrueOnce(store, "signedIn").then(() => {
-    const mapView = new MapView({ map: store.webmap, container: viewDiv });
-    store.view = mapView;
-    return store.view;
-  });
+  await whenTrueOnce(store, "signedIn");
+  store.view = new MapView({ map: store.webmap, container: viewDiv });
 }

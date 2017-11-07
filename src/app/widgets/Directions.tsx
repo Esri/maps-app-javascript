@@ -96,15 +96,18 @@ class Directions extends declared(Widget) {
     );
   }
 
-  onClickHandler(event: MouseEvent) {
+  async onClickHandler(event: MouseEvent) {
     if (this.searchResult && this.locate.graphic.geometry) {
       this.working = true;
-      this.viewModel
-        .route(this.locate.graphic, this.searchResult.feature)
-        .then((result: any) => {
-          this.working = false;
-        })
-        .otherwise(error => console.warn(error)); // tslint:disable-line: no-console
+      try {
+        const data = await this.viewModel.route(
+          this.locate.graphic,
+          this.searchResult.feature
+        );
+        this.working = false;
+      } catch (error) {
+        console.warn(error); // tslint:disable-line: no-console
+      }
     }
   }
 }
