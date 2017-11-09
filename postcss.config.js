@@ -1,10 +1,18 @@
 "use strict";
 
-module.exports = ({ file, options, env }) => ({
+module.exports = {
   plugins: {
     "postcss-import": {},
-    "postcss-cssnext": {},
+    "postcss-cssnext": {
+      features: {
+        customProperties: {
+          warnings: false
+        }
+      }
+    },
     "css-mqpacker": {},
-    "cssnano": "production"
+    "cssnano": {
+      preset: "default"
+    }
   }
-});
+};
