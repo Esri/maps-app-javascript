@@ -1,3 +1,4 @@
 @import "../../../node_modules/material-components-web/dist/material-components-web.css";
 @import "./index.css";
 @import "../widgets/Authenticate/styles/Authenticate.css";
+@import "../widgets/Directions/styles/Directions.css";

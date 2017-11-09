@@ -27,7 +27,8 @@ export interface DirectionsProperties extends esri.WidgetProperties {
 }
 
 const CSS = {
-  base: "directions"
+  base: "directions",
+  icon: "svg-icon"
 };
 
 @subclass()
@@ -56,7 +57,7 @@ class Directions extends declared(Widget) {
   render() {
     const classes = {
       spinner: this.working,
-      "svg-icon": !this.working
+      [CSS.icon]: !this.working
     };
     const content = this.working ? (
       <svg
@@ -89,11 +90,28 @@ class Directions extends declared(Widget) {
     );
     return (
       <div class={CSS.base}>
-        <div bind={this} onclick={this.onClickHandler}>
+        <div bind={this} title="Directions" onclick={this.onClickHandler}>
           {content}
+        </div>
+        <div bind={this} title="Clear" onclick={this.clear}>
+          <svg
+            class={CSS.icon}
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 32 32"
+          >
+            <path d="M18.404 16l9.9 9.9-2.404 2.404-9.9-9.9-9.9 9.9L3.696 25.9l9.9-9.9-9.9-9.898L6.1 3.698l9.9 9.899 9.9-9.9 2.404 2.406-9.9 9.898z" />
+          </svg>
         </div>
       </div>
     );
+  }
+
+  clear() {
+    this.viewModel.clear();
+    this.search.clear();
+    this.view.graphics.removeAll();
   }
 
   async onClickHandler(event: MouseEvent) {

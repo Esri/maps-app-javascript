@@ -1,10 +1,11 @@
 const webpack = require("webpack");
 const path = require("path");
-const { TsConfigPathsPlugin } = require("awesome-typescript-loader");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-const extractStyles = new ExtractTextPlugin("src/app/styles/main.css");
+const dist = path.join(__dirname, "/dist");
+const JSAPI_VERSION = "jsdev.arcgis.com/4.6";
 
 module.exports = env => {
   return {
@@ -16,7 +17,7 @@ module.exports = env => {
       "./src/app/styles/main.css"
     ],
     output: {
-      path: path.join(__dirname, "/dist"),
+      path: dist,
       publicPath: "/dist/",
       filename: "app/main.js",
       chunkFilename: '[id].main.js',
@@ -40,8 +41,7 @@ module.exports = env => {
           test: /\.tsx?$/,
           loader: "awesome-typescript-loader",
           options: {
-            transpileOnly: true,
-            configFile: "configs/build.tsconfig.json"
+            transpileOnly: true
           }
         },
         {
@@ -75,17 +75,24 @@ module.exports = env => {
       new CopyWebpackPlugin([
         {
           from: "public",
-          to: path.join(__dirname, "/dist")
+          to: dist
         }
       ]),
       // nls files
       new CopyWebpackPlugin([
         {
           from: "src/app/widgets/Authenticate/nls",
-          to: path.join(__dirname, "/dist") + "/app/widgets/Authenticate/nls"
+          to: `${dist}/app/widgets/Authenticate/nls`
         }
       ]),
-      new TsConfigPathsPlugin("configs/build.tsconfig.json"),
+      new HtmlWebpackPlugin({
+        title: "ArcGIS Maps App JavaScript",
+        template: "src/index.ejs",
+        filename: "index.html",
+        inject: false,
+        MODE: "dev",
+        JSAPI: JSAPI_VERSION
+      }),
       new ExtractTextPlugin("app/styles/main.css")
     ],
 

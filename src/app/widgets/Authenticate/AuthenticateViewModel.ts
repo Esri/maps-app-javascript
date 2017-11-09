@@ -45,7 +45,9 @@ class AuthenticateViewModel extends declared(Accessor) {
 
     const left = Number(screen.availWidth / 2 - width / 2);
     const top = Number(screen.availHeight / 2 - height / 2);
-    const windowFeatures = `width=${width},height=${height},status,resizable,left=${left},top=${top},screenX=${left},screenY=${top}`;
+    const windowFeatures = `width=${width},height=${
+      height
+    },status,resizable,left=${left},top=${top},screenX=${left},screenY=${top}`;
 
     watch(this, "appId", appId => {
       this.info = new OAuthInfo({
@@ -83,25 +85,17 @@ class AuthenticateViewModel extends declared(Accessor) {
   }
 
   private async _checkStatus(resolve: Resolver) {
-    if ((window.navigator as any).standalone !== true) {
-      IdentityManager.registerOAuthInfos([this.info]);
-    }
+    this.registerOAuth();
     try {
-      this.credential = await IdentityManager.checkSignInStatus(
-        `${this.info.portalUrl}/sharing`
-      );
+      this.credential = await this.currentStatus(this.info);
       resolve(this.credential);
     } catch (error) {}
   }
 
   private async _login(resolve: Resolver, reject: Rejector) {
-    if ((window.navigator as any).standalone !== true) {
-      IdentityManager.registerOAuthInfos([this.info]);
-    }
+    this.registerOAuth();
     try {
-      this.credential = await IdentityManager.checkSignInStatus(
-        `${this.info.portalUrl}/sharing`
-      );
+      this.credential = await this.currentStatus(this.info);
       resolve(this.credential);
     } catch (error) {
       try {
@@ -111,6 +105,18 @@ class AuthenticateViewModel extends declared(Accessor) {
         reject(err);
       }
     }
+  }
+
+  private registerOAuth() {
+    if ((window.navigator as any).standalone !== true) {
+      IdentityManager.registerOAuthInfos([this.info]);
+    } else {
+      // TODO - add some logic to save creds to localStorage if app saved to homescreen
+    }
+  }
+
+  private currentStatus(info: OAuthInfo) {
+    return IdentityManager.checkSignInStatus(`${info.portalUrl}/sharing`);
   }
 
   private async fetchCredentials() {

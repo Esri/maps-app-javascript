@@ -81,6 +81,10 @@ class DirectionsViewModel extends declared(Accessor) {
     this.handleRouteResult = this.handleRouteResult.bind(this);
   }
 
+  clear() {
+    this.routeLayer.removeAll();
+  }
+
   async route(start: Graphic, end: Graphic) {
     const [startG, endG] = this.copyGraphics(start, end);
 
@@ -98,12 +102,6 @@ class DirectionsViewModel extends declared(Accessor) {
     routeResult.symbol = routeSymbol;
     this.routeLayer.removeAll();
     this.routeLayer.addMany([routeResult, this.startGraphic, this.endGraphic]);
-    // const unioned = union([
-    //   this.startGraphic.geometry,
-    //   this.endGraphic.geometry
-    // ]);
-    // temporary fix for 4.6, should use unioned property
-    // this.view.goTo(routeResult.extent.expand(2));
     this.view.goTo(routeResult);
     return data;
   }

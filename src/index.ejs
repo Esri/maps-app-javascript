@@ -10,7 +10,7 @@
   <!-- Add to home screen for Safari on iOS -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="EsriJS App">
+  <meta name="apple-mobile-web-app-title" content="Maps App">
   <link rel="apple-touch-icon" href="assets/icons/icon-152x152.png">
   <meta name="msapplication-TileImage" content="assets/icons/icon-152x152.png">
   <meta name="msapplication-TileColor" content="#338033">
@@ -19,7 +19,6 @@
 </head>
 
 <body>
-
   <header class="mdc-toolbar">
     <div class="mdc-toolbar__row">
       <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
@@ -46,18 +45,27 @@
     </webmap>
   </main>
 
-  <link rel="stylesheet" href="https://jsdev.arcgis.com/4.6/esri/css/main.css" media="none" onload="if(media!='all')media='all'">
+  <link rel="stylesheet" href="https://<%= htmlWebpackPlugin.options.JSAPI %>/esri/css/main.css" media="none" onload="if(media!='all')media='all'">
   <script>
-    /*
+    <% if (htmlWebpackPlugin.options.MODE === "prod") { %>
+    // load service worker
     if ("serviceWorker" in navigator) {
-      navigator.serviceWorker
-              .register("./service-worker.js")
-              .then(function() { console.log("Service Worker Registered"); })
-              .catch(function(error) {
-                console.log("Service Worker Failed to Register: ", error);
-              });
+      window.addEventListener("load", function() {
+        navigator.serviceWorker.register("sw.js").then(function(registration) {
+          console.log("SW registered: ", registration);
+        }).catch(function(registrationError) {
+          console.log("SW registration failed: ", registrationError);
+        });
+      });
     }
-    */
+    // if not supported, fallback to appcache
+    else {
+      var iframe = document.createElement("iframe");
+      iframe.setAttribute("src", "iframe-inject-appcache-manifest.html");
+      iframe.setAttribute("style", "display:none;");
+      document.body.insertBefore(iframe, document.body.firstChild);
+    }
+    <% } %>
     var locationPath = location.pathname.replace(/\/[^\/]+$/, "");
 
     window.dojoConfig = {
@@ -82,7 +90,7 @@
       ]
     };
   </script>
-  <script src="https://jsdev.arcgis.com/4.6/"></script>
+  <script src="https://<%= htmlWebpackPlugin.options.JSAPI %>/"></script>
 </body>
 
 </html>

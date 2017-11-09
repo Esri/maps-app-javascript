@@ -1,10 +1,17 @@
 const webpack = require("webpack");
 const path = require("path");
-const { TsConfigPathsPlugin } = require("awesome-typescript-loader");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const AppCachePlugin = require("appcache-webpack-plugin-plus").default;
+const ImageminPlugin = require('imagemin-webpack-plugin').default;
 
-const extractStyles = new ExtractTextPlugin("src/app/styles/main.css");
+const cleanPlugin = require("clean-webpack-plugin");
+const workboxPlugin = require("workbox-webpack-plugin");
+
+const dist = path.join(__dirname, "/dist");
+const JSAPI_VERSION = "jsdev.arcgis.com/4.6";
 
 module.exports = env => {
   return {
@@ -13,14 +20,13 @@ module.exports = env => {
       "./src/app/styles/main.css"
     ],
     output: {
-      path: path.join(__dirname, "/dist"),
+      path: dist,
       publicPath: "/dist/",
       filename: "app/main.js",
       chunkFilename: '[id].main.js',
       library: "app/main",
       libraryTarget: "amd"
     },
-    devtool: "#inline-source-map",
 
     resolve: {
       modules: [path.resolve(__dirname, "/src"), "node_modules/"],
@@ -34,7 +40,7 @@ module.exports = env => {
           loader: "awesome-typescript-loader",
           options: {
             transpileOnly: true,
-            configFile: "configs/build.tsconfig.json"
+            configFileName: "tsconfig.build.json"
           }
         },
         {
@@ -61,22 +67,59 @@ module.exports = env => {
     },
 
     plugins: [
+      new UglifyJSPlugin({
+        sourceMap: false
+      }),
       new webpack.NamedModulesPlugin(),
       new CopyWebpackPlugin([
         {
           from: "public",
-          to: path.join(__dirname, "/dist")
+          to: dist
         }
       ]),
+      new ImageminPlugin({ test: /\.(jpe?g|png|gif|svg)$/i }),
       // nls files
       new CopyWebpackPlugin([
         {
           from: "src/app/widgets/Authenticate/nls",
-          to: path.join(__dirname, "/dist") + "/app/widgets/Authenticate/nls"
+          to: `${dist}/app/widgets/Authenticate/nls`
         }
       ]),
-      new TsConfigPathsPlugin("configs/build.tsconfig.json"),
-      new ExtractTextPlugin("app/styles/main.css")
+      new ExtractTextPlugin("app/styles/main.css"),
+      new AppCachePlugin({
+        network: ["*"],
+        settings: ["prefer-online"],
+        output: "manifest.appcache"
+      }),
+      new HtmlWebpackPlugin({
+        title: "ArcGIS Maps App JavaScript",
+        template: "src/index.ejs",
+        filename: "index.html",
+        inject: false,
+        MODE: "prod",
+        JSAPI: JSAPI_VERSION
+      }),
+      new HtmlWebpackPlugin({
+        template: "src/iframe-inject-appcache-manifest.ejs",
+        filename: "iframe-inject-appcache-manifest.html"
+      }),
+      new workboxPlugin({
+        globDirectory: "./dist",
+        globPatterns: ["**/*.{html,js,css,png}"],
+        swDest: path.join("./dist", "sw.js"),
+        clientsClaim: true,
+        skipWaiting: true,
+        runtimeCaching: [
+          {
+            urlPattern: new RegExp("https://jsdev.arcgis.com"),
+            handler: "staleWhileRevalidate"
+          },
+          {
+            urlPattern: new RegExp("https://basemaps.arcgis.com"),
+            handler: "staleWhileRevalidate"
+          }
+        ]
+      })
     ],
 
     externals: [

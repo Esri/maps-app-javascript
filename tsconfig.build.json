@@ -2,7 +2,6 @@
   "compilerOptions": {
     "module": "amd",
     "noImplicitAny": true,
-    "out": "./build/app/main.js",
     "removeComments": true,
     "sourceMap": false,
     "jsx": "react",
@@ -16,7 +15,8 @@
     "declaration": false,
     "noLib": false,
     "preserveConstEnums": true,
-    "suppressImplicitAnyIndexErrors": true
+    "suppressImplicitAnyIndexErrors": true,
+    "strictNullChecks": true
   },
   "types": [ "arcgis-js-api" ],
   "include": [

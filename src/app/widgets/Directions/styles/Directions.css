@@ -1,0 +1,7 @@
+.directions {
+	display: flex;
+}
+
+.directions > div {
+	min-width: 35px;
+}
