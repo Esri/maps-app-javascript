@@ -6,6 +6,7 @@ const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const AppCachePlugin = require("appcache-webpack-plugin-plus").default;
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
+const CompressionPlugin = require("compression-webpack-plugin");
 
 const cleanPlugin = require("clean-webpack-plugin");
 const workboxPlugin = require("workbox-webpack-plugin");
@@ -67,6 +68,11 @@ module.exports = env => {
     },
 
     plugins: [
+      new CompressionPlugin({
+        asset: '[path].gz[query]',
+        algorithm: 'gzip',
+        test: /\.js$|\.css$|\.html$/
+      }),
       new UglifyJSPlugin({
         sourceMap: false
       }),
