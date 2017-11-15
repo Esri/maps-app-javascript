@@ -3,9 +3,9 @@ import td = require("testdouble");
 
 import promiseUtils = require("esri/core/promiseUtils");
 
-import store from "../../../app/stores/app";
+import store from "../../../src/app/stores/app";
 
-import init, { empty } from "../../../app/init";
+import init, { empty } from "../../../src/app/init";
 
 const { suite, test, before, after } = intern.getInterface("tdd");
 const { assert } = intern.getPlugin("chai");

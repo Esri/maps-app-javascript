@@ -9,31 +9,31 @@
         { "name": "dist", "location": "~tmp" },
         {
           "name": "dojo",
-          "location": "https://js.arcgis.com/4.5/dojo"
+          "location": "https://jsdev.arcgis.com/4.6/dojo"
         },
         {
           "name": "dijit",
-          "location": "https://js.arcgis.com/4.5/dijit"
+          "location": "https://jsdev.arcgis.com/4.6/dijit"
         },
         {
           "name": "dojox",
-          "location": "https://js.arcgis.com/4.5/dojox"
+          "location": "https://jsdev.arcgis.com/4.6/dojox"
         },
         {
           "name": "dgrid",
-          "location": "https://js.arcgis.com/4.5/dgrid"
+          "location": "https://jsdev.arcgis.com/4.6/dgrid"
         },
         {
           "name": "dstore",
-          "location": "https://js.arcgis.com/4.5/dstore"
+          "location": "https://jsdev.arcgis.com/4.6/dstore"
         },
         {
           "name": "moment",
-          "location": "https://js.arcgis.com/4.5/moment"
+          "location": "https://jsdev.arcgis.com/4.6/moment"
         },
         {
           "name": "esri",
-          "location": "https://js.arcgis.com/4.5/esri"
+          "location": "https://jsdev.arcgis.com/4.6/esri"
         },
         {
           "name": "chai",
@@ -61,15 +61,17 @@
     {
       "browserName": "chrome",
       "chromeOptions": { "args": [ "headless", "disable-gpu" ] },
-      "fixSessionCapabilities": false
+      "fixSessionCapabilities": "no-detect"
     }
   ],
   "browser": {
-    "suites": "~tmp/tests/unit/all.js"
+    "suites": "~tmp/tests.js" //"suites": "~tmp/tests/unit/all.js"
   },
   "coverage": [
     "~tmp/app/**/*.js",
-    "!~tmp/app/main.*",
+    "!~tmp/src/app/main.*",
+    "!~tmp/webpack:*",
+    "!tests/unit/**/*",
     "!node_modules/"
   ],
   "maxConcurrency": 2

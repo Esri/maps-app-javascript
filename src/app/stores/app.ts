@@ -31,7 +31,7 @@ import {
   subclass
 } from "esri/core/accessorSupport/decorators";
 
-import { appId, webMapItem } from "../../config/main";
+import { appId, webMapItem } from "../config";
 
 interface Store {
   webmap: WebMap;

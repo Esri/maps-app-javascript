@@ -34,8 +34,7 @@
   ],
   "include": [
     "./src/app/**/*",
-    "./src/config/**/*",
-    "./src/tests/**/*"
+    "./tests/**/*"
   ],
   "exclude": [
     "./node_modules"

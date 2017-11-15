@@ -4,9 +4,10 @@
   "description": "",
   "scripts": {
     "precommit": "lint-staged",
+    "copy:js": "cpx './src/**/*.js' ./~tmp/src",
     "build": "del dist && webpack --env.NODE_ENV=local --env.production --progress && http-server ./dist -p 9000 -g --cors -o",
     "start": "del dist && webpack --env.dev && webpack-dev-server --env.dev --hot",
-    "test": "del ~tmp && npm run copy:js && tsc --outDir './~tmp' && intern && del ~tmp"
+    "test": "del ~tmp && webpack --config webpack.test.config.js && intern && del ~tmp"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
@@ -36,6 +37,7 @@
     "clean-webpack-plugin": "^0.1.17",
     "compression-webpack-plugin": "^1.0.1",
     "copy-webpack-plugin": "^4.2.0",
+    "cpx": "^1.5.0",
     "css-loader": "^0.28.7",
     "css-mqpacker": "^6.0.1",
     "cssnano": "^4.0.0-rc.2",

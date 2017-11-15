@@ -20,8 +20,7 @@
   },
   "types": [ "arcgis-js-api" ],
   "include": [
-    "../src/app/**/*",
-    "../src/config/**/*"
+    "../src/app/**/*"
   ],
   "exclude": [
     "../node_modules"

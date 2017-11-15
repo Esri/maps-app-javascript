@@ -1,7 +1,7 @@
 import {} from "intern";
 import td = require("testdouble");
 
-import { SignIn, SignOut } from "../../../../app/widgets/AuthIcons";
+import { SignIn, SignOut } from "../../../../src/app/widgets/AuthIcons";
 
 const { suite, test } = intern.getInterface("tdd");
 const { assert } = intern.getPlugin("chai");

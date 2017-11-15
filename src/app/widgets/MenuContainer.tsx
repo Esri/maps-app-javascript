@@ -15,7 +15,7 @@ import Authenticate = require("./Authenticate");
 import MapView = require("esri/views/MapView");
 import Widget = require("esri/widgets/Widget");
 
-import { appId } from "../../config/main";
+import { appId } from "../config";
 
 import { MDCTemporaryDrawer } from "@material/drawer/index";
 

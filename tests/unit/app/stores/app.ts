@@ -3,7 +3,7 @@ import td = require("testdouble");
 
 import promiseUtils = require("esri/core/promiseUtils");
 
-import store from "../../../../app/stores/app";
+import store from "../../../../src/app/stores/app";
 
 import MapView = require("esri/views/MapView");
 

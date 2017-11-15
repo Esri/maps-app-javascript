@@ -9,42 +9,34 @@ const extractStyles = new ExtractTextPlugin("src/app/styles/main.css");
 module.exports = env => {
   return {
     entry: [
-      "./src/tests/unit/all.ts",
+      "./tests/unit/all.ts",
     ],
     output: {
-      filename: path.join('~tmp', 'app/tests.js'),
+      filename: path.join("~tmp", "tests.js"),
       libraryTarget: "amd"
     },
-    devtool: "#inline-source-map",
-    devServer: {
-      inline: true,
-      open: true
+    stats: {
+      colors: true
     },
-
+    devtool: "#inline-source-map",
     resolve: {
-      modules: [path.resolve(__dirname, "/src"), "node_modules/"],
+      modules: [path.resolve(__dirname, "/src"), path.resolve(__dirname, "/tests"), "node_modules/"],
       extensions: [".ts", ".tsx", ".js", ".css"]
     },
 
     module: {
       rules: [
-        { test: /\/js\/.*\.js$/, use: '@theintern/istanbul-loader' },
-        { test: /\.tsx?$/, use: [ '@theintern/istanbul-loader', 'awesome-typescript-loader' ] }
+        { test: /\/js\/.*\.js$/, use: "@theintern/istanbul-loader" },
+        { test: /\.tsx?$/, use: [ "@theintern/istanbul-loader", "awesome-typescript-loader" ] }
       ]
     },
 
     plugins: [
-      new CopyWebpackPlugin([
-        {
-          from: "public",
-          to: path.join(__dirname, "/~tmp")
-        }
-      ]),
       // nls files
       new CopyWebpackPlugin([
         {
           from: "src/app/widgets/Authenticate/nls",
-          to: path.join(__dirname, "/~tmp") + "/app/widgets/Authenticate/nls"
+          to: path.join(__dirname, "/~tmp") + "/widgets/Authenticate/nls"
         }
       ])
     ],
