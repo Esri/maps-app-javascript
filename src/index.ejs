@@ -4,9 +4,8 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>ArcGIS Maps App JavaScript</title>
-  <link rel="stylesheet" href="app/styles/main.css" media="none" onload="if(media!='all')media='all'">
-  <link rel="manifest" href="manifest.json">
+  <title><%= htmlWebpackPlugin.options.title %></title>
+  <link rel="manifest" href="app-manifest.json">
   <!-- Add to home screen for Safari on iOS -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -19,6 +18,9 @@
 </head>
 
 <body>
+  <% if (htmlWebpackPlugin.options.MODE === "prod") { %>
+  <iframe src="iframe-inject-appcache-manifest.html" style="display:none;"></iframe>
+  <% } %>
   <header class="mdc-toolbar">
     <div class="mdc-toolbar__row">
       <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
@@ -34,6 +36,8 @@
   </header>
 
   <menu-container></menu-container>
+
+  <noscript> JavaScript is required in order to use this app </noscript>
 
   <main class="main">
     <webmap>
@@ -58,15 +62,8 @@
         });
       });
     }
-    // if not supported, fallback to appcache
-    else {
-      var iframe = document.createElement("iframe");
-      iframe.setAttribute("src", "iframe-inject-appcache-manifest.html");
-      iframe.setAttribute("style", "display:none;");
-      document.body.insertBefore(iframe, document.body.firstChild);
-    }
     <% } %>
-    var locationPath = location.pathname.replace(/\/[^\/]+$/, "");
+    var locationPath = location.pathname.replace(/\/[^\/]+$/, "/");
 
     window.dojoConfig = {
       deps: ["app/main"],

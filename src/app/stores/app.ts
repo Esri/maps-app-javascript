@@ -16,15 +16,13 @@ import WebMap = require("esri/WebMap");
 // Widgets
 import BasemapGallery = require("esri/widgets/BasemapGallery");
 import Compass = require("esri/widgets/Compass");
+import Directions = require("esri/widgets/Directions");
 import Expand = require("esri/widgets/Expand");
 import Home = require("esri/widgets/Home");
 import Locate = require("esri/widgets/Locate");
 import Search = require("esri/widgets/Search");
 
-import Directions from "./../widgets/Directions";
 import MenuContainer from "./../widgets/MenuContainer";
-
-import { applyReverseGeocodeBehavior } from "./../behaviors/reverseGeocode";
 
 import {
   aliasOf,
@@ -79,8 +77,6 @@ class AppStore extends declared(Accessor) implements Store {
       element()) as HTMLElement;
     const searchNode = (document.querySelector("search") ||
       element()) as HTMLElement;
-    const directionsNode = (document.querySelector("directions") ||
-      element()) as HTMLElement;
 
     this.menuContainer = new MenuContainer({
       container: menuNode
@@ -93,17 +89,14 @@ class AppStore extends declared(Accessor) implements Store {
 
     const { value: view } = await whenOnce(this, "view");
     const directions = new Directions({
-      container: directionsNode
+      container: element(),
+      view
     });
-
-    directions.view = view;
 
     const search = new Search({
       container: searchNode,
       view
     });
-
-    directions.search = search;
 
     const basemapGallery = new BasemapGallery({
       container: element(),
@@ -112,10 +105,6 @@ class AppStore extends declared(Accessor) implements Store {
 
     const locate = new Locate({ view });
 
-    directions.locate = locate;
-
-    applyReverseGeocodeBehavior(view, search);
-
     const widgets = [
       {
         component: new Home({
@@ -123,6 +112,14 @@ class AppStore extends declared(Accessor) implements Store {
           view
         }),
         position: "top-left"
+      },
+      {
+        component: new Expand({
+          view,
+          content: directions.container,
+          expandIconClass: "esri-icon-directions"
+        }),
+        position: "top-right"
       },
       {
         component: new Expand({

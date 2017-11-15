@@ -7,7 +7,7 @@
     ],
     "module": "amd",
     "noImplicitAny": true,
-    "removeComments": false,
+    "removeComments": true,
     "sourceMap": true,
     "jsx": "react",
     "jsxFactory": "tsx",

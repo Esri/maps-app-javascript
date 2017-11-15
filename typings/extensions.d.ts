@@ -10,21 +10,14 @@ declare module "styles/main.css" {
 }
 
 // material
-
 declare module "@material/drawer/index" {
-  /*
-  export module drawer {
-    interface MDCTemporaryDrawer {
-      open: boolean
-    }
-    export class MDCTemporaryDrawer {
-      constructor(params?: any)
-      open: boolean
-    }
-  }
-  */
   export class MDCTemporaryDrawer {
-    constructor(params?: any)
-    open: boolean
+    open: boolean;
+    constructor(params?: any);
   }
+}
+
+declare module "esri/widgets/Directions" {
+  const Directions: any;
+  export = Directions;
 }

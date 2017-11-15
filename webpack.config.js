@@ -1,33 +1,27 @@
 const webpack = require("webpack");
 const path = require("path");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-const dist = path.join(__dirname, "/dist");
-const JSAPI_VERSION = "jsdev.arcgis.com/4.6";
+const moduleConfig = require("./webpack/module.config");
+const plugins = require("./webpack/plugins.config");
+const devServer = require("./webpack/devserver.config");
+const externals = require("./webpack/externals.config");
 
-module.exports = env => {
-  return {
+module.exports = function(env, options) {
+  const config = {
     entry: [
-      "webpack-dev-server/client?http://localhost:8080/", // WebpackDevServer host and port
-      "webpack/hot/only-dev-server", // "only" prevents reload on syntax errors
       "./src/app/main.ts",
-      //"./src/tests/unit/all.ts",
       "./src/app/styles/main.css"
     ],
+    stats: {
+      colors: true
+    },
     output: {
-      path: dist,
-      publicPath: "/dist/",
+      path: path.resolve(__dirname, "dist"),
+      publicPath: "/",
       filename: "app/main.js",
       chunkFilename: '[id].main.js',
       library: "app/main",
       libraryTarget: "amd"
-    },
-    devtool: "#inline-source-map",
-    devServer: {
-      inline: true,
-      open: true
     },
 
     resolve: {
@@ -35,74 +29,19 @@ module.exports = env => {
       extensions: [".ts", ".tsx", ".js", ".css"]
     },
 
-    module: {
-      rules: [
-        {
-          test: /\.tsx?$/,
-          loader: "awesome-typescript-loader",
-          options: {
-            transpileOnly: true
-          }
-        },
-        {
-          test: /\.css$/,
-          use: ExtractTextPlugin.extract({
-            use: [
-              {
-                loader: "css-loader",
-                options: {
-                  url: false
-                }
-              },
-              {
-                loader: "postcss-loader"
-              }
-            ]
-          })
-        }
-      ]
-    },
+    module: moduleConfig(...arguments),
 
-    plugins: [
-      new webpack.HotModuleReplacementPlugin(),
-      new webpack.NamedModulesPlugin(),
-      new CopyWebpackPlugin([
-        {
-          from: "public",
-          to: dist
-        }
-      ]),
-      // nls files
-      new CopyWebpackPlugin([
-        {
-          from: "src/app/widgets/Authenticate/nls",
-          to: `${dist}/app/widgets/Authenticate/nls`
-        }
-      ]),
-      new HtmlWebpackPlugin({
-        title: "ArcGIS Maps App JavaScript",
-        template: "src/index.ejs",
-        filename: "index.html",
-        inject: false,
-        MODE: "dev",
-        JSAPI: JSAPI_VERSION
-      }),
-      new ExtractTextPlugin("app/styles/main.css")
-    ],
+    plugins: plugins(...arguments),
 
-    externals: [
-      (context, request, callback) => {
-        if (
-          /^dojo/.test(request) ||
-          /^esri/.test(request)
-        ) {
-          if (request.includes("dojo/i18n!.")) {
-            request = request.replace(/^dojo\/i18n!\./, "dojo/i18n!./widgets");
-          }
-          return callback(null, "amd " + request);
-        }
-        callback();
-      }
-    ]
+    externals: externals
   };
+
+  if (env.dev) {
+    config.devtool = "cheap-module-source-map";
+    config.devServer = devServer(...arguments);
+    config.entry.push("webpack-dev-server/client?http://localhost:8080/");
+    config.entry.push("webpack/hot/only-dev-server");
+  }
+
+  return config;
 };

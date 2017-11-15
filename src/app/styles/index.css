@@ -42,7 +42,7 @@ header.mdc-toolbar,
 
 .mdc-temporary-drawer__header {
   color: var(--color-theme-font);
-  background: url("./../../assets/green-blue-small.png") no-repeat top center, linear-gradient(to right, #502070 0%, #2f3c90 100%);
+  background: inline("../../assets/green-blue-small.png") no-repeat top center, linear-gradient(to right, #502070 0%, #2f3c90 100%);
 }
 
 a.app-menu {
@@ -133,7 +133,7 @@ webmap {
 
 .main::after {
   content: "";
-  background: url("./../../assets/icons/icon-256x256.png") no-repeat center;
+  background: inline("../../assets/icons/icon-256x256.png") no-repeat center;
   opacity: 0.5;
   top: 0;
   left: 0;

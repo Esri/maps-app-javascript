@@ -10,6 +10,7 @@ module.exports = {
         }
       }
     },
+    "postcss-assets": {},
     "css-mqpacker": {},
     "cssnano": {
       preset: "default"

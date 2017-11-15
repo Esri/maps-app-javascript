@@ -4,8 +4,8 @@
   "description": "",
   "scripts": {
     "precommit": "lint-staged",
-    "build": "del dist && webpack --config webpack.build.config.js --env.NODE_ENV=local --env.production --progress && http-server . -p 9000 -g -d -o",
-    "serve": "del dist && webpack --config webpack.config.js && webpack-dev-server --hot",
+    "build": "del dist && webpack --env.NODE_ENV=local --env.production --progress && http-server ./dist -p 9000 -g --cors -o",
+    "start": "del dist && webpack --env.dev && webpack-dev-server --env.dev --hot",
     "test": "del ~tmp && npm run copy:js && tsc --outDir './~tmp' && intern && del ~tmp"
   },
   "lint-staged": {
@@ -46,6 +46,7 @@
     "husky": "^0.14.3",
     "imagemin-webpack-plugin": "^1.5.2",
     "lint-staged": "^4.3.0",
+    "postcss-assets": "^5.0.0",
     "postcss-cli": "^4.1.0",
     "postcss-cssnext": "^3.0.2",
     "postcss-import": "^11.0.0",
@@ -54,6 +55,7 @@
     "postcss-nesting": "^4.0.1",
     "prettier": "^1.7.4",
     "sinon": "^4.0.2",
+    "style-ext-html-webpack-plugin": "^3.4.5",
     "ts-loader": "^3.1.1",
     "tslint": "^5.8.0",
     "tslint-config-prettier": "^1.6.0",
@@ -63,7 +65,9 @@
     "uglifyjs-webpack-plugin": "^1.0.1",
     "webp-webpack-plugin": "^1.2.2",
     "webpack": "^3.8.1",
+    "webpack-bundle-analyzer": "^2.9.1",
     "webpack-dev-server": "^2.9.3",
+    "webpack-manifest-plugin": "^1.3.2",
     "workbox-webpack-plugin": "^2.1.1"
   },
   "dependencies": {
