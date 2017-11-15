@@ -25,7 +25,10 @@ module.exports = function(env, options) {
     new CopyWebpackPlugin([
       {
         from: "src/assets",
-        to: `${dist}/assets`
+        to: `${dist}/assets`,
+        ignore: [
+          "*.ico"
+        ]
       }
     ]),
     new CopyWebpackPlugin([
