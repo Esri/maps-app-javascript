@@ -8,6 +8,7 @@ module.exports = function (/*env*/) {
     noInfo: true,
     compress: true,
     disableHostCheck: true,
+    open: true,
     stats: {
       colors: true
     }
