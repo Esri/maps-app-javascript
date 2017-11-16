@@ -84,16 +84,6 @@ module.exports = function(env, options) {
       })
     );
     plugins.push(
-      new WebPWebpackPlugin({
-        match: /(jpe?g|png)$/,
-        webp: {
-            quality: 80,
-            inject: true, // inject the default runtime code
-            injectCode: '' // inject your code
-        }
-      })
-    );
-    plugins.push(
       new workboxPlugin(sw)
     );
   }
@@ -101,6 +91,17 @@ module.exports = function(env, options) {
     plugins.push(new webpack.NamedModulesPlugin());
     plugins.push(new webpack.HotModuleReplacementPlugin());
   }
+  plugins.push(new ImageminPlugin({ test: /\.(jpe?g|png|gif|svg)$/i }));
+  plugins.push(
+    new WebPWebpackPlugin({
+      match: /(jpe?g|png)$/,
+      webp: {
+          quality: 80,
+          inject: true, // inject the default runtime code
+          injectCode: '' // inject your code
+      }
+    })
+  );
   //plugins.push(new StyleExtHtmlWebpackPlugin());
   return plugins;
 };
