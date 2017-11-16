@@ -41,10 +41,12 @@
 
   <main class="main">
     <webmap>
-      <div>
-        <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
-          <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
-        </svg>
+      <div class="spinner">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
       </div>
     </webmap>
   </main>
@@ -75,11 +77,11 @@
         {
           name: "app",
           location: locationPath + "app"
-        },
+        }/*,
         {
           name: "@material",
           location: locationPath + "../node_modules/@material"
-        }
+        }*/
       ]
     };
   </script>
