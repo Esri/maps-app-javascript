@@ -22,7 +22,14 @@ import { MDCTemporaryDrawer } from "@material/drawer/index";
 import esri = __esri;
 
 const CSS = {
-  base: "directions"
+  base: "directions",
+  drawer: "mdc-temporary-drawer mdc-typography",
+  drawerContent: "mdc-temporary-drawer__content",
+  drawerNav: "mdc-temporary-drawer__drawer",
+  drawerHeader: "mdc-temporary-drawer__header",
+  drawerHeaderContent: "mdc-temporary-drawer__header-content",
+  list: "mdc-list",
+  listItem: "mdc-list-item margin-left-1"
 };
 
 @subclass()
@@ -35,10 +42,6 @@ class MenuContainer extends declared(Widget) {
 
   @property() view: MapView;
 
-  constructor(params?: any) {
-    super(params);
-  }
-
   open() {
     this.drawer.open = true;
   }
@@ -50,21 +53,18 @@ class MenuContainer extends declared(Widget) {
   render() {
     return (
       <aside
-        class="mdc-temporary-drawer mdc-typography"
+        class={CSS.drawer}
         bind={this}
         afterCreate={this.handleMenuCreation}
       >
-        <nav class="mdc-temporary-drawer__drawer">
-          <header class="mdc-temporary-drawer__header">
-            <div class="mdc-temporary-drawer__header-content">Maps App</div>
+        <nav class={CSS.drawerNav}>
+          <header class={CSS.drawerHeader}>
+            <div class={CSS.drawerHeaderContent}>Maps App</div>
           </header>
-          <nav
-            id="icon-with-text-demo"
-            class="mdc-temporary-drawer__content mdc-list"
-          >
+          <nav class={join(CSS.drawerContent, CSS.list)}>
             <authentication
               bind={this}
-              class="mdc-list-item margin-left-1"
+              class={CSS.listItem}
               afterCreate={this.handleAuthButton}
             />
           </nav>

@@ -42,20 +42,11 @@ class AuthenticateViewModel extends declared(Accessor) {
 
   constructor(params?: AuthenticateParams) {
     super(params);
-    const width = 800;
-    const height = 480;
-
-    const left = Number(screen.availWidth / 2 - width / 2);
-    const top = Number(screen.availHeight / 2 - height / 2);
-    const windowFeatures = `width=${width},height=${
-      height
-    },status,resizable,left=${left},top=${top},screenX=${left},screenY=${top}`;
 
     watch(this, "appId", appId => {
       this.info = new OAuthInfo({
         appId,
-        popup: true,
-        popupWindowFeatures: windowFeatures
+        popup: true
       });
     });
   }

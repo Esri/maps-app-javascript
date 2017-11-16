@@ -55,10 +55,6 @@ class AppStore extends declared(Accessor) implements Store {
 
   @property() menuContainer: MenuContainer;
 
-  @aliasOf("webmap.add") addLayer: (layer: __esri.Layer) => void;
-
-  @aliasOf("view.ui.add") addToUI: (components: any) => void;
-
   constructor(params?: any) {
     super(params);
 
@@ -141,7 +137,7 @@ class AppStore extends declared(Accessor) implements Store {
         position: "top-left"
       }
     ];
-    return this.addToUI(widgets);
+    return this.view.ui.add(widgets);
   }
 }
 
