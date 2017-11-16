@@ -2,7 +2,7 @@ const path = require("path");
 
 module.exports = {
   globDirectory: "./dist",
-  globPatterns: ["**/*.{html,js,css,png}"],
+  globPatterns: ["**/*.{html,js,css,png,webp}"],
   swDest: path.join("./dist", "sw.js"),
   clientsClaim: true,
   skipWaiting: true,
