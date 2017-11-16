@@ -8,11 +8,13 @@ const extractStyles = new ExtractTextPlugin("src/app/styles/main.css");
 
 module.exports = env => {
   return {
-    entry: [
-      "./tests/unit/all.ts",
-    ],
+    entry: {
+      init: "./src/app/init.ts",
+      tests: "./tests/unit/all.ts"
+    },
     output: {
-      filename: path.join("~tmp", "tests.js"),
+      filename: "[name].js",
+      path: path.resolve(__dirname, "~tmp"),
       libraryTarget: "amd"
     },
     stats: {

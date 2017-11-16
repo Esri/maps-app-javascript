@@ -69,6 +69,7 @@
   },
   "coverage": [
     "~tmp/app/**/*.js",
+    "!~tmp/tests.js",
     "!~tmp/src/app/main.*",
     "!~tmp/webpack:*",
     "!tests/unit/**/*",
