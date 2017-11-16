@@ -1,8 +1,8 @@
 /* eslint-env node */
 
-const extractCss = require("./extract-css");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-module.exports = function () {
+module.exports = function() {
   return {
     rules: [
       {
@@ -15,8 +15,20 @@ module.exports = function () {
       },
       {
         test: /\.css$/,
-        use: extractCss
+        use: ExtractTextPlugin.extract({
+          use: [
+            {
+              loader: "css-loader",
+              options: {
+                url: false
+              }
+            },
+            {
+              loader: "postcss-loader"
+            }
+          ]
+        })
       }
     ]
   };
-}
+};

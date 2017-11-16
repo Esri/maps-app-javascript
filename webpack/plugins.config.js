@@ -12,6 +12,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
 const AppCachePlugin = require("appcache-webpack-plugin-plus").default;
 const ImageminPlugin = require("imagemin-webpack-plugin").default;
+const WebPWebpackPlugin = require("webp-webpack-plugin");
 const workboxPlugin = require("workbox-webpack-plugin");
 
 const html = require("./html.config");
@@ -83,6 +84,16 @@ module.exports = function(env, options) {
       })
     );
     plugins.push(
+      new WebPWebpackPlugin({
+        match: /(jpe?g|png)$/,
+        webp: {
+            quality: 80,
+            inject: true, // inject the default runtime code
+            injectCode: '' // inject your code
+        }
+      })
+    );
+    plugins.push(
       new workboxPlugin(sw)
     );
   }
@@ -90,6 +101,6 @@ module.exports = function(env, options) {
     plugins.push(new webpack.NamedModulesPlugin());
     plugins.push(new webpack.HotModuleReplacementPlugin());
   }
-  plugins.push(new StyleExtHtmlWebpackPlugin());
+  //plugins.push(new StyleExtHtmlWebpackPlugin());
   return plugins;
 };
