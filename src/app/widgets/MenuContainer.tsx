@@ -32,7 +32,7 @@ const CSS = {
   listItem: "mdc-list-item margin-left-1"
 };
 
-@subclass()
+@subclass("app.widgets.MenuContainer")
 class MenuContainer extends declared(Widget) {
   @property() drawer: MDCTemporaryDrawer;
 

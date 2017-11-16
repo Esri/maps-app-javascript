@@ -32,7 +32,7 @@ const { watch, whenOnce } = watchUtils;
 
 const MAPS_APP_KEY = "esrijs-maps-app-credentials";
 
-@subclass()
+@subclass("app.widgets.Authenticate.AuthenticateViewModel")
 class AuthenticateViewModel extends declared(Accessor) {
   @property() credential: Credential | null;
 
