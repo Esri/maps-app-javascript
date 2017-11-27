@@ -8,7 +8,7 @@ module.exports = {
   skipWaiting: true,
   runtimeCaching: [
     {
-      urlPattern: new RegExp("https://jsdev.arcgis.com"),
+      urlPattern: new RegExp("https://js.arcgis.com"),
       handler: "staleWhileRevalidate"
     },
     {

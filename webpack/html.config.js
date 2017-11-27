@@ -1,5 +1,5 @@
 /* eslint-env node */
-const JSAPI_VERSION = "jsdev.arcgis.com/4.6";
+const JSAPI_VERSION = "js.arcgis.com/4.6";
 
 module.exports = function (env, options) {
   return [
