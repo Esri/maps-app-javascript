@@ -5,24 +5,50 @@ This repo provides an example app called Maps App that can be used as as starter
 ## Features
  * Dynamically switch basemaps
  * Place search
- * Routing
- * Geocode addresses
- * Reverse geocode _in progress_
+ * Directions
  * Sign into an ArcGIS account
  * Service Worker
  * AppCache
  * `manifest.json` - to add as button to home screen
  * default icons
 
-> Note - Be careful of how aggressive you cache via the service worker, you run the risk of not getting the latest data from Services that can change with updates. This is one area of this app I would call highly experimental.
+This application takes advantage of numerous technologies for development purposes. It utlizes [webpack](https://webpack.js.org/) to compile and bundle the application code and other files. It is written in [TypeScript](http://www.typescriptlang.org/) and provides examples on how to create [custom widgets](https://developers.arcgis.com/javascript/latest/guide/custom-widget/index.html) using the [ArcGIS API 4 for JavaScript](https://developers.arcgis.com/javascript/).
+
+This application also uses [Workbox for Webpack](https://developers.google.com/web/tools/workbox/get-started/webpack) to set up [service workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) for the application to cache application code and files, as well as uses an [appcache fallback](https://developer.mozilla.org/en-US/docs/Web/HTML/Using_the_application_cache) for Internet Explorer, Edge, and Safari.
+
+[Intern](https://theintern.io/) is used for all unit tests and code coverage.
 
 ## Usage
 
 Clone the repo and run `npm install`.
 
-* `npm run serve` - compile application and run it in a local server.
-* `npm run webpack` - compile application for deployment.
+* `npm start` - compile application and run it in a local server at `http://localhost:8080`.
+* `npm run build` - compile application for deployment that can be viewed at `http://localhost:9000`.
+* `npm test` - run unit tests and code coverage with local chrome driver.
 
+The ports for running the local server can be updated in `webpack/devserver.config.js` for dev and `package.json` for build.
+
+* Login to [ArcGIS for Developers](https://developers.arcgis.com/) and [register](https://developers.arcgis.com/applications/#/) your app to create an Client ID.
+
+![](images/Register1.png)
+* Once you've registered your version of the maps-app, grab a copy of the client id from the registration and set the client id in the applications `src/app/config.ts` file. You will also want to provide the Portal URL for your Organization, such as `"https://<MY-ORGANIZATION>.maps.arcgis.com"`. You can also provide your own WebMap or use the default one provided.
+
+```js
+// src/app/config.ts
+export const appId = "<APP-ID>";
+
+export const portalUrl = "<PORTAL-URL>";
+
+export const webMapItem = {
+  portalItem: {
+    id: "<WEBMAP-ID>"
+  }
+};
+```
+
+* As part of the registration process, add a redirect uri for your app.  Navigate to the Redirect URIs section at the bottom of the registration page and set the redirect uri as shown for development purposes. You will also want to add a redirect uri for where your application will be deployed.  This redirect uri is the default redirect for `https://www.arcgis.com`.
+
+![](images/Register2.png)
 
 ## Demo
 
