@@ -5,7 +5,6 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
 const StyleExtHtmlWebpackPlugin = require("style-ext-html-webpack-plugin");
-const ManifestPlugin = require("webpack-manifest-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
@@ -34,8 +33,8 @@ module.exports = function(env, options) {
     ]),
     new CopyWebpackPlugin([
       {
-        from: "src/app-manifest.json",
-        to: `${dist}/app-manifest.json`
+        from: "src/manifest.json",
+        to: `${dist}/manifest.json`
       }
     ]),
     new CopyWebpackPlugin([
@@ -44,10 +43,7 @@ module.exports = function(env, options) {
         to: `${dist}/app/widgets/Authenticate/nls`
       }
     ]),
-    new ExtractTextPlugin("app/styles/main.css"),
-    new ManifestPlugin({
-      fileName: "asset-manifest.json",
-    })
+    new ExtractTextPlugin("app/styles/main.css")
   ];
 
   if (process.env.ANALYZE) {
@@ -102,6 +98,5 @@ module.exports = function(env, options) {
       }
     })
   );
-  //plugins.push(new StyleExtHtmlWebpackPlugin());
   return plugins;
 };
