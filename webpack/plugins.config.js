@@ -13,6 +13,7 @@ const AppCachePlugin = require("appcache-webpack-plugin-plus").default;
 const ImageminPlugin = require("imagemin-webpack-plugin").default;
 const WebPWebpackPlugin = require("webp-webpack-plugin");
 const workboxPlugin = require("workbox-webpack-plugin");
+const WebpackPwaManifest = require("webpack-pwa-manifest");
 
 const html = require("./html.config");
 const sw = require("./sw.config");
@@ -22,6 +23,21 @@ module.exports = function(env, options) {
   let htmls = html(env, options).map(x => new HtmlWebpackPlugin(x));
   let plugins = [
     ...htmls,
+    new WebpackPwaManifest({
+      name: "ArcGIS Maps App JavaScript",
+      short_name: "MapsApp",
+      description: "ArcGIS Maps App with Search and Directions",
+      start_url: ".",
+      display: "standalone",
+      background_color: "#a9a9a9",
+      theme_color: "#338033",
+      icons: [
+        {
+          src: path.resolve("src/assets/icons/icon.png"),
+          sizes: [96, 128, 192, 256, 384, 512] // multiple sizes
+        }
+      ]
+    }),
     new CopyWebpackPlugin([
       {
         from: "src/assets",
@@ -29,12 +45,6 @@ module.exports = function(env, options) {
         ignore: [
           "*.ico"
         ]
-      }
-    ]),
-    new CopyWebpackPlugin([
-      {
-        from: "src/manifest.json",
-        to: `${dist}/manifest.json`
       }
     ]),
     new CopyWebpackPlugin([
@@ -94,7 +104,7 @@ module.exports = function(env, options) {
       webp: {
           quality: 80,
           inject: true, // inject the default runtime code
-          injectCode: '' // inject your code
+          injectCode: "" // inject your code
       }
     })
   );

@@ -133,7 +133,8 @@ webmap {
 
 .main::after {
   content: "";
-  background: url("../../assets/icons/icon-256x256.png") no-repeat center;
+  background: url("../../assets/icons/icon.png") no-repeat center;
+  background-size: contain;
   opacity: 0.8;
   top: 0;
   left: 0;
@@ -144,6 +145,10 @@ webmap {
 }
 
 /* esri widgets */
+
+.esri-expand .esri-directions {
+  max-height: 100%;
+}
 
 /* spinner */
 .spinner {
