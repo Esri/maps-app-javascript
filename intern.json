@@ -9,31 +9,31 @@
         { "name": "dist", "location": "~tmp" },
         {
           "name": "dojo",
-          "location": "https://jsdev.arcgis.com/4.6/dojo"
+          "location": "https://js.arcgis.com/4.6/dojo"
         },
         {
           "name": "dijit",
-          "location": "https://jsdev.arcgis.com/4.6/dijit"
+          "location": "https://js.arcgis.com/4.6/dijit"
         },
         {
           "name": "dojox",
-          "location": "https://jsdev.arcgis.com/4.6/dojox"
+          "location": "https://js.arcgis.com/4.6/dojox"
         },
         {
           "name": "dgrid",
-          "location": "https://jsdev.arcgis.com/4.6/dgrid"
+          "location": "https://js.arcgis.com/4.6/dgrid"
         },
         {
           "name": "dstore",
-          "location": "https://jsdev.arcgis.com/4.6/dstore"
+          "location": "https://js.arcgis.com/4.6/dstore"
         },
         {
           "name": "moment",
-          "location": "https://jsdev.arcgis.com/4.6/moment"
+          "location": "https://js.arcgis.com/4.6/moment"
         },
         {
           "name": "esri",
-          "location": "https://jsdev.arcgis.com/4.6/esri"
+          "location": "https://js.arcgis.com/4.6/esri"
         },
         {
           "name": "chai",
