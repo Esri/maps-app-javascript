@@ -13,6 +13,8 @@
 
 /// <amd-dependency path="esri/core/tsSupport/declareExtendsHelper" name="__extends" />
 /// <amd-dependency path="esri/core/tsSupport/decorateHelper" name="__decorate" />
+/// <amd-dependency path="esri/core/tsSupport/generatorHelper" name="__generator" />
+/// <amd-dependency path="esri/core/tsSupport/awaiterHelper" name="__awaiter" />
 
 import Accessor = require("esri/core/Accessor");
 import promiseUtils = require("esri/core/promiseUtils");

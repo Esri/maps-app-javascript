@@ -13,17 +13,14 @@
 
 /// <amd-dependency path="esri/core/tsSupport/declareExtendsHelper" name="__extends" />
 /// <amd-dependency path="esri/core/tsSupport/decorateHelper" name="__decorate" />
+/// <amd-dependency path="esri/core/tsSupport/generatorHelper" name="__generator" />
+/// <amd-dependency path="esri/core/tsSupport/awaiterHelper" name="__awaiter" />
 
 import Accessor = require("esri/core/Accessor");
-import promiseUtils = require("esri/core/promiseUtils");
 import watchUtils = require("esri/core/watchUtils");
 
-import Credential = require("esri/identity/Credential");
-
 import FeatureLayer = require("esri/layers/FeatureLayer");
-
 import MapView = require("esri/views/MapView");
-
 import WebMap = require("esri/WebMap");
 
 // Widgets

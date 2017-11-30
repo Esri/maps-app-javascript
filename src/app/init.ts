@@ -10,6 +10,8 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 */
+/// <amd-dependency path="esri/core/tsSupport/generatorHelper" name="__generator" />
+/// <amd-dependency path="esri/core/tsSupport/awaiterHelper" name="__awaiter" />
 
 import watchUtils = require("esri/core/watchUtils");
 import MapView = require("esri/views/MapView");

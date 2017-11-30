@@ -16,7 +16,7 @@
     "moduleResolution": "node",
     "isolatedModules": false,
     "experimentalDecorators": true,
-    "noEmitHelpers": false,
+    "noEmitHelpers": true,
     "declaration": false,
     "noLib": false,
     "preserveConstEnums": true,
