@@ -11,9 +11,9 @@
   limitations under the License.
 */
 
-export const appId = "zZT62Q2mz1sbArWw";
+export const appId = "W2zBZ4VcZwV68oZC";
 
-export const portalUrl = "https://odoenet.maps.arcgis.com";
+export const portalUrl = "https://arcgis.com";
 
 export const webMapItem = {
   portalItem: {
