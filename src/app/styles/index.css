@@ -54,12 +54,15 @@ header.mdc-toolbar,
   background: url("../../assets/green-blue-small.png") no-repeat top center, linear-gradient(to right, #502070 0%, #2f3c90 100%);
 }
 
+@media (--small-viewport) {
+  .toolbar-title {
+    display: none;
+  }
+}
+
 a.app-menu {
   color: var(--color-theme-font);
-  margin-left: 1rem;
-  margin-right: 1rem;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
+  margin: 1rem 1rem;
 }
 
 .app-actions {
@@ -142,8 +145,6 @@ webmap {
 
 .main::after {
   content: "";
-  // background: url("../../assets/icons/icon.png") no-repeat center;
-  // background-size: contain;
   opacity: 0.8;
   top: 0;
   left: 0;
