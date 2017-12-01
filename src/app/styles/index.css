@@ -40,6 +40,15 @@ header.mdc-toolbar,
   text-transform: uppercase;
 }
 
+.mdc-temporary-drawer .drawer-close {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  right: 0;
+  margin: 1em;
+  z-index: 1;
+}
+
 .mdc-temporary-drawer__header {
   color: var(--color-theme-font);
   background: url("../../assets/green-blue-small.png") no-repeat top center, linear-gradient(to right, #502070 0%, #2f3c90 100%);
@@ -133,8 +142,8 @@ webmap {
 
 .main::after {
   content: "";
-  background: url("../../assets/icons/icon.png") no-repeat center;
-  background-size: contain;
+  // background: url("../../assets/icons/icon.png") no-repeat center;
+  // background-size: contain;
   opacity: 0.8;
   top: 0;
   left: 0;

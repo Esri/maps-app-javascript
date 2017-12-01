@@ -37,12 +37,14 @@ import esri = __esri;
 const CSS = {
   base: "directions",
   drawer: "mdc-temporary-drawer mdc-typography",
+  drawerClose: "drawer-close",
   drawerContent: "mdc-temporary-drawer__content",
   drawerNav: "mdc-temporary-drawer__drawer",
   drawerHeader: "mdc-temporary-drawer__header",
   drawerHeaderContent: "mdc-temporary-drawer__header-content",
   list: "mdc-list",
-  listItem: "mdc-list-item margin-left-1"
+  listItem: "mdc-list-item margin-left-1",
+  icon: "svg-icon"
 };
 
 @subclass("app.widgets.MenuContainer")
@@ -72,6 +74,17 @@ class MenuContainer extends declared(Widget) {
       >
         <nav class={CSS.drawerNav}>
           <header class={CSS.drawerHeader}>
+            <div bind={this} class={CSS.drawerClose} onclick={this.close}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class={CSS.icon}
+                width="32"
+                height="32"
+                viewBox="0 0 32 32"
+              >
+                <path d="M25 28h-5L8 16 20 4h5L13 16l12 12z" />
+              </svg>
+            </div>
             <div class={CSS.drawerHeaderContent}>Maps App</div>
           </header>
           <nav class={join(CSS.drawerContent, CSS.list)}>
@@ -88,6 +101,13 @@ class MenuContainer extends declared(Widget) {
 
   private handleMenuCreation(element: any) {
     this.drawer = new MDCTemporaryDrawer(element);
+    // default to open drawer to sign in
+    // if not currently signed in
+    setTimeout(() => {
+      if (!this.signedIn) {
+        this.open();
+      }
+    }, 500);
   }
 
   private handleAuthButton(element: any) {
