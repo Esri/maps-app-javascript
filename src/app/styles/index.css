@@ -156,10 +156,6 @@ webmap {
 
 /* esri widgets */
 
-.esri-expand .esri-directions {
-  max-height: 100%;
-}
-
 /* spinner */
 .spinner {
   margin: 100px auto;

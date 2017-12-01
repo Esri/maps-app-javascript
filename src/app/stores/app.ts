@@ -123,7 +123,8 @@ class AppStore extends declared(Accessor) implements Store {
         component: new Expand({
           view,
           content: directions.container,
-          expandIconClass: "esri-icon-directions"
+          expandIconClass: "esri-icon-directions",
+          group: "right"
         }),
         position: "top-right"
       },
@@ -131,7 +132,8 @@ class AppStore extends declared(Accessor) implements Store {
         component: new Expand({
           view,
           content: basemapGallery.container,
-          expandIconClass: "esri-icon-basemap"
+          expandIconClass: "esri-icon-basemap",
+          group: "right"
         }),
         position: "top-right"
       },
