@@ -1,1 +1,16 @@
-<html manifest="manifest.appcache"></html>
+<html manifest="manifest.appcache">
+  <script>
+  window.addEventListener("load", function(evt) {
+    window.applicationCache.addEventListener("updateready", function(evt) {
+        if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
+            // Browser downloaded a new app cache.
+            window.parent.location.reload();
+            console.log("App cache reloaded");
+        } else {
+            // Manifest didn"t changed. Nothing new to server.
+            console.log("App cache no change");
+        }
+    }, false);
+  }, false);
+  </script>
+</html>
