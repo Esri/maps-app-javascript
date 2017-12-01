@@ -18,6 +18,10 @@ This application also uses [Workbox for Webpack](https://developers.google.com/w
 
 [Intern](https://theintern.io/) is used for all unit tests and code coverage.
 
+The [Drawer](https://material.io/components/web/catalog/drawers/) used is from the [Material Components of the Web](https://material.io/components/web/) library.
+
+Feel free to use this project as a starting point for your own applications!
+
 ## Usage
 
 Clone the repo and run `npm install`.
