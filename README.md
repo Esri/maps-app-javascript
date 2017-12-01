@@ -30,6 +30,8 @@ The ports for running the local server can be updated in `webpack/devserver.conf
 
 * Login to [ArcGIS for Developers](https://developers.arcgis.com/) and [register](https://developers.arcgis.com/applications/#/) your app to create an Client ID.
 
+* You will need to register your application with a Client ID so that you can take advantage of the premium [Directions and Routing](https://developers.arcgis.com/features/directions/) and [Geocoding](https://developers.arcgis.com/features/geocoding/) Services from the ArcGIS Platform.
+
 ![](images/Register1.png)
 * Once you've registered your version of the maps-app, grab a copy of the client id from the registration and set the client id in the applications `src/app/config.ts` file. You will also want to provide the Portal URL for your Organization, such as `"https://<MY-ORGANIZATION>.maps.arcgis.com"`. You can also provide your own WebMap or use the default one provided.
 
