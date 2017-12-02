@@ -43,14 +43,20 @@ module.exports = function(env, options) {
         from: "src/assets",
         to: `${dist}/assets`,
         ignore: [
-          "*.ico"
+          "*.ico",
+          ".gitkeep",
+          ".DS_Store"
         ]
       }
     ]),
     new CopyWebpackPlugin([
       {
         from: "src/app/widgets/Authenticate/nls",
-        to: `${dist}/app/widgets/Authenticate/nls`
+        to: `${dist}/app/widgets/Authenticate/nls`,
+        ignore: [
+          ".gitkeep",
+          ".DS_Store"
+        ]
       }
     ]),
     new ExtractTextPlugin("app/styles/main.css")
