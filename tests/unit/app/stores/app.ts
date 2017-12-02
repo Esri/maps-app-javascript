@@ -1,3 +1,6 @@
+/// <amd-dependency path="esri/core/tsSupport/generatorHelper" name="__generator" />
+/// <amd-dependency path="esri/core/tsSupport/awaiterHelper" name="__awaiter" />
+
 import {} from "intern";
 import td = require("testdouble");
 
