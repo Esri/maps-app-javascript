@@ -77,8 +77,7 @@ class AuthenticateViewModel extends declared(Accessor) {
   signin() {
     return new Promise(async (resolve, reject) => {
       if (!this.info) {
-        const { value: info } = await whenOnce(this, "info");
-        return this._login(resolve, reject);
+        await whenOnce(this, "info");
       }
       return this._login(resolve, reject);
     });
