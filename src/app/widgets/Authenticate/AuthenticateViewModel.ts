@@ -45,8 +45,6 @@ export interface AuthenticateParams {
 
 const { watch, whenOnce } = watchUtils;
 
-const MAPS_APP_KEY = "esrijs-maps-app-credentials";
-
 @subclass("app.widgets.Authenticate.AuthenticateViewModel")
 class AuthenticateViewModel extends declared(Accessor) {
   @property() credential: Credential | null;
@@ -88,7 +86,6 @@ class AuthenticateViewModel extends declared(Accessor) {
 
   signout() {
     IdentityManager.destroyCredentials();
-    localStorage.removeItem(MAPS_APP_KEY);
     this.credential = null;
     location.reload();
   }
@@ -116,55 +113,25 @@ class AuthenticateViewModel extends declared(Accessor) {
     }
   }
 
-  private checkForLocalCreds() {
-    if ((window.navigator as any).standalone) {
-      const credString = localStorage.getItem(MAPS_APP_KEY);
-      if (credString) {
-        this.credential = new Credential(JSON.parse(credString));
-        IdentityManager.initialize(this.credential);
-      }
-    }
-  }
-
-  private saveLocalCreds() {
-    if ((window.navigator as any).standalone) {
-      localStorage.setItem(
-        MAPS_APP_KEY,
-        JSON.stringify(IdentityManager.toJSON())
-      );
-    }
-  }
-
   private currentStatus(info: OAuthInfo) {
     return IdentityManager.checkSignInStatus(`${info.portalUrl}/sharing`);
   }
 
   private registerOAuth() {
-    if ((window.navigator as any).standalone !== true) {
-      IdentityManager.registerOAuthInfos([this.info]);
-    } else {
-      this.checkForLocalCreds();
-    }
+    IdentityManager.registerOAuthInfos([this.info]);
   }
 
   private async fetchCredentials() {
-    if ((window.navigator as any).standalone !== true) {
-      this.credential = await IdentityManager.getCredential(
-        `${this.info.portalUrl}/sharing`,
-        {
-          error: null as any,
-          oAuthPopupConfirmation: false,
-          retry: false,
-          token: null as any
-        }
-      );
-    } else {
-      this.credential = await IdentityManager.getCredential(
-        `${this.info.portalUrl}/sharing`
-      );
-    }
+    this.credential = await IdentityManager.getCredential(
+      `${this.info.portalUrl}/sharing`,
+      {
+        error: null as any,
+        oAuthPopupConfirmation: false,
+        retry: false,
+        token: null as any
+      }
+    );
 
-    this.saveLocalCreds();
     return this.credential;
   }
 }
