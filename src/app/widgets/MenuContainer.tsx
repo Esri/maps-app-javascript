@@ -107,7 +107,7 @@ class MenuContainer extends declared(Widget) {
       if (!this.signedIn) {
         this.open();
       }
-    }, 500);
+    }, 0);
   }
 
   private handleAuthButton(element: any) {

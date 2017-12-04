@@ -77,7 +77,8 @@ class AuthenticateViewModel extends declared(Accessor) {
   signin() {
     return new Promise(async (resolve, reject) => {
       if (!this.info) {
-        await whenOnce(this, "info");
+        const { value: info } = await whenOnce(this, "info");
+        return this._login(resolve, reject);
       }
       return this._login(resolve, reject);
     });
@@ -117,7 +118,9 @@ class AuthenticateViewModel extends declared(Accessor) {
   }
 
   private registerOAuth() {
-    IdentityManager.registerOAuthInfos([this.info]);
+    if (!window.matchMedia("(display-mode: standalone)").matches) {
+      IdentityManager.registerOAuthInfos([this.info]);
+    }
   }
 
   private async fetchCredentials() {
