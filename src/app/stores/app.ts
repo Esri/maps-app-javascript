@@ -35,7 +35,6 @@ import Search = require("esri/widgets/Search");
 import MenuContainer from "./../widgets/MenuContainer";
 
 import {
-  aliasOf,
   declared,
   property,
   subclass

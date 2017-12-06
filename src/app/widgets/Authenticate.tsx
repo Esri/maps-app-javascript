@@ -29,7 +29,7 @@ import Widget = require("esri/widgets/Widget");
 import * as i18n from "dojo/i18n!./Authenticate/nls/Authenticate";
 import AuthenticateViewModel from "./Authenticate/AuthenticateViewModel";
 
-import { SignIn, SignOut } from "./AuthIcons";
+import { AuthStatus, SignIn, SignOut, User } from "./AuthComponents";
 
 import esri = __esri;
 
@@ -65,6 +65,8 @@ class Authenticate extends declared(Widget) {
 
   @aliasOf("viewModel.signin") signin: () => Promise<void>;
 
+  @aliasOf("viewModel.userName") userName: string;
+
   @property({
     readOnly: true,
     dependsOn: ["credential"]
@@ -90,14 +92,12 @@ class Authenticate extends declared(Widget) {
 
     const text = this.isSignedIn ? i18n.signout : i18n.signin;
 
-    const content = !this.showLabel ? (
-      <span aria-label={text}>{icon}</span>
-    ) : (
-      <span>
-        <span aria-label={text}>{icon}</span>
-        <span class={join(CSS.label, CSS.margin)}>{text}</span>
-      </span>
-    );
+    const props = {
+      style: join(CSS.label, CSS.margin),
+      showLabel: this.showLabel,
+      text,
+      icon
+    };
 
     return (
       <div
@@ -106,7 +106,9 @@ class Authenticate extends declared(Widget) {
         onclick={this.onClick}
         afterCreate={this.handleAfterCreate}
       >
-        {content}
+        {AuthStatus(props)}
+        &nbsp;
+        {User(this.userName)}
       </div>
     );
   }

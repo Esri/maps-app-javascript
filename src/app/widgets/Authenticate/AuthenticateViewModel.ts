@@ -53,6 +53,8 @@ class AuthenticateViewModel extends declared(Accessor) {
 
   @property() info: OAuthInfo;
 
+  @aliasOf("credential.userId") userName: string;
+
   constructor(params?: AuthenticateParams) {
     super(params);
 
@@ -118,6 +120,12 @@ class AuthenticateViewModel extends declared(Accessor) {
   }
 
   private registerOAuth() {
+    /**
+     * When installed as a homescreen application, display-mode is standalone
+     * OAuth redirects don't behave correctly here, so will not register
+     * OAuth with the IdentityManager and use the old-school modal popup
+     * in this case.
+     */
     if (!window.matchMedia("(display-mode: standalone)").matches) {
       IdentityManager.registerOAuthInfos([this.info]);
     }

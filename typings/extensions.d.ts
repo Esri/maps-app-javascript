@@ -16,8 +16,9 @@ declare module "@material/drawer/index" {
     constructor(params?: any);
   }
 }
-
+/*
 declare module "esri/widgets/Directions" {
   const Directions: any;
   export = Directions;
 }
+*/

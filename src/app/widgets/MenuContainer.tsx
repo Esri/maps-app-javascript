@@ -28,9 +28,9 @@ import Authenticate = require("./Authenticate");
 import MapView = require("esri/views/MapView");
 import Widget = require("esri/widgets/Widget");
 
-import { appId } from "../config";
+import MenuContainerViewModel from "./MenuContainer/MenuContainerViewModel";
 
-import { MDCTemporaryDrawer } from "@material/drawer/index";
+import { appId } from "../config";
 
 import esri = __esri;
 
@@ -49,7 +49,10 @@ const CSS = {
 
 @subclass("app.widgets.MenuContainer")
 class MenuContainer extends declared(Widget) {
-  @property() drawer: MDCTemporaryDrawer;
+  @property({
+    type: MenuContainerViewModel
+  })
+  viewModel = new MenuContainerViewModel();
 
   @property() auth: Authenticate;
 
@@ -57,13 +60,9 @@ class MenuContainer extends declared(Widget) {
 
   @property() view: MapView;
 
-  open() {
-    this.drawer.open = true;
-  }
+  @aliasOf("viewModel.open") open: () => void;
 
-  close() {
-    this.drawer.open = false;
-  }
+  @aliasOf("viewModel.close") close: () => void;
 
   render() {
     return (
@@ -100,7 +99,7 @@ class MenuContainer extends declared(Widget) {
   }
 
   private handleMenuCreation(element: any) {
-    this.drawer = new MDCTemporaryDrawer(element);
+    this.viewModel.initDrawer(element);
     // default to open drawer to sign in
     // if not currently signed in
     setTimeout(() => {
