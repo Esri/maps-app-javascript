@@ -9,7 +9,7 @@ const extractStyles = new ExtractTextPlugin("src/app/styles/main.css");
 module.exports = env => {
   return {
     entry: {
-      init: "./src/app/init.ts",
+      init: "./src/app/widgets/Application.ts",
       tests: "./tests/unit/all.ts"
     },
     output: {

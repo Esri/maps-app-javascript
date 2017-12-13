@@ -42,9 +42,11 @@ import {
 
 import { appId, webMapItem } from "../config";
 
-const { watch, whenOnce } = watchUtils;
+const { watch, whenOnce, whenTrueOnce } = watchUtils;
 
 const element = () => document.createElement("div");
+
+export const empty = (el: Element) => (el.innerHTML = "");
 
 @subclass("app.widgets.ViewManager")
 class Application extends declared(Accessor) {
@@ -77,6 +79,13 @@ class Application extends declared(Accessor) {
     const searchNode = (document.querySelector("search") ||
       element()) as HTMLElement;
 
+    let viewNode = document.querySelector("webmap") as HTMLDivElement;
+    if (viewNode) {
+      empty(viewNode);
+    } else {
+      viewNode = element();
+    }
+
     this.menuContainer = new MenuContainer({
       container: menuNode
     });
@@ -88,7 +97,10 @@ class Application extends declared(Accessor) {
       this.menuContainer.close();
     });
 
-    const { value: view } = await whenOnce(this, "view");
+    await whenTrueOnce(this, "signedIn");
+
+    this.view = new MapView({ map: this.webmap, container: viewNode });
+    const view = this.view;
 
     /**
      * These widgets are going to be added to
