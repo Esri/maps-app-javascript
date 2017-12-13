@@ -17,20 +17,24 @@
 import watchUtils = require("esri/core/watchUtils");
 import MapView = require("esri/views/MapView");
 
-import store from "./stores/app";
+import app from "./widgets/Application";
 
 const { whenTrueOnce } = watchUtils;
 
 export const empty = (element: Element) => (element.innerHTML = "");
 
+/**
+ * Initialize application.
+ */
 export default async function init(): Promise<void> {
-  store.loadWidgets();
+  app.loadWidgets();
+  // TODO - create WebMap here and let Application handle MapView
   let viewDiv = document.querySelector("webmap") as HTMLDivElement;
   if (viewDiv) {
     empty(viewDiv);
   } else {
     viewDiv = document.createElement("div");
   }
-  await whenTrueOnce(store, "signedIn");
-  store.view = new MapView({ map: store.webmap, container: viewDiv });
+  await whenTrueOnce(app, "signedIn");
+  app.view = new MapView({ map: app.webmap, container: viewDiv });
 }

@@ -6,13 +6,13 @@ import td = require("testdouble");
 
 import promiseUtils = require("esri/core/promiseUtils");
 
-import store from "../../../../src/app/stores/app";
+import app from "../../../../src/app/widgets/Application";
 
 import MapView = require("esri/views/MapView");
 
 const { suite, test, before, after } = intern.getInterface("tdd");
 
-suite("app/stores/app", () => {
+suite("app/widgets/Application", () => {
   const addToUI = td.function("addToUI");
 
   before(() => {});
@@ -24,8 +24,8 @@ suite("app/stores/app", () => {
       container: document.createElement("div")
     });
     view.ui.add = addToUI as any;
-    store.view = view;
-    await store.loadWidgets();
+    app.view = view;
+    await app.loadWidgets();
     td.verify(addToUI(td.matchers.anything()));
   });
 });

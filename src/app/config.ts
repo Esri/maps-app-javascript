@@ -11,10 +11,21 @@
   limitations under the License.
 */
 
+/**
+ * Registered application id.
+ * This is needed to be able to use premium
+ * services such as routing and directions.
+ */
 export const appId = "W2zBZ4VcZwV68oZC";
 
+/**
+ * Users Portal URL.
+ */
 export const portalUrl = "https://arcgis.com";
 
+/**
+ * WebMap id to use for this application.
+ */
 export const webMapItem = {
   portalItem: {
     id: "1aab2defd7444b6790f439a186cd4a23"

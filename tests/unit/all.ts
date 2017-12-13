@@ -1,3 +1,3 @@
 import "./app/init";
-import "./app/stores/app";
+import "./app/widgets/Application";
 import "./app/widgets/AuthComponents";

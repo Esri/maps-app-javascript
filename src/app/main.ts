@@ -11,6 +11,11 @@
   limitations under the License.
 */
 
+/**
+ * We use this `main` file to initialize the app for a couple of reasons.
+ * 1. Using Webpack, cannot reach exported method to start application.
+ * 2. Because of issue above, makes testing more difficult when mocks are needed.
+ */
 import init from "./init";
 
 export default init();

@@ -24,6 +24,11 @@ interface IconProps {
   icon: string;
 }
 
+/**
+ * These are simple stateless components used
+ * with the Authentication Widget.
+ */
+
 export const AuthStatus = ({
   style,
   icon,

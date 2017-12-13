@@ -90,8 +90,10 @@ class Authenticate extends declared(Widget) {
       : // Sign-out icon
         SignOut({ icon: CSS.icon });
 
+    // Determine what the displayed message will be.
     const text = this.isSignedIn ? i18n.signout : i18n.signin;
 
+    // Properties for stateless component
     const props = {
       style: join(CSS.label, CSS.margin),
       showLabel: this.showLabel,
@@ -113,10 +115,17 @@ class Authenticate extends declared(Widget) {
     );
   }
 
+  /**
+   * Based on curernt signedIn status, either sign the user in or out.
+   */
   private onClick() {
     this.isSignedIn ? this.signout() : this.signin();
   }
 
+  /**
+   * Once widget is created, check what the current sign in status is.
+   * @param node
+   */
   private handleAfterCreate(node: Element) {
     this.checkStatus();
   }

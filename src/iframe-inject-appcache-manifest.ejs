@@ -1,5 +1,11 @@
 <html manifest="manifest.appcache">
   <script>
+    /**
+     * Load appcache via iframe to separate the logic neeed
+     * to update the cache if needed.
+     * Appcache is deprecated and only utilized in
+     * browsers that do not support Service Workers.
+     */
     function onUpdateReady() {
         console.log("Appcache has been updated. Running swapCache()")
         try {

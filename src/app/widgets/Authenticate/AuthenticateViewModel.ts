@@ -47,17 +47,31 @@ const { watch, whenOnce } = watchUtils;
 
 @subclass("app.widgets.Authenticate.AuthenticateViewModel")
 class AuthenticateViewModel extends declared(Accessor) {
+  /**
+   * Current credential for application.
+   */
   @property() credential: Credential | null;
 
+  /**
+   * Registered application ID to use for
+   * OAuth authentication.
+   */
   @property() appId: string;
 
+  /**
+   * OAuthInfo using `appId`.
+   */
   @property() info: OAuthInfo;
 
+  /**
+   * Currently logged in user name.
+   */
   @aliasOf("credential.userId") userName: string;
 
   constructor(params?: AuthenticateParams) {
     super(params);
 
+    // Once an `appId` is provided, we can create our OAuthInfo.
     watch(this, "appId", appId => {
       this.info = new OAuthInfo({
         appId,
@@ -66,6 +80,9 @@ class AuthenticateViewModel extends declared(Accessor) {
     });
   }
 
+  /**
+   * Check the current status of whether a user is signed in or not.
+   */
   checkStatus() {
     return new Promise(async (resolve, reject) => {
       if (!this.info) {
@@ -76,6 +93,10 @@ class AuthenticateViewModel extends declared(Accessor) {
     });
   }
 
+  /**
+   * Check if there is a current OAuthInfo and take
+   * user through the steps of signing in.
+   */
   signin() {
     return new Promise(async (resolve, reject) => {
       if (!this.info) {
@@ -86,12 +107,20 @@ class AuthenticateViewModel extends declared(Accessor) {
     });
   }
 
+  /**
+   * Destroy credentials and reload application.
+   */
   signout() {
     IdentityManager.destroyCredentials();
     this.credential = null;
     location.reload();
   }
 
+  /**
+   * Check the current signed in status and attempt to
+   * acquire current Credential.
+   * @param resolve
+   */
   private async _checkStatus(resolve: Resolver) {
     this.registerOAuth();
     try {
@@ -100,6 +129,12 @@ class AuthenticateViewModel extends declared(Accessor) {
     } catch (error) {}
   }
 
+  /**
+   * Check for a current credential for a user, if not already
+   * signed in, go through steps to let user authenticate.
+   * @param resolve
+   * @param reject
+   */
   private async _login(resolve: Resolver, reject: Rejector) {
     this.registerOAuth();
     try {
@@ -115,10 +150,17 @@ class AuthenticateViewModel extends declared(Accessor) {
     }
   }
 
+  /**
+   * Use `IdentityManager` to check users current signed in status.
+   * @param info
+   */
   private currentStatus(info: OAuthInfo) {
     return IdentityManager.checkSignInStatus(`${info.portalUrl}/sharing`);
   }
 
+  /**
+   * Use `IdentityManager` to register current OAuthInfos.
+   */
   private registerOAuth() {
     /**
      * When installed as a homescreen application, display-mode is standalone
@@ -131,6 +173,9 @@ class AuthenticateViewModel extends declared(Accessor) {
     }
   }
 
+  /**
+   * OAuth login process for user.
+   */
   private async fetchCredentials() {
     this.credential = await IdentityManager.getCredential(
       `${this.info.portalUrl}/sharing`,

@@ -42,19 +42,12 @@ import {
 
 import { appId, webMapItem } from "../config";
 
-interface Store {
-  webmap: WebMap;
-  view: MapView;
-}
-
 const { watch, whenOnce } = watchUtils;
 
 const element = () => document.createElement("div");
 
-@subclass("app.stores.app")
-class AppStore extends declared(Accessor) implements Store {
-  @property() minimal = false;
-
+@subclass("app.widgets.ViewManager")
+class Application extends declared(Accessor) {
   @property({ readOnly: true })
   webmap: WebMap = new WebMap(webMapItem);
 
@@ -76,6 +69,7 @@ class AppStore extends declared(Accessor) implements Store {
   }
 
   async loadWidgets() {
+    // We are going to bind some widgets to pre-existing DOM elements
     const menuNode = (document.querySelector("menu-container") ||
       element()) as HTMLElement;
     const authNode = (document.querySelector("authentication") ||
@@ -87,12 +81,20 @@ class AppStore extends declared(Accessor) implements Store {
       container: menuNode
     });
 
+    // Will update Application `signedIn` based on Authentication
+    // widget in the MenuContainer
     watch(this, "menuContainer.signedIn", credential => {
       this.signedIn = !!credential;
       this.menuContainer.close();
     });
 
     const { value: view } = await whenOnce(this, "view");
+
+    /**
+     * These widgets are going to be added to
+     * Expand widgets, so they need a container
+     * element when initialized.
+     */
     const directions = new Directions({
       container: element(),
       view
@@ -110,6 +112,7 @@ class AppStore extends declared(Accessor) implements Store {
 
     const locate = new Locate({ view });
 
+    // Create array of widgets with positions to add to MapView
     const widgets = [
       {
         component: new Home({
@@ -152,4 +155,4 @@ class AppStore extends declared(Accessor) implements Store {
   }
 }
 
-export default new AppStore();
+export default new Application();

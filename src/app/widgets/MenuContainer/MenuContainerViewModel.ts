@@ -32,18 +32,31 @@ interface MenuContainerViewModel {
 
 @subclass("app.widgets.MenuContainer.MenuContainerViewModel")
 class MenuContainerViewModel extends declared(Accessor) {
+  /**
+   * Material Components Temporary Drawer.
+   */
   @property() drawer: MDCTemporaryDrawer;
 
+  /**
+   * Will initialize the Material Drawer child component.
+   * @param element
+   */
   initDrawer(element: HTMLElement) {
     this.drawer = new MDCTemporaryDrawer(element);
   }
 
+  /**
+   * Open the drawer.
+   */
   open() {
     if (this.drawer) {
       this.drawer.open = true;
     }
   }
 
+  /**
+   * Close the drawer.
+   */
   close() {
     if (this.drawer) {
       this.drawer.open = false;
