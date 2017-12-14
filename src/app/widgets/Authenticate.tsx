@@ -59,19 +59,13 @@ class Authenticate extends declared(Widget) {
 
   @aliasOf("viewModel.appId") appId: string;
 
-  @aliasOf("viewModel.checkStatus") checkStatus: () => Promise<Credential>;
-
-  @aliasOf("viewModel.signout") signout: () => void;
-
-  @aliasOf("viewModel.signin") signin: () => Promise<void>;
-
   @aliasOf("viewModel.userName") userName: string;
 
   @property({
     readOnly: true,
     dependsOn: ["credential"]
   })
-  private get isSignedIn(): boolean {
+  get isSignedIn(): boolean {
     return !!this.credential;
   }
 
@@ -119,15 +113,14 @@ class Authenticate extends declared(Widget) {
    * Based on curernt signedIn status, either sign the user in or out.
    */
   private onClick() {
-    this.isSignedIn ? this.signout() : this.signin();
+    this.isSignedIn ? this.viewModel.signout() : this.viewModel.signin();
   }
 
   /**
    * Once widget is created, check what the current sign in status is.
-   * @param node
    */
-  private handleAfterCreate(node: Element) {
-    this.checkStatus();
+  private handleAfterCreate() {
+    this.viewModel.checkStatus();
   }
 }
 

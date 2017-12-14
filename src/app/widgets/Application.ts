@@ -48,7 +48,7 @@ const element = () => document.createElement("div");
 
 export const empty = (el: Element) => (el.innerHTML = "");
 
-@subclass("app.widgets.ViewManager")
+@subclass("app.widgets.Application")
 class Application extends declared(Accessor) {
   @property({ readOnly: true })
   webmap: WebMap = new WebMap(webMapItem);
