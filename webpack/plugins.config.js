@@ -57,6 +57,14 @@ module.exports = function(env, options) {
           ".gitkeep",
           ".DS_Store"
         ]
+      },
+      {
+        from: "src/app/widgets/Menu/nls",
+        to: `${dist}/app/widgets/Menu/nls`,
+        ignore: [
+          ".gitkeep",
+          ".DS_Store"
+        ]
       }
     ]),
     new ExtractTextPlugin("app/styles/main.css")
