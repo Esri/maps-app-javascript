@@ -37,36 +37,25 @@
   <% if (htmlWebpackPlugin.options.MODE === "prod") { %>
   <iframe src="iframe-inject-appcache-manifest.html" style="display:none;"></iframe>
   <% } %>
-  <header class="mdc-toolbar">
-    <div class="mdc-toolbar__row">
-      <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
-        <a href="#" class="app-menu material-icons mdc-toolbar__icon--menu">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" class="svg-icon"><path d="M28 8H4c-1.1 0-2-.9-2-2s.9-2 2-2h24c1.1 0 2 .9 2 2s-.9 2-2 2zm0 10H4c-1.1 0-2-.9-2-2s.9-2 2-2h24c1.1 0 2 .9 2 2s-.9 2-2 2zm0 10H4c-1.1 0-2-.9-2-2s.9-2 2-2h24c1.1 0 2 .9 2 2s-.9 2-2 2z"/></svg>
-        </a>
-        <span class="mdc-toolbar__title toolbar-title"><%= htmlWebpackPlugin.options.title %></span>
-      </section>
-      <div class="app-actions">
-        <search></search>
-      </div>
-    </div>
-  </header>
 
-  <menu-container></menu-container>
+  <header class="top-nav fade-in">
+    <span class="top-nav-title margin-left-1">ArcGIS <span class="phone-hide"><%= htmlWebpackPlugin.options.title %></span></span>
+    <nav class="class-top-nav-list right" role="navigation" aria-labelledby="usernav">
+      <authentication></authentication>
+    </nav>
+    <user-nav></user-nav>
+  </header>
 
   <noscript> JavaScript is required in order to use this app </noscript>
 
   <main class="main">
     <webmap>
-      <div class="spinner">
-        <div class="rect1"></div>
-        <div class="rect2"></div>
-        <div class="rect3"></div>
-        <div class="rect4"></div>
-        <div class="rect5"></div>
+      <div class="loader is-active padding-leader-3 padding-trailer-3">
+        <div class="loader-bars"></div>
       </div>
     </webmap>
   </main>
-  <link rel="stylesheet" href="./app/styles/main.css" media="none" onload="if(media!='all')media='all'">
+  <link rel="stylesheet" href="app/styles/main.css" media="none" onload="if(media!='all')media='all'">
   <link rel="stylesheet" href="https://<%= htmlWebpackPlugin.options.JSAPI %>/esri/css/main.css" media="none" onload="if(media!='all')media='all'">
   <script>
     <% if (htmlWebpackPlugin.options.MODE === "prod") { %>

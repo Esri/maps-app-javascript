@@ -1,0 +1,79 @@
+:root {
+  --color-theme: $light-gray;
+  --color-theme-font: #fff;
+  --color-black: #323232;
+  --color-blue: #0079c1;
+  --color-purple: #9081bc;
+  --color-green: #338033;
+  --max-width: 600px;
+  --animate-time: 1.4s;
+  --align: 0.15em;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  letter-spacing: 0em;
+  font-family: "Avenir Next","Helvetica Neue",sans-serif;
+  line-height: 1.55rem;
+  font-feature-settings: "liga" 1,"calt" 0;
+}
+
+/* header */
+header.top-nav {
+  z-index: 1;
+}
+
+header.top-nav {
+  background-color: var(--color-theme);
+}
+
+@media (max-width: 600px) {
+  .toolbar-title {
+    display: none;
+  }
+}
+
+authentication {
+  color: var(--color-theme-font);
+  text-decoration: none;
+  letter-spacing: 2px;
+  padding: 10px 20px;
+  border-bottom: 4px solid transparent;
+  vertical-align: -var(--align);
+  line-height: var(--align);
+  display: inline-block;
+  vertical-align: top;
+  cursor: pointer;
+}
+
+.top-nav-title,
+.top-nav-link {
+  color: var(--color-theme-font);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 20px 10px;
+}
+
+/* map view */
+
+.main,
+webmap {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.esri-view-root {
+  width: 100%;
+  height: 100%;
+}

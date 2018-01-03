@@ -38,6 +38,7 @@ suite("app/widgets/AuthComponents", () => {
       icon: SignIn({ icon: icon1 }),
       text: "Hello",
       showLabel: false,
+      showIcon: false,
       style: "test-class"
     };
     const vnode = AuthStatus(props);

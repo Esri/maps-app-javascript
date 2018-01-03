@@ -4,7 +4,7 @@ const JSAPI_VERSION = "js.arcgis.com/4.6";
 module.exports = function (env, options) {
   return [
     {
-      title: "ArcGIS Maps App JavaScript",
+      title: "Maps App JavaScript",
       template: "src/index.ejs",
       filename: "index.html",
       favicon: "src/assets/favicon.ico",

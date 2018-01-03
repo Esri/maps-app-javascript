@@ -23,7 +23,7 @@ module.exports = env => {
     devtool: "#inline-source-map",
     resolve: {
       modules: [path.resolve(__dirname, "/src"), path.resolve(__dirname, "/tests"), "node_modules/"],
-      extensions: [".ts", ".tsx", ".js", ".css"]
+      extensions: [".ts", ".tsx", ".js", ".css", ".scss"]
     },
 
     module: {

@@ -2,9 +2,6 @@
   "loader": {
     "script": "dojo2",
     "options": {
-      "paths": {
-        "@material/drawer/index": "node_modules/@material/drawer/dist/mdc.drawer"
-      },
       "packages": [
         { "name": "dist", "location": "~tmp" },
         {
@@ -49,10 +46,6 @@
           "name": "testdouble",
           "location": "node_modules/testdouble/dist",
           "main": "testdouble"
-        },
-        {
-          "name": "@material",
-          "location": "node_modules/@material"
         }
       ]
     }
@@ -65,15 +58,19 @@
     }
   ],
   "browser": {
-    "suites": "~tmp/tests.js" //"suites": "~tmp/tests/unit/all.js"
+    "suites": "~tmp/tests.js"
   },
+  "instrumenterOptions": {
+    "esModules": true
+  }, 
   "coverage": [
     "~tmp/app/**/*.js",
+    "!node_modules/calcite-web/**/*",
     "!~tmp/tests.js",
     "!~tmp/src/app/main.*",
     "!~tmp/webpack:*",
     "!tests/unit/**/*",
-    "!node_modules/"
+    "!node_modules/*"
   ],
   "maxConcurrency": 2
 }

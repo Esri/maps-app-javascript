@@ -4,21 +4,11 @@ declare module "dojo/i18n!*" {
   export = i18n;
 }
 
-declare module "styles/main.css" {
-  const css: any;
-  export default css;
+declare module "esri/moment" {
+  import * as m from "moment";
+  export = m;
 }
 
-// material
-declare module "@material/drawer/index" {
-  export class MDCTemporaryDrawer {
-    open: boolean;
-    constructor(params?: any);
-  }
+declare module "calcite-web" {
+  export const dropdown: () => void;
 }
-/*
-declare module "esri/widgets/Directions" {
-  const Directions: any;
-  export = Directions;
-}
-*/

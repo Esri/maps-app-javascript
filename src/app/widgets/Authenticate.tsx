@@ -55,23 +55,21 @@ class Authenticate extends declared(Widget) {
 
   @renderable()
   @property()
+  showIcon = false;
+
+  @renderable()
+  @property()
   showLabel = true;
 
   @aliasOf("viewModel.appId") appId: string;
 
-  @aliasOf("viewModel.userName") userName: string;
-
   @property({
     readOnly: true,
-    dependsOn: ["credential"]
+    dependsOn: ["viewModel.credential"]
   })
   get isSignedIn(): boolean {
-    return !!this.credential;
+    return !!this.viewModel.credential;
   }
-
-  @renderable()
-  @aliasOf("viewModel.credential")
-  private credential: Credential;
 
   constructor(params?: AuthenticateProperties) {
     super(params);
@@ -90,6 +88,7 @@ class Authenticate extends declared(Widget) {
     // Properties for stateless component
     const props = {
       style: join(CSS.label, CSS.margin),
+      showIcon: this.showIcon,
       showLabel: this.showLabel,
       text,
       icon
@@ -103,8 +102,6 @@ class Authenticate extends declared(Widget) {
         afterCreate={this.handleAfterCreate}
       >
         {AuthStatus(props)}
-        &nbsp;
-        {User(this.userName)}
       </div>
     );
   }

@@ -29,6 +29,7 @@
   ],
   "types": [
     "arcgis-js-api",
+    "moment",
     "chai",
     "intern"
   ],
@@ -40,6 +41,6 @@
     "./node_modules"
   ],
   "files": [
-    "typings/extensions.d.ts"
+    "./typings/extensions.d.ts"
   ]
 }

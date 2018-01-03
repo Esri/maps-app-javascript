@@ -3,6 +3,7 @@ node_modules/*
 build/*
 dist/*
 html-report/*
+~tmp/*
 .baseDir*
 .tsdrc
 .tscache

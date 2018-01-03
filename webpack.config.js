@@ -10,7 +10,7 @@ module.exports = function(env, options) {
   const config = {
     entry: [
       "./src/app/main.ts",
-      "./src/app/styles/main.css"
+      "./src/app/styles/main.scss"
     ],
     stats: {
       colors: true
@@ -39,8 +39,8 @@ module.exports = function(env, options) {
   if (env.dev) {
     config.devtool = "cheap-module-source-map";
     config.devServer = devServer(...arguments);
-    config.entry.push("webpack-dev-server/client?http://localhost:8080/");
-    config.entry.push("webpack/hot/only-dev-server");
+    //config.entry.push("webpack-dev-server/client?http://localhost:8080/");
+    //config.entry.push("webpack/hot/only-dev-server");
   }
 
   return config;

@@ -16,6 +16,7 @@ import { tsx } from "esri/widgets/support/widget";
 interface AuthStatusProps {
   icon: JSX.Element;
   text: string;
+  showIcon: boolean;
   showLabel: boolean;
   style: string;
 }
@@ -33,13 +34,14 @@ export const AuthStatus = ({
   style,
   icon,
   text,
-  showLabel
+  showLabel,
+  showIcon
 }: AuthStatusProps) => {
-  return !showLabel ? (
+  return !showLabel && showIcon ? (
     <span aria-label={text}>{icon}</span>
   ) : (
     <span>
-      <span aria-label={text}>{icon}</span>
+      {showIcon ? <span aria-label={text}>{icon}</span> : <span />}
       <span class={style}>{text}</span>
     </span>
   );
@@ -69,6 +71,4 @@ export const SignOut = (props: IconProps) => (
   </svg>
 );
 
-export const User = (name?: string) => {
-  return <span>{name ? `(${name})` : ""}</span>;
-};
+export const User = (name?: string) => <span>{name ? `(${name})` : ""}</span>;

@@ -18,14 +18,14 @@
     "suppressImplicitAnyIndexErrors": true,
     "strictNullChecks": true
   },
-  "types": [ "arcgis-js-api" ],
+  "types": [ "arcgis-js-api", "moment" ],
   "include": [
-    "../src/app/**/*"
+    "./src/app/**/*"
   ],
   "exclude": [
-    "../node_modules"
+    "./node_modules"
   ],
   "files": [
-    "../typings/extensions.d.ts"
+    "./typings/extensions.d.ts"
   ]
 }

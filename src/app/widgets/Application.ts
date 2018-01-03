@@ -32,7 +32,7 @@ import Home = require("esri/widgets/Home");
 import Locate = require("esri/widgets/Locate");
 import Search = require("esri/widgets/Search");
 
-import MenuContainer from "./../widgets/MenuContainer";
+import UserNav from "./UserNav";
 
 import {
   declared,
@@ -57,26 +57,9 @@ class Application extends declared(Accessor) {
 
   @property() view: MapView;
 
-  @property() menuContainer: MenuContainer;
-
-  constructor(params?: any) {
-    super(params);
-
-    const menu = document.querySelector(".app-menu");
-    if (menu) {
-      menu.addEventListener("click", () => {
-        this.menuContainer.open();
-      });
-    }
-  }
-
   async loadWidgets() {
     // We are going to bind some widgets to pre-existing DOM elements
-    const menuNode = (document.querySelector("menu-container") ||
-      element()) as HTMLElement;
-    const authNode = (document.querySelector("authentication") ||
-      element()) as HTMLElement;
-    const searchNode = (document.querySelector("search") ||
+    const navNode = (document.querySelector("user-nav") ||
       element()) as HTMLElement;
 
     let viewNode = document.querySelector("webmap") as HTMLDivElement;
@@ -86,34 +69,31 @@ class Application extends declared(Accessor) {
       viewNode = element();
     }
 
-    this.menuContainer = new MenuContainer({
-      container: menuNode
+    const userNav = new UserNav({
+      container: navNode
     });
 
-    // Will update Application `signedIn` based on Authentication
-    // widget in the MenuContainer
-    watch(this, "menuContainer.signedIn", credential => {
-      this.signedIn = !!credential;
-      this.menuContainer.close();
-    });
+    watch(userNav, "signedIn", signedIn => (this.signedIn = signedIn));
 
     await whenTrueOnce(this, "signedIn");
 
     this.view = new MapView({ map: this.webmap, container: viewNode });
     const view = this.view;
 
+    userNav.view = view;
+
     /**
      * These widgets are going to be added to
      * Expand widgets, so they need a container
      * element when initialized.
      */
-    const directions = new Directions({
+    const search = new Search({
       container: element(),
       view
     });
 
-    const search = new Search({
-      container: searchNode,
+    const directions = new Directions({
+      container: element(),
       view
     });
 
@@ -132,6 +112,12 @@ class Application extends declared(Accessor) {
           view
         }),
         position: "top-left"
+      },
+      {
+        component: new Search({
+          view
+        }),
+        position: "top-right"
       },
       {
         component: new Expand({
