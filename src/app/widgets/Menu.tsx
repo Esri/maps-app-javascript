@@ -29,6 +29,11 @@ const CSS = {
   link: "dropdown-link"
 };
 
+/**
+ * Returns the navigation menu item for a user to sign in or out
+ * @param props
+ * @param context
+ */
 export const userMenu = (props: UserMenuProps, context: any) => (
   <nav class={CSS.menu} role="menu">
     <span class={CSS.title}>

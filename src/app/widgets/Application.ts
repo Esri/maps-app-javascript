@@ -73,6 +73,7 @@ class Application extends declared(Accessor) {
       container: navNode
     });
 
+    // sync the signed in status of the UserNav with the application
     watch(userNav, "signedIn", signedIn => (this.signedIn = signedIn));
 
     await whenTrueOnce(this, "signedIn");

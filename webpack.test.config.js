@@ -39,6 +39,14 @@ module.exports = env => {
         {
           from: "src/app/widgets/Authenticate/nls",
           to: path.join(__dirname, "/~tmp") + "/widgets/Authenticate/nls"
+        },
+        {
+          from: "src/app/widgets/Menu/nls",
+          to: path.join(__dirname, "/~tmp") + "/widgets/Menu/nls",
+          ignore: [
+            ".gitkeep",
+            ".DS_Store"
+          ]
         }
       ])
     ],

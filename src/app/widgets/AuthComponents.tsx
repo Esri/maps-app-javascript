@@ -29,7 +29,6 @@ interface IconProps {
  * These are simple stateless components used
  * with the Authentication Widget.
  */
-
 export const AuthStatus = ({
   style,
   icon,
@@ -47,6 +46,10 @@ export const AuthStatus = ({
   );
 };
 
+/**
+ * Returns the SignIn SVG Icon
+ * @param props
+ */
 export const SignIn = (props: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -59,6 +62,10 @@ export const SignIn = (props: IconProps) => (
   </svg>
 );
 
+/**
+ * Returns the SignOut SVG Icon
+ * @param props
+ */
 export const SignOut = (props: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -71,4 +78,8 @@ export const SignOut = (props: IconProps) => (
   </svg>
 );
 
+/**
+ * Returns the label for a User if provided
+ * @param name
+ */
 export const User = (name?: string) => <span>{name ? `(${name})` : ""}</span>;

@@ -12,19 +12,45 @@
 */
 
 import moment = require("esri/moment");
+import { Moment } from "moment";
 
 type Duration = moment.Duration;
 
-export const dateDuration: (n: number) => Duration = n =>
-  moment.duration(moment(n).diff(moment()));
+/**
+ * Simply returns the current moment
+ */
+export const now = () => moment();
 
+/**
+ * Calculates the duration between two moments
+ * @param n
+ * @param t
+ */
+export const dateDuration: (n: number, t: Moment) => Duration = (n, t) =>
+  moment.duration(moment(n).diff(t));
+
+/**
+ * Returns a Function provide a string representation of a fixed number value
+ * @param i
+ */
 export const fixedN: (i: number) => (n: number) => string = i => n =>
   n.toFixed(i);
+/**
+ * Returns a string representation of a Number to zero digits
+ */
 export const fixedZero: (n: number) => string = fixedN(0);
+/**
+ * Returns a string representation of a Number to one digit
+ */
 export const fixedOne: (n: number) => string = fixedN(1);
 
-export const expiration: (n: number) => string = n => {
-  const duration = dateDuration(n);
+/**
+ * Calculates the expiration time in Days or Hours between moments
+ * @param n
+ * @param t
+ */
+export const expiration: (n: number, t?: Moment) => string = (n, t = now()) => {
+  const duration = dateDuration(n, t);
   return duration.asDays() > 1
     ? `${fixedZero(duration.asDays())} days`
     : `${fixedOne(duration.asHours())} hours`;
