@@ -32,7 +32,7 @@ import Home = require("esri/widgets/Home");
 import Locate = require("esri/widgets/Locate");
 import Search = require("esri/widgets/Search");
 
-import UserNav from "./UserNav";
+import UserNav from "./widgets/UserNav";
 
 import {
   declared,
@@ -40,7 +40,7 @@ import {
   subclass
 } from "esri/core/accessorSupport/decorators";
 
-import { appId, webMapItem } from "../config";
+import { appId, webMapItem } from "./config";
 
 const { watch, whenOnce, whenTrueOnce } = watchUtils;
 
@@ -59,8 +59,8 @@ class Application extends declared(Accessor) {
 
   async loadWidgets() {
     // We are going to bind some widgets to pre-existing DOM elements
-    const navNode = (document.querySelector("user-nav") ||
-      element()) as HTMLElement;
+    const navNode: HTMLElement =
+      document.querySelector("user-nav") || element();
 
     let viewNode = document.querySelector("webmap") as HTMLDivElement;
     if (viewNode) {

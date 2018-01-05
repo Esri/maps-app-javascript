@@ -29,8 +29,8 @@ suite("app/widgets/AuthComponents", () => {
 
   test("User contains given name", () => {
     const name = "Syd";
-    const vnode = User(name);
-    assert.equal((vnode as any).children[0].text, `(${name})`);
+    const vnode: JSX.IntrinsicElements = User(name);
+    assert.equal(vnode.children[0].text, `(${name})`);
   });
 
   test("AuthStatus contains a single element", () => {
@@ -41,8 +41,8 @@ suite("app/widgets/AuthComponents", () => {
       showIcon: false,
       style: "test-class"
     };
-    const vnode = AuthStatus(props);
-    const child = (vnode as any).children[0];
+    const vnode: JSX.IntrinsicElements = AuthStatus(props);
+    const child = vnode.children[0];
     assert.ok(child);
   });
 });

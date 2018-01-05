@@ -1,9 +1,9 @@
 /// <amd-dependency path="esri/core/tsSupport/generatorHelper" name="__generator" />
 /// <amd-dependency path="esri/core/tsSupport/awaiterHelper" name="__awaiter" />
 
-import {} from "intern";
+// import {} from "intern";
 
-import app from "../../../../src/app/widgets/Application";
+import app from "../../../src/app/Application";
 
 import MapView = require("esri/views/MapView");
 

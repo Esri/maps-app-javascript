@@ -110,7 +110,7 @@ class Authenticate extends declared(Widget) {
    * Based on curernt signedIn status, either sign the user in or out.
    */
   private onClick() {
-    this.isSignedIn ? this.viewModel.signout() : this.viewModel.signin();
+    this.isSignedIn ? this.viewModel.signOut() : this.viewModel.signIn();
   }
 
   /**

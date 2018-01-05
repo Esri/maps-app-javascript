@@ -35,8 +35,8 @@ type Rejector = (error?: any) => void;
 
 interface AuthenticateViewModel {
   credential: Credential | null;
-  signin(): Promise<Credential>;
-  signout(): void;
+  signIn(): Promise<Credential>;
+  signOut(): void;
 }
 
 export interface AuthenticateParams {
@@ -97,7 +97,7 @@ class AuthenticateViewModel extends declared(Accessor) {
    * Check if there is a current OAuthInfo and take
    * user through the steps of signing in.
    */
-  signin() {
+  signIn() {
     return new Promise(async (resolve, reject) => {
       if (!this.info) {
         const { value: info } = await whenOnce(this, "info");
@@ -110,7 +110,7 @@ class AuthenticateViewModel extends declared(Accessor) {
   /**
    * Destroy credentials and reload application.
    */
-  signout() {
+  signOut() {
     IdentityManager.destroyCredentials();
     this.credential = null;
     location.reload();

@@ -16,6 +16,6 @@
  * 1. Using Webpack, cannot reach exported method to start application.
  * 2. Because of issue above, makes testing more difficult when mocks are needed.
  */
-import app from "./widgets/Application";
+import app from "./Application";
 
 export default app.loadWidgets();
