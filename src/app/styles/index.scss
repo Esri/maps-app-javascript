@@ -24,10 +24,10 @@ header.top-nav {
 }
 
 header.top-nav {
-  background-color: let(--color-theme);
+  background-color: var(--color-theme);
 }
 
-@media (let(--max-width)) {
+@media (var(--max-width)) {
   .toolbar-title {
     display: none;
   }
@@ -35,7 +35,7 @@ header.top-nav {
 
 .top-nav-title,
 .top-nav-link {
-  color: let(--color-theme-font);
+  color: var(--color-theme-font);
   letter-spacing: 2px;
   text-transform: uppercase;
   padding: 20px 10px;
