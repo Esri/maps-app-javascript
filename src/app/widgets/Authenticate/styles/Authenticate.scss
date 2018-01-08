@@ -1,27 +1,5 @@
-:root {
-  --align: 0.15em;
-  --standard-size: 1em;
-}
-
-@custom-media --small-viewport (max-width: 544px);
-
-.authenticate-margin {
-  margin-left: 1em;
-}
-/* same as esri calcite-web svg icons */
-.authenticate-icon {
-  fill: currentColor;
-  pointer-events: none;
+.authenticate {
+  text-decoration: none;
   display: inline-block;
-  width: var(--standard-size);
-  height: var(--standard-size);
-  vertical-align: -var(--align);
-  padding-right: var(--align);
+  cursor: pointer;
 }
-/*
-@media (--small-viewport) {
-  .authenticate-label {
-    display: none;
-  }
-}
-*/

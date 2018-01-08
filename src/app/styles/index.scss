@@ -1,13 +1,7 @@
 :root {
   --color-theme: $light-gray;
-  --color-theme-font: #fff;
-  --color-black: #323232;
-  --color-blue: #0079c1;
-  --color-purple: #9081bc;
-  --color-green: #338033;
+  --color-theme-font: $white;
   --max-width: 600px;
-  --animate-time: 1.4s;
-  --align: 0.15em;
 }
 
 html,
@@ -19,9 +13,9 @@ body {
   display: flex;
   flex-direction: column;
   letter-spacing: 0em;
-  font-family: "Avenir Next","Helvetica Neue",sans-serif;
+  font-family: "Avenir Next", "Helvetica Neue", sans-serif;
   line-height: 1.55rem;
-  font-feature-settings: "liga" 1,"calt" 0;
+  font-feature-settings: "liga" 1, "calt" 0;
 }
 
 /* header */
@@ -30,31 +24,18 @@ header.top-nav {
 }
 
 header.top-nav {
-  background-color: var(--color-theme);
+  background-color: let(--color-theme);
 }
 
-@media (max-width: 600px) {
+@media (let(--max-width)) {
   .toolbar-title {
     display: none;
   }
 }
 
-authentication {
-  color: var(--color-theme-font);
-  text-decoration: none;
-  letter-spacing: 2px;
-  padding: 10px 20px;
-  border-bottom: 4px solid transparent;
-  vertical-align: -var(--align);
-  line-height: var(--align);
-  display: inline-block;
-  vertical-align: top;
-  cursor: pointer;
-}
-
 .top-nav-title,
 .top-nav-link {
-  color: var(--color-theme-font);
+  color: let(--color-theme-font);
   letter-spacing: 2px;
   text-transform: uppercase;
   padding: 20px 10px;

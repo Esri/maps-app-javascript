@@ -21,7 +21,7 @@ import {
   subclass
 } from "esri/core/accessorSupport/decorators";
 
-import { join, renderable, tsx } from "esri/widgets/support/widget";
+import { renderable, tsx } from "esri/widgets/support/widget";
 
 import Credential = require("esri/identity/Credential");
 import Widget = require("esri/widgets/Widget");
@@ -29,7 +29,12 @@ import Widget = require("esri/widgets/Widget");
 import * as i18n from "dojo/i18n!./Authenticate/nls/Authenticate";
 import AuthenticateViewModel from "./Authenticate/AuthenticateViewModel";
 
-import { AuthStatus, SignIn, SignOut, User } from "./AuthComponents";
+import {
+  AuthStatus,
+  SignIn,
+  SignOut,
+  User
+} from "./Authenticate/components/AuthComponents";
 
 import esri = __esri;
 
@@ -41,9 +46,7 @@ interface AuthenticateProperties extends esri.WidgetProperties {
 
 const CSS = {
   base: "authenticate",
-  icon: "authenticate-icon",
-  margin: "authenticate-margin",
-  label: "authenticate-label"
+  margin: "margin-left-1"
 };
 
 @subclass("app.widgets.Authenticate")
@@ -78,16 +81,16 @@ class Authenticate extends declared(Widget) {
   render() {
     const icon = this.isSignedIn
       ? // Sign-in icon
-        SignIn({ icon: CSS.icon })
+        SignIn()
       : // Sign-out icon
-        SignOut({ icon: CSS.icon });
+        SignOut();
 
     // Determine what the displayed message will be.
     const text = this.isSignedIn ? i18n.signout : i18n.signin;
 
     // Properties for stateless component
     const props = {
-      style: join(CSS.label, CSS.margin),
+      style: CSS.margin,
       showIcon: this.showIcon,
       showLabel: this.showLabel,
       text,

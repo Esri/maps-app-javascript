@@ -12,8 +12,8 @@
 */
 
 define({
-  root: ({
+  root: {
     session: "Session expires in",
     signin: "Please sign in"
-  })
+  }
 });

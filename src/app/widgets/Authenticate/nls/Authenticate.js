@@ -12,8 +12,8 @@
 */
 
 define({
-  root: ({
+  root: {
     signout: "Sign Out",
     signin: "Sign In"
-  })
+  }
 });

@@ -14,6 +14,14 @@
       "prettier --write",
       "tslint --fix",
       "git add"
+    ],
+    "*.{scss}": [
+      "prettier --parser scss --write",
+      "git add"
+    ],
+    "*.{js, md}": [
+      "prettier --write",
+      "git add"
     ]
   },
   "keywords": [
@@ -59,7 +67,7 @@
     "postcss-load-config": "^1.2.0",
     "postcss-loader": "^2.0.9",
     "postcss-nesting": "^4.0.1",
-    "prettier": "^1.7.4",
+    "prettier": "^1.9.2",
     "sass-loader": "^6.0.6",
     "sinon": "^4.0.2",
     "style-ext-html-webpack-plugin": "^3.4.5",
