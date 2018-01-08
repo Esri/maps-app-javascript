@@ -7,16 +7,12 @@
     "copy:js": "cpx './src/**/*.js' ./~tmp/src",
     "build": "del dist && webpack --env.NODE_ENV=local --env.production --progress && http-server ./dist -p 9000 -g --cors -o",
     "start": "del dist && webpack --env.dev && webpack-dev-server --env.dev --hot",
-    "test": "del ~tmp && webpack --config webpack.test.config.js && intern"
+    "test": "del ~tmp && webpack --config webpack.test.config.js && intern && del ~tmp"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
       "prettier --write",
       "tslint --fix",
-      "git add"
-    ],
-    "*.{scss}": [
-      "prettier --parser scss --write",
       "git add"
     ],
     "*.{js, md}": [
@@ -68,6 +64,7 @@
     "postcss-loader": "^2.0.9",
     "postcss-nesting": "^4.0.1",
     "prettier": "^1.9.2",
+    "prettier-webpack-plugin": "^0.2.2",
     "sass-loader": "^6.0.6",
     "sinon": "^4.0.2",
     "style-ext-html-webpack-plugin": "^3.4.5",

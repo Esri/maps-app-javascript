@@ -14,6 +14,7 @@ const ImageminPlugin = require("imagemin-webpack-plugin").default;
 const WebPWebpackPlugin = require("webp-webpack-plugin");
 const workboxPlugin = require("workbox-webpack-plugin");
 const WebpackPwaManifest = require("webpack-pwa-manifest");
+const PrettierPlugin = require("prettier-webpack-plugin");
 
 const html = require("./html.config");
 const sw = require("./sw.config");
@@ -57,6 +58,12 @@ module.exports = function(env, options) {
         ignore: [".gitkeep", ".DS_Store"]
       }
     ]),
+    new PrettierPlugin({
+      semi: true,
+      parser: "scss",
+      encoding: "utf-8",
+      extensions: [".scss"]
+    }),
     new ExtractTextPlugin("app/styles/main.css")
   ];
 

@@ -27,7 +27,7 @@ header.top-nav {
   background-color: var(--color-theme);
 }
 
-@media (var(--max-width)) {
+@media (max-width: 600px) {
   .toolbar-title {
     display: none;
   }
