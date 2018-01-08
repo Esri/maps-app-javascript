@@ -14,12 +14,7 @@
 /// <amd-dependency path="esri/core/tsSupport/declareExtendsHelper" name="__extends" />
 /// <amd-dependency path="esri/core/tsSupport/decorateHelper" name="__decorate" />
 
-import {
-  aliasOf,
-  declared,
-  property,
-  subclass
-} from "esri/core/accessorSupport/decorators";
+import { aliasOf, declared, property, subclass } from "esri/core/accessorSupport/decorators";
 
 import { join, renderable, tsx } from "esri/widgets/support/widget";
 
@@ -42,7 +37,7 @@ const CSS = {
   link: "dropdown-link"
 };
 
-import { userMenu } from "./Menu";
+import { userMenu } from "./UserNav/components/UserMenu";
 
 @subclass("app.widgets.UserNav")
 class UserNav extends declared(Widget) {

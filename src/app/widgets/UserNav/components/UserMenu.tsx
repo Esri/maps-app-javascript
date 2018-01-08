@@ -13,7 +13,7 @@
 
 import { tsx } from "esri/widgets/support/widget";
 
-import * as i18n from "dojo/i18n!./Menu/nls/Menu";
+import * as i18n from "dojo/i18n!./UserNav/nls/UserMenu";
 
 const upper: (s: string) => string = s => s.toUpperCase();
 
@@ -40,9 +40,7 @@ export const userMenu = (props: UserMenuProps, context: any) => (
       {props.userName}
       <br />
       <small>
-        {props.userName
-          ? `${i18n.session} ${upper(props.sessionDuration)}`
-          : i18n.signin}
+        {props.userName ? `${i18n.session} ${upper(props.sessionDuration)}` : i18n.signin}
       </small>
     </span>
     {props.menuItems}

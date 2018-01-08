@@ -23,12 +23,7 @@ import Credential = require("esri/identity/Credential");
 import IdentityManager = require("esri/identity/IdentityManager");
 import OAuthInfo = require("esri/identity/OAuthInfo");
 
-import {
-  aliasOf,
-  declared,
-  property,
-  subclass
-} from "esri/core/accessorSupport/decorators";
+import { aliasOf, declared, property, subclass } from "esri/core/accessorSupport/decorators";
 
 type Resolver = (value?: any) => void;
 type Rejector = (error?: any) => void;
@@ -113,7 +108,7 @@ class AuthenticateViewModel extends declared(Accessor) {
   signOut() {
     IdentityManager.destroyCredentials();
     this.credential = null;
-    location.reload();
+    this.pageReload();
   }
 
   /**
@@ -158,6 +153,10 @@ class AuthenticateViewModel extends declared(Accessor) {
     return IdentityManager.checkSignInStatus(`${info.portalUrl}/sharing`);
   }
 
+  private pageReload() {
+    location.reload();
+  }
+
   /**
    * Use `IdentityManager` to register current OAuthInfos.
    */
@@ -177,15 +176,12 @@ class AuthenticateViewModel extends declared(Accessor) {
    * OAuth login process for user.
    */
   private async fetchCredentials() {
-    this.credential = await IdentityManager.getCredential(
-      `${this.info.portalUrl}/sharing`,
-      {
-        error: null as any,
-        oAuthPopupConfirmation: false,
-        retry: false,
-        token: null as any
-      }
-    );
+    this.credential = await IdentityManager.getCredential(`${this.info.portalUrl}/sharing`, {
+      error: null as any,
+      oAuthPopupConfirmation: false,
+      retry: false,
+      token: null as any
+    });
 
     return this.credential;
   }

@@ -42,36 +42,26 @@ module.exports = function(env, options) {
       {
         from: "src/assets",
         to: `${dist}/assets`,
-        ignore: [
-          "*.ico",
-          ".gitkeep",
-          ".DS_Store"
-        ]
+        ignore: ["*.ico", ".gitkeep", ".DS_Store"]
       }
     ]),
     new CopyWebpackPlugin([
       {
         from: "src/app/widgets/Authenticate/nls",
         to: `${dist}/app/widgets/Authenticate/nls`,
-        ignore: [
-          ".gitkeep",
-          ".DS_Store"
-        ]
+        ignore: [".gitkeep", ".DS_Store"]
       },
       {
-        from: "src/app/widgets/Menu/nls",
-        to: `${dist}/app/widgets/Menu/nls`,
-        ignore: [
-          ".gitkeep",
-          ".DS_Store"
-        ]
+        from: "src/app/widgets/UserNav/nls",
+        to: `${dist}/app/widgets/UserNav/nls`,
+        ignore: [".gitkeep", ".DS_Store"]
       }
     ]),
     new ExtractTextPlugin("app/styles/main.css")
   ];
 
   if (process.env.ANALYZE) {
-    plugins.push(new BundleAnalyzerPlugin())
+    plugins.push(new BundleAnalyzerPlugin());
   }
   if (env.production) {
     plugins.push(
@@ -103,11 +93,8 @@ module.exports = function(env, options) {
         output: "manifest.appcache"
       })
     );
-    plugins.push(
-      new workboxPlugin(sw)
-    );
-  }
-  else {
+    plugins.push(new workboxPlugin(sw));
+  } else {
     plugins.push(new webpack.NamedModulesPlugin());
     plugins.push(new webpack.HotModuleReplacementPlugin());
   }
@@ -116,9 +103,9 @@ module.exports = function(env, options) {
     new WebPWebpackPlugin({
       match: /(jpe?g|png)$/,
       webp: {
-          quality: 80,
-          inject: true, // inject the default runtime code
-          injectCode: "" // inject your code
+        quality: 80,
+        inject: true, // inject the default runtime code
+        injectCode: "" // inject your code
       }
     })
   );

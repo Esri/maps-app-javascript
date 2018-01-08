@@ -1,12 +1,11 @@
 import {} from "intern";
-import td = require("testdouble");
 
 import {
   AuthStatus,
   SignIn,
   SignOut,
   User
-} from "../../../../src/app/widgets/AuthComponents";
+} from "../../../../../../src/app/widgets/Authenticate/components/AuthComponents";
 
 const { suite, test } = intern.getInterface("tdd");
 const { assert } = intern.getPlugin("chai");
@@ -16,10 +15,10 @@ suite("app/widgets/AuthComponents", () => {
   const icon2 = "icon-2";
 
   test("Icons can be initialized with properties", () => {
-    const vnode1 = SignIn({ icon: icon1 });
-    const vnode2 = SignOut({ icon: icon2 });
-    assert.equal((vnode1 as any).properties.class, icon1);
-    assert.equal((vnode2 as any).properties.class, icon2);
+    const vnode1 = SignIn();
+    const vnode2 = SignOut();
+    assert.equal((vnode1 as any).properties.class, "svg-icon");
+    assert.equal((vnode2 as any).properties.class, "svg-icon");
   });
 
   test("User contains empty name", () => {
@@ -35,7 +34,7 @@ suite("app/widgets/AuthComponents", () => {
 
   test("AuthStatus contains a single element", () => {
     const props = {
-      icon: SignIn({ icon: icon1 }),
+      icon: SignIn(),
       text: "Hello",
       showLabel: false,
       showIcon: false,

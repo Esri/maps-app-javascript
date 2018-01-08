@@ -7,14 +7,10 @@ import app from "../../../src/app/Application";
 
 import MapView = require("esri/views/MapView");
 
-const { suite, test, before, after } = intern.getInterface("tdd");
+const { suite, test } = intern.getInterface("tdd");
 const { assert } = intern.getPlugin("chai");
 
-suite("app/widgets/Application", () => {
-  before(() => {});
-
-  after(() => {});
-
+suite("app/Application", () => {
   test("Application will create MapView when signed in", async () => {
     app.signedIn = true;
     await app.loadWidgets();

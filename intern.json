@@ -64,13 +64,13 @@
     "esModules": true
   }, 
   "coverage": [
+    "!node_modules/*",
     "~tmp/app/**/*.js",
     "!node_modules/calcite-web/**/*",
     "!~tmp/tests.js",
     "!~tmp/src/app/main.*",
     "!~tmp/webpack:*",
-    "!tests/unit/**/*",
-    "!node_modules/*"
+    "!tests/unit/**/*"
   ],
   "maxConcurrency": 2
 }
