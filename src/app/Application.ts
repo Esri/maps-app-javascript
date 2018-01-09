@@ -34,15 +34,11 @@ import Search = require("esri/widgets/Search");
 
 import UserNav from "./widgets/UserNav";
 
-import {
-  declared,
-  property,
-  subclass
-} from "esri/core/accessorSupport/decorators";
+import { declared, property, subclass } from "esri/core/accessorSupport/decorators";
 
 import { appId, webMapItem } from "./config";
 
-const { watch, whenOnce, whenTrueOnce } = watchUtils;
+const { watch, whenTrueOnce } = watchUtils;
 
 const element = () => document.createElement("div");
 
@@ -59,8 +55,7 @@ class Application extends declared(Accessor) {
 
   async loadWidgets() {
     // We are going to bind some widgets to pre-existing DOM elements
-    const navNode: HTMLElement =
-      document.querySelector("user-nav") || element();
+    const navNode: HTMLElement = document.querySelector("user-nav") || element();
 
     let viewNode = document.querySelector("webmap") as HTMLDivElement;
     if (viewNode) {
@@ -103,8 +98,6 @@ class Application extends declared(Accessor) {
       view
     });
 
-    const locate = new Locate({ view });
-
     // Create array of widgets with positions to add to MapView
     const widgets = [
       {
@@ -139,14 +132,11 @@ class Application extends declared(Accessor) {
         position: "top-right"
       },
       {
-        component: locate,
+        component: new Locate({ view }),
         position: "bottom-right"
       },
       {
-        component: new Compass({
-          container: element(),
-          view
-        }),
+        component: new Compass({ view }),
         position: "top-left"
       }
     ];
