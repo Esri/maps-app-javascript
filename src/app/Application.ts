@@ -17,7 +17,7 @@
 /// <amd-dependency path="esri/core/tsSupport/awaiterHelper" name="__awaiter" />
 
 import Accessor = require("esri/core/Accessor");
-import watchUtils = require("esri/core/watchUtils");
+import { watch, whenTrueOnce } from "esri/core/watchUtils";
 
 import FeatureLayer = require("esri/layers/FeatureLayer");
 import MapView = require("esri/views/MapView");
@@ -37,8 +37,6 @@ import UserNav from "./widgets/UserNav";
 import { declared, property, subclass } from "esri/core/accessorSupport/decorators";
 
 import { appId, webMapItem } from "./config";
-
-const { watch, whenTrueOnce } = watchUtils;
 
 const element = () => document.createElement("div");
 

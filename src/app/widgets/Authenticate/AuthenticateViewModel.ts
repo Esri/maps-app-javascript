@@ -17,13 +17,12 @@
 /// <amd-dependency path="esri/core/tsSupport/awaiterHelper" name="__awaiter" />
 
 import Accessor = require("esri/core/Accessor");
-import promiseUtils = require("esri/core/promiseUtils");
-import watchUtils = require("esri/core/watchUtils");
 import Credential = require("esri/identity/Credential");
 import IdentityManager = require("esri/identity/IdentityManager");
 import OAuthInfo = require("esri/identity/OAuthInfo");
 
 import { aliasOf, declared, property, subclass } from "esri/core/accessorSupport/decorators";
+import { watch, whenOnce } from "esri/core/watchUtils";
 
 type Resolver = (value?: any) => void;
 type Rejector = (error?: any) => void;
@@ -37,8 +36,6 @@ interface AuthenticateViewModel {
 export interface AuthenticateParams {
   appId: string;
 }
-
-const { watch, whenOnce } = watchUtils;
 
 @subclass("app.widgets.Authenticate.AuthenticateViewModel")
 class AuthenticateViewModel extends declared(Accessor) {
