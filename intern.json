@@ -62,15 +62,10 @@
   },
   "instrumenterOptions": {
     "esModules": true
-  }, 
+  },
+  "reporters": ["pretty", "lcov"],
   "coverage": [
-    "!node_modules/*",
-    "~tmp/app/**/*.js",
-    "!node_modules/calcite-web/**/*",
-    "!~tmp/tests.js",
-    "!~tmp/src/app/main.*",
-    "!~tmp/webpack:*",
-    "!tests/unit/**/*"
+    "~tmp/init.js"
   ],
   "maxConcurrency": 2
 }

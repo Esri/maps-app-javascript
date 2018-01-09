@@ -13,4 +13,3 @@ coverage-final.*
 .firebaserc
 firebase.json
 firebase-debug.log
-coverage/*
