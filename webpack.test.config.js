@@ -1,10 +1,6 @@
 const webpack = require("webpack");
 const path = require("path");
-const { TsConfigPathsPlugin } = require("awesome-typescript-loader");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-
-const extractStyles = new ExtractTextPlugin("src/app/styles/main.css");
 
 module.exports = env => {
   return {
