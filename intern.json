@@ -57,9 +57,7 @@
       "fixSessionCapabilities": "no-detect"
     }
   ],
-  "browser": {
-    "suites": "~tmp/tests.js"
-  },
+  "suites": "~tmp/tests.js",
   "instrumenterOptions": {
     "esModules": true
   },

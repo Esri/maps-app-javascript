@@ -32,8 +32,8 @@ import { expiration } from "./../utils/dateUtils";
 import esri = __esri;
 
 const CSS = {
-  base: "dropdown js-dropdown right margin-right-1",
-  toggle: "top-nav-link js-dropdown-toggle user-icon",
+  base: "dropdown js-dropdown right",
+  toggle: "top-nav-link js-dropdown-toggle user-icon padding-right-1 padding-left-1",
   link: "dropdown-link"
 };
 
