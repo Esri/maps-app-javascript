@@ -15,12 +15,12 @@ import { tsx } from "esri/widgets/support/widget";
 
 import * as i18n from "dojo/i18n!./UserNav/nls/UserMenu";
 
-const upper: (s: string) => string = s => s.toUpperCase();
+export const upper: (s: string) => string = s => s.toUpperCase();
 
-interface UserMenuProps {
+export interface UserMenuProps {
   userName: string;
   sessionDuration: string;
-  menuItems: JSX.Element[];
+  menuItems: JSX.IntrinsicElements[];
 }
 
 const CSS = {

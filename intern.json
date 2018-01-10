@@ -65,7 +65,10 @@
   },
   "reporters": ["pretty", "lcov"],
   "coverage": [
-    "~tmp/init.js"
+    "~tmp/app/init.js",
+    "!node_modules/*",
+    "!tests/*",
+    "!~tmp/webpack:*"
   ],
   "maxConcurrency": 2
 }

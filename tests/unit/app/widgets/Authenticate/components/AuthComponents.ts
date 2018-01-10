@@ -10,7 +10,7 @@ import {
 const { suite, test } = intern.getInterface("tdd");
 const { assert } = intern.getPlugin("chai");
 
-suite("app/widgets/AuthComponents", () => {
+suite("app/widgets/Authenticate/components/AuthComponents", () => {
   const icon1 = "icon-1";
   const icon2 = "icon-2";
 

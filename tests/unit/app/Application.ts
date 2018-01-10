@@ -1,9 +1,7 @@
 /// <amd-dependency path="esri/core/tsSupport/generatorHelper" name="__generator" />
 /// <amd-dependency path="esri/core/tsSupport/awaiterHelper" name="__awaiter" />
 
-// import {} from "intern";
-
-import app from "../../../src/app/Application";
+import app, { empty } from "../../../src/app/Application";
 
 import MapView = require("esri/views/MapView");
 
@@ -15,5 +13,12 @@ suite("app/Application", () => {
     app.signedIn = true;
     await app.loadWidgets();
     assert.ok(app.view);
+  });
+
+  test("Can empty DOM element when needed", () => {
+    const div = document.createElement("div");
+    div.innerHTML = "I am a DOM element";
+    empty(div);
+    assert.isEmpty(div.innerHTML);
   });
 });

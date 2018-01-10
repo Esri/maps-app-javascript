@@ -20,9 +20,6 @@ body {
 /* header */
 header.top-nav {
   z-index: 1;
-}
-
-header.top-nav {
   background-color: var(--color-theme);
 }
 
@@ -37,7 +34,6 @@ header.top-nav {
   color: var(--color-theme-font);
   letter-spacing: 2px;
   text-transform: uppercase;
-  padding: 20px 10px;
 }
 
 /* map view */
