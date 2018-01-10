@@ -21,13 +21,15 @@ export const appId = "W2zBZ4VcZwV68oZC";
 /**
  * Users Portal URL.
  */
-export const portalUrl = "https://arcgis.com";
+export const portalUrl = "https://arcgis.com"; // default Portal URL
 
 /**
  * WebMap id to use for this application.
+ * You can update this WebMap id with your own.
  */
 export const webMapItem = {
   portalItem: {
+    // shared WebMap with Vector Tile basemap
     id: "1aab2defd7444b6790f439a186cd4a23"
   }
 };

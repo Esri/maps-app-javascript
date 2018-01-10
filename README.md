@@ -42,13 +42,26 @@ The ports for running the local server can be updated in `webpack/devserver.conf
 
 ```js
 // src/app/config.ts
+/**
+ * Registered application id.
+ * This is needed to be able to use premium
+ * services such as routing and directions.
+ */
 export const appId = "<APP-ID>";
 
-export const portalUrl = "<PORTAL-URL>";
+/**
+ * Users Portal URL.
+ */
+export const portalUrl = "https://arcgis.com"; // default Portal URL
 
+/**
+ * WebMap id to use for this application.
+ * You can update this WebMap id with your own.
+ */
 export const webMapItem = {
   portalItem: {
-    id: "<WEBMAP-ID>"
+    // shared WebMap with Vector Tile basemap
+    id: "1aab2defd7444b6790f439a186cd4a23"
   }
 };
 ```
