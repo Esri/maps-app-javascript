@@ -19,7 +19,6 @@
 import Accessor = require("esri/core/Accessor");
 import { watch, whenTrueOnce } from "esri/core/watchUtils";
 
-import FeatureLayer = require("esri/layers/FeatureLayer");
 import MapView = require("esri/views/MapView");
 import WebMap = require("esri/WebMap");
 
