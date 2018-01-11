@@ -68,6 +68,15 @@ export const webMapItem = {
 
 * As part of the registration process, add a redirect uri for your app.  Navigate to the Redirect URIs section at the bottom of the registration page and set the redirect uri as shown for development purposes. You will also want to add a redirect uri for where your application will be deployed.  This redirect uri is the default redirect for `https://www.arcgis.com`.
 
+For development purposes, you will want to add the following redirects to your Application ID:
+
+* `http://localhost:8080`
+* `http://localhost:9000`
+* `127.0.0.1:8080`
+* `127.0.0.1:9000`
+
+When you deploy your application, do not use the same Application ID for development as production. You want your Application ID to _only redirect your production website_.
+
 ![](images/Register2.png)
 
 ## Demo
