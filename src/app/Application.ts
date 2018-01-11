@@ -37,6 +37,8 @@ import { declared, property, subclass } from "esri/core/accessorSupport/decorato
 
 import { appId, webMapItem } from "./config";
 
+import { applyReverseGeocodeAction } from "./mapactions/reverseGeocode";
+
 const element = () => document.createElement("div");
 
 export const empty = (el: Element) => (el.innerHTML = "");
@@ -81,7 +83,6 @@ class Application extends declared(Accessor) {
      * element when initialized.
      */
     const search = new Search({
-      container: element(),
       view
     });
 
@@ -95,6 +96,9 @@ class Application extends declared(Accessor) {
       view
     });
 
+    // Add a reverse geocode action to MapView
+    applyReverseGeocodeAction(view, search);
+
     // Create array of widgets with positions to add to MapView
     const widgets = [
       {
@@ -105,9 +109,7 @@ class Application extends declared(Accessor) {
         position: "top-left"
       },
       {
-        component: new Search({
-          view
-        }),
+        component: search,
         position: "top-right"
       },
       {
