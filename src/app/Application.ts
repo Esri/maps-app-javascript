@@ -32,6 +32,7 @@ import Expand = require("esri/widgets/Expand");
 import Home = require("esri/widgets/Home");
 import Locate = require("esri/widgets/Locate");
 import Search = require("esri/widgets/Search");
+import Track = require("esri/widgets/Track");
 
 import Alert from "./widgets/Alert";
 import UserNav from "./widgets/UserNav";
@@ -121,7 +122,8 @@ class Application extends declared(Accessor) {
 
     const compass = new Compass({ view });
     const home = new Home({ view });
-    const locate = new Locate({ container: element(), view });
+    const locate = new Locate({ view });
+    const track = new Track({ view });
 
     // Add a reverse geocode action to MapView
     applyReverseGeocodeAction(view, search);
@@ -151,6 +153,10 @@ class Application extends declared(Accessor) {
     const widgets = [
       {
         component: home,
+        position: "top-left"
+      },
+      {
+        component: track,
         position: "top-left"
       },
       {
