@@ -14,12 +14,7 @@
 /// <amd-dependency path="esri/core/tsSupport/declareExtendsHelper" name="__extends" />
 /// <amd-dependency path="esri/core/tsSupport/decorateHelper" name="__decorate" />
 
-import {
-  aliasOf,
-  declared,
-  property,
-  subclass
-} from "esri/core/accessorSupport/decorators";
+import { aliasOf, declared, property, subclass } from "esri/core/accessorSupport/decorators";
 
 import { renderable, tsx } from "esri/widgets/support/widget";
 
@@ -29,17 +24,13 @@ import Widget = require("esri/widgets/Widget");
 import * as i18n from "dojo/i18n!./Authenticate/nls/Authenticate";
 import AuthenticateViewModel from "./Authenticate/AuthenticateViewModel";
 
-import {
-  AuthStatus,
-  SignIn,
-  SignOut,
-  User
-} from "./Authenticate/components/AuthComponents";
+import { AuthStatus, SignIn, SignOut, User } from "./Authenticate/components/AuthComponents";
 
 import esri = __esri;
 
 interface AuthenticateProperties extends esri.WidgetProperties {
   appId?: string;
+  portalUrl?: string;
   showLabel?: boolean;
   viewModel?: AuthenticateViewModel;
 }
@@ -65,6 +56,8 @@ class Authenticate extends declared(Widget) {
   showLabel = true;
 
   @aliasOf("viewModel.appId") appId: string;
+
+  @aliasOf("viewModel.portalUrl") portalUrl: string;
 
   @property({
     readOnly: true,
@@ -98,12 +91,7 @@ class Authenticate extends declared(Widget) {
     };
 
     return (
-      <div
-        class={CSS.base}
-        bind={this}
-        onclick={this.onClick}
-        afterCreate={this.handleAfterCreate}
-      >
+      <div class={CSS.base} bind={this} onclick={this.onClick} afterCreate={this.handleAfterCreate}>
         {AuthStatus(props)}
       </div>
     );

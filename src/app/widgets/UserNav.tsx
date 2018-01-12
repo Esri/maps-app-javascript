@@ -25,7 +25,7 @@ import Widget = require("esri/widgets/Widget");
 
 import { dropdown } from "calcite-web";
 
-import { appId } from "../config";
+import { appId, portalUrl } from "../config";
 
 import { expiration } from "./../utils/dateUtils";
 
@@ -44,6 +44,7 @@ class UserNav extends declared(Widget) {
   @property()
   auth = new Authenticate({
     appId,
+    portalUrl,
     showLabel: true
   });
 

@@ -15,6 +15,7 @@ suite("app/widgets/Authenticate/AuthenticateViewModel", () => {
   beforeEach(() => {
     authVM = new AuthenticateViewModel();
     authVM.appId = "1234";
+    authVM.portalUrl = "BobsBurger";
   });
 
   test("will update OUAthInfo when appId assigned", async () => {

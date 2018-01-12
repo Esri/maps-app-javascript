@@ -51,6 +51,12 @@ class AuthenticateViewModel extends declared(Accessor) {
   @property() appId: string;
 
   /**
+   * Portal URL to use for
+   * OAuth authentication.
+   */
+  @property() portalUrl: string;
+
+  /**
    * OAuthInfo using `appId`.
    */
   @property() info: OAuthInfo;
@@ -67,6 +73,7 @@ class AuthenticateViewModel extends declared(Accessor) {
     watch(this, "appId", appId => {
       this.info = new OAuthInfo({
         appId,
+        portalUrl: this.portalUrl,
         popup: true
       });
     });

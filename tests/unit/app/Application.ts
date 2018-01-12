@@ -3,14 +3,11 @@
 
 import app, { empty } from "../../../src/app/Application";
 
-import MapView = require("esri/views/MapView");
-
 const { suite, test } = intern.getInterface("tdd");
 const { assert } = intern.getPlugin("chai");
 
 suite("app/Application", () => {
-  test("Application will create MapView when signed in", async () => {
-    app.signedIn = true;
+  test("Application will create MapView", async () => {
     await app.loadWidgets();
     assert.ok(app.view);
   });

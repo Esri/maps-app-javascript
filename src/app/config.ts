@@ -21,7 +21,7 @@ export const appId = "W2zBZ4VcZwV68oZC";
 /**
  * Users Portal URL.
  */
-export const portalUrl = "https://arcgis.com"; // default Portal URL
+export const portalUrl = "https://www.arcgis.com"; // default Portal URL
 
 /**
  * WebMap id to use for this application.

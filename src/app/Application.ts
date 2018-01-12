@@ -17,7 +17,7 @@
 /// <amd-dependency path="esri/core/tsSupport/awaiterHelper" name="__awaiter" />
 
 import Accessor = require("esri/core/Accessor");
-import { watch, whenTrueOnce } from "esri/core/watchUtils";
+import { watch, whenTrue, whenTrueOnce } from "esri/core/watchUtils";
 
 import MapView = require("esri/views/MapView");
 import WebMap = require("esri/WebMap");
@@ -31,11 +31,12 @@ import Home = require("esri/widgets/Home");
 import Locate = require("esri/widgets/Locate");
 import Search = require("esri/widgets/Search");
 
+import Alert from "./widgets/Alert";
 import UserNav from "./widgets/UserNav";
 
 import { declared, property, subclass } from "esri/core/accessorSupport/decorators";
 
-import { appId, webMapItem } from "./config";
+import { webMapItem } from "./config";
 
 import { applyReverseGeocodeAction } from "./mapactions/reverseGeocode";
 
@@ -55,6 +56,7 @@ class Application extends declared(Accessor) {
   async loadWidgets() {
     // We are going to bind some widgets to pre-existing DOM elements
     const navNode: HTMLElement = document.querySelector("user-nav") || element();
+    const alertNode: HTMLElement = document.querySelector("alert") || element();
 
     let viewNode = document.querySelector("webmap") as HTMLDivElement;
     if (viewNode) {
@@ -70,12 +72,19 @@ class Application extends declared(Accessor) {
     // sync the signed in status of the UserNav with the application
     watch(userNav, "signedIn", signedIn => (this.signedIn = signedIn));
 
-    await whenTrueOnce(this, "signedIn");
-
     this.view = new MapView({ map: this.webmap, container: viewNode });
     const view = this.view;
 
     userNav.view = view;
+
+    // Alert is used to notify users to login if they want to use
+    // directions widget
+    const alertMessage = new Alert({
+      container: alertNode,
+      message: "Please Sign In to use Directions",
+      color: "red",
+      isFull: true
+    });
 
     /**
      * These widgets are going to be added to
@@ -86,18 +95,37 @@ class Application extends declared(Accessor) {
       view
     });
 
-    const directions = new Directions({
-      container: element(),
-      view
-    });
-
     const basemapGallery = new BasemapGallery({
       container: element(),
       view
     });
 
+    const directionsExpand = new Expand({
+      view,
+      expandIconClass: "esri-icon-directions",
+      group: "right"
+    });
+
     // Add a reverse geocode action to MapView
     applyReverseGeocodeAction(view, search);
+
+    // Wait for user to login to add Directions widget
+    const directionsHandle = whenTrue(directionsExpand, "expanded", () => {
+      directionsExpand.collapse();
+      alertMessage.open();
+    });
+
+    // when user is signed in
+    // add the Directions widget to the application
+    whenTrueOnce(this, "signedIn").then(() => {
+      const directions = new Directions({
+        container: element(),
+        view
+      });
+      directionsExpand.content = directions.container;
+      directionsHandle.remove();
+      alertMessage.close();
+    });
 
     // Create array of widgets with positions to add to MapView
     const widgets = [
@@ -113,12 +141,7 @@ class Application extends declared(Accessor) {
         position: "top-right"
       },
       {
-        component: new Expand({
-          view,
-          content: directions.container,
-          expandIconClass: "esri-icon-directions",
-          group: "right"
-        }),
+        component: directionsExpand,
         position: "top-right"
       },
       {
