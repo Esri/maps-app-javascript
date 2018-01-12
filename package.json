@@ -10,13 +10,9 @@
     "test": "del-cli ~tmp && webpack --config webpack.test.config.js && intern && del-cli ~tmp"
   },
   "lint-staged": {
-    "*.{ts,tsx}": [
+    "*.{ts,tsx, js, md}": [
       "prettier --write",
       "tslint --fix",
-      "git add"
-    ],
-    "*.{js, md}": [
-      "prettier --write",
       "git add"
     ]
   },
