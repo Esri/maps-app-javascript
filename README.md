@@ -27,6 +27,8 @@ Feel free to use this project as a starting point for your own applications!
 
 Clone the repo and run `npm install`.
 
+* _NOTE FOR WINDOWS USERS_ - You will need to install the [Windows-Build-Tools](https://github.com/felixrieseberg/windows-build-tools) to compile npm modules for this project. `npm install --global --production windows-build-tools`
+
 * `npm start` - compile application and run it in a local server at `http://localhost:8080`.
 * `npm run build` - compile application for deployment that can be viewed at `http://localhost:9000`.
 * `npm test` - run unit tests and code coverage with local chrome driver.
