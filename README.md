@@ -74,8 +74,8 @@ For development purposes, you will want to add the following redirects to your A
 
 * `http://localhost:8080`
 * `http://localhost:9000`
-* `127.0.0.1:8080`
-* `127.0.0.1:9000`
+* `http://127.0.0.1:8080`
+* `http://127.0.0.1:9000`
 
 When you deploy your application, do not use the same Application ID for development as production. You want your Application ID to _only redirect to your production website_.
 
