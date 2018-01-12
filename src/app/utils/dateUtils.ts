@@ -33,8 +33,7 @@ export const dateDuration: (n: number, t: Moment) => Duration = (n, t) =>
  * Returns a Function provide a string representation of a fixed number value
  * @param i
  */
-export const fixedN: (i: number) => (n: number) => string = i => n =>
-  n.toFixed(i);
+export const fixedN: (i: number) => (n: number) => string = i => n => n.toFixed(i);
 /**
  * Returns a string representation of a Number to zero digits
  */
@@ -55,3 +54,9 @@ export const expiration: (n: number, t?: Moment) => string = (n, t = now()) => {
     ? `${fixedZero(duration.asDays())} days`
     : `${fixedOne(duration.asHours())} hours`;
 };
+
+/**
+ * Format the given date in the following format: January 12th, 2018
+ * @param n
+ */
+export const asMonthDayYear: (n: Date) => string = n => moment(n).format("MMMM Do YYYY");

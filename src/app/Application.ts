@@ -35,6 +35,7 @@ import Search = require("esri/widgets/Search");
 import Track = require("esri/widgets/Track");
 
 import Alert from "./widgets/Alert";
+import Browser from "./widgets/Bowser";
 import UserNav from "./widgets/UserNav";
 
 import { declared, property, subclass } from "esri/core/accessorSupport/decorators";
@@ -120,6 +121,11 @@ class Application extends declared(Accessor) {
       group: "right"
     });
 
+    const browser = new Browser({
+      container: element(),
+      view
+    });
+
     const compass = new Compass({ view });
     const home = new Home({ view });
     const locate = new Locate({ view });
@@ -147,6 +153,14 @@ class Application extends declared(Accessor) {
       directionsExpand.content = directions.container;
       directionsHandle.remove();
       alertMessage.close();
+      const browserExpand = new Expand({
+        view,
+        content: browser.container,
+        expandIconClass: "esri-icon-collection",
+        group: "right"
+      });
+      view.ui.add(browserExpand, "top-right");
+      browser.viewModel.fetchItems();
     });
 
     // Create array of widgets with positions to add to MapView
