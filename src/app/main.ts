@@ -18,4 +18,4 @@
  */
 import app from "./Application";
 
-export default app.loadWidgets();
+export default app.init();

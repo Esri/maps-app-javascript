@@ -1,4 +1,5 @@
 import "./app/Application";
+import "./app/mapactions/navRotation";
 import "./app/mapactions/reverseGeocode";
 import "./app/utils/dateUtils";
 import "./app/widgets/Alert";

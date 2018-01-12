@@ -38,7 +38,8 @@ const CSS = {
   red: "alert-red",
   yellow: "alert-yellow",
   green: "alert-green",
-  full: "alert-full"
+  full: "alert-full",
+  icon: "svg-icon"
 };
 
 @subclass("app.widgets.Alert")
@@ -76,7 +77,15 @@ class Alert extends declared(Widget) {
       <div classes={dynamicClasses} class={CSS.base}>
         {this.message}
         <a href="#" bind={this} onclick={this.close} class={CSS.close}>
-          close
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 32 32"
+            class={CSS.icon}
+          >
+            <path d="M18.404 16l9.9 9.9-2.404 2.404-9.9-9.9-9.9 9.9L3.696 25.9l9.9-9.9-9.9-9.898L6.1 3.698l9.9 9.899 9.9-9.9 2.404 2.406-9.9 9.898z" />
+          </svg>
         </a>
       </div>
     );

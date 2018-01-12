@@ -11,6 +11,7 @@
   limitations under the License.
 */
 
+/// <amd-dependency path="esri/core/tsSupport/assignHelper" name="__assign" />
 /// <amd-dependency path="esri/core/tsSupport/declareExtendsHelper" name="__extends" />
 /// <amd-dependency path="esri/core/tsSupport/decorateHelper" name="__decorate" />
 /// <amd-dependency path="esri/core/tsSupport/generatorHelper" name="__generator" />
@@ -19,6 +20,7 @@
 import Accessor = require("esri/core/Accessor");
 import { watch, whenTrue, whenTrueOnce } from "esri/core/watchUtils";
 
+import Viewpoint = require("esri/Viewpoint");
 import MapView = require("esri/views/MapView");
 import WebMap = require("esri/WebMap");
 
@@ -36,13 +38,26 @@ import UserNav from "./widgets/UserNav";
 
 import { declared, property, subclass } from "esri/core/accessorSupport/decorators";
 
-import { webMapItem } from "./config";
+import { viewOptions, webMapItem } from "./config";
 
+import { applyNavRotationAction } from "./mapactions/navRotation";
 import { applyReverseGeocodeAction } from "./mapactions/reverseGeocode";
 
 const element = () => document.createElement("div");
 
 export const empty = (el: Element) => (el.innerHTML = "");
+
+export async function locateOnStart(view: MapView, locate: Locate) {
+  await view.when();
+  locate.goToLocationEnabled = false;
+  await locate.locate();
+  const vp = new Viewpoint({
+    scale: viewOptions.scale,
+    targetGeometry: locate.graphic.geometry
+  });
+  await view.goTo(vp);
+  locate.goToLocationEnabled = true;
+}
 
 @subclass("app.widgets.Application")
 class Application extends declared(Accessor) {
@@ -53,7 +68,7 @@ class Application extends declared(Accessor) {
 
   @property() view: MapView;
 
-  async loadWidgets() {
+  async init() {
     // We are going to bind some widgets to pre-existing DOM elements
     const navNode: HTMLElement = document.querySelector("user-nav") || element();
     const alertNode: HTMLElement = document.querySelector("alert") || element();
@@ -91,9 +106,7 @@ class Application extends declared(Accessor) {
      * Expand widgets, so they need a container
      * element when initialized.
      */
-    const search = new Search({
-      view
-    });
+    const search = new Search({ view });
 
     const basemapGallery = new BasemapGallery({
       container: element(),
@@ -106,8 +119,15 @@ class Application extends declared(Accessor) {
       group: "right"
     });
 
+    const compass = new Compass({ view });
+    const home = new Home({ view });
+    const locate = new Locate({ container: element(), view });
+
     // Add a reverse geocode action to MapView
     applyReverseGeocodeAction(view, search);
+    // Add nav rotation check to MapView
+    // this action will manage adding/remove widget to view
+    applyNavRotationAction(view, compass);
 
     // Wait for user to login to add Directions widget
     const directionsHandle = whenTrue(directionsExpand, "expanded", () => {
@@ -130,10 +150,7 @@ class Application extends declared(Accessor) {
     // Create array of widgets with positions to add to MapView
     const widgets = [
       {
-        component: new Home({
-          container: element(),
-          view
-        }),
+        component: home,
         position: "top-left"
       },
       {
@@ -154,15 +171,14 @@ class Application extends declared(Accessor) {
         position: "top-right"
       },
       {
-        component: new Locate({ view }),
+        component: locate,
         position: "bottom-right"
-      },
-      {
-        component: new Compass({ view }),
-        position: "top-left"
       }
     ];
-    return this.view.ui.add(widgets);
+    this.view.ui.add(widgets);
+
+    // Go to users location on startup
+    return locateOnStart(view, locate);
   }
 }
 

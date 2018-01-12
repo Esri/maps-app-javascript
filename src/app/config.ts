@@ -24,12 +24,22 @@ export const appId = "W2zBZ4VcZwV68oZC";
 export const portalUrl = "https://www.arcgis.com"; // default Portal URL
 
 /**
+ * MapView options
+ * See doc for details
+ * https://developers.arcgis.com/javascript/latest/api-reference/esri-views-MapView.html
+ */
+export const viewOptions = {
+  scale: 5000
+};
+
+/**
+ * OPTIONAL
  * WebMap id to use for this application.
  * You can update this WebMap id with your own.
  */
 export const webMapItem = {
   portalItem: {
-    // shared WebMap with Vector Tile basemap
-    id: "1aab2defd7444b6790f439a186cd4a23"
+    // shared WebMap
+    id: "3ff64504498c4e9581a7a754412b6a9e"
   }
 };
