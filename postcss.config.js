@@ -1,7 +1,10 @@
 "use strict";
 
-module.exports = ({ file, options, env }) => ({
-  plugins: [
+module.exports = ({ file, options, env }) => {
+  const config = {
+    plugins: []
+  };
+  config.plugins = [].concat(
     require("postcss-import"),
     require("postcss-cssnext")({
       features: {
@@ -9,12 +12,19 @@ module.exports = ({ file, options, env }) => ({
           warnings: false
         }
       }
-    }),
-    require("webpcss").default({ replace_to: ".$1.webp",  noWebpClass: ".no-webp" }),
+    })
+  );
+  if (process.platform !== "win32") {
+    config.plugins.push(
+      require("webpcss").default({ replace_to: ".$1.webp", noWebpClass: ".no-webp" })
+    );
+  }
+  config.plugins = config.plugins.concat(
     require("postcss-assets"),
     require("css-mqpacker"),
     require("cssnano")({
       preset: "default"
     })
-  ]
-})
+  );
+  return config;
+};
