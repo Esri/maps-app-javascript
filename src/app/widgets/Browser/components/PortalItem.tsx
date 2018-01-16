@@ -15,7 +15,7 @@ import { tsx } from "esri/widgets/support/widget";
 
 import { asMonthDayYear } from "../../../utils/dateUtils";
 
-interface PortalItemProps {
+export interface PortalItemProps {
   key: number;
   thumbnailUrl: string;
   title: string;
