@@ -18,6 +18,7 @@
 /// <amd-dependency path="esri/core/tsSupport/awaiterHelper" name="__awaiter" />
 
 import Accessor = require("esri/core/Accessor");
+import Collection = require("esri/core/Collection");
 import { watch, whenTrue, whenTrueOnce } from "esri/core/watchUtils";
 
 import Viewpoint = require("esri/Viewpoint");
@@ -49,7 +50,7 @@ const element = () => document.createElement("div");
 
 export const empty = (el: Element) => (el.innerHTML = "");
 
-export async function locateOnStart(view: MapView, locate: Locate) {
+export const locateOnStart = async (view: MapView, locate: Locate) => {
   await view.when();
   locate.goToLocationEnabled = false;
   await locate.locate();
@@ -59,7 +60,11 @@ export async function locateOnStart(view: MapView, locate: Locate) {
   });
   await view.goTo(vp);
   locate.goToLocationEnabled = true;
-}
+};
+
+export const collapseAll = (widgets: Collection<Expand>) => () => {
+  widgets.forEach(w => w.collapse());
+};
 
 @subclass("app.widgets.Application")
 class Application extends declared(Accessor) {
@@ -108,6 +113,9 @@ class Application extends declared(Accessor) {
      * Expand widgets, so they need a container
      * element when initialized.
      */
+
+    const expandWidgets = new Collection();
+
     const search = new Search({ view });
 
     const basemapGallery = new BasemapGallery({
@@ -121,6 +129,15 @@ class Application extends declared(Accessor) {
       group: "right"
     });
 
+    const basemapExpand = new Expand({
+      view,
+      content: basemapGallery.container,
+      expandIconClass: "esri-icon-basemap",
+      group: "right"
+    });
+
+    expandWidgets.addMany([directionsExpand, basemapExpand]);
+
     const browser = new Browser({
       container: element(),
       view
@@ -130,6 +147,10 @@ class Application extends declared(Accessor) {
     const home = new Home({ view });
     const locate = new Locate({ view });
     const track = new Track({ view });
+
+    // we want to collaplse all expand widgets when search gets focus
+    // because the suggestions list will cover the widgets anyway
+    search.on("search-focus", collapseAll(expandWidgets));
 
     // Add a reverse geocode action to MapView
     applyReverseGeocodeAction(view, search);
@@ -160,6 +181,7 @@ class Application extends declared(Accessor) {
         group: "right"
       });
       view.ui.add(browserExpand, "top-right");
+      expandWidgets.add(browserExpand);
       browser.viewModel.fetchItems();
     });
 
@@ -182,12 +204,7 @@ class Application extends declared(Accessor) {
         position: "top-right"
       },
       {
-        component: new Expand({
-          view,
-          content: basemapGallery.container,
-          expandIconClass: "esri-icon-basemap",
-          group: "right"
-        }),
+        component: basemapExpand,
         position: "top-right"
       },
       {

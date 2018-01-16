@@ -1,9 +1,11 @@
 /// <amd-dependency path="esri/core/tsSupport/generatorHelper" name="__generator" />
 /// <amd-dependency path="esri/core/tsSupport/awaiterHelper" name="__awaiter" />
 
-import app, { empty, locateOnStart } from "../../../src/app/Application";
+import app, { collapseAll, empty, locateOnStart } from "../../../src/app/Application";
 
+import Collection = require("esri/core/Collection");
 import MapView = require("esri/views/MapView");
+import Expand = require("esri/widgets/Expand");
 import Locate = require("esri/widgets/Locate");
 import td = require("testdouble");
 
@@ -47,5 +49,20 @@ suite("app/Application", () => {
 
     td.verify(goTo(td.matchers.anything()));
     assert.isTrue(location.goToLocationEnabled);
+  });
+
+  test("can collapse list of widgets", () => {
+    const collection = new Collection();
+    const exp1 = new Expand();
+    const exp2 = new Expand();
+    exp1.expand();
+    exp2.expand();
+    collection.addMany([exp1, exp2]);
+    const collapser = collapseAll(collection);
+    assert.isTrue(exp1.expanded);
+    assert.isTrue(exp2.expanded);
+    collapser();
+    assert.isFalse(exp1.expanded);
+    assert.isFalse(exp2.expanded);
   });
 });
