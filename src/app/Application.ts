@@ -169,7 +169,10 @@ class Application extends declared(Accessor) {
     whenTrueOnce(this, "signedIn").then(() => {
       const directions = new Directions({
         container: element(),
-        view
+        view,
+        searchProperties: {
+          popupEnabled: true
+        }
       });
       directionsExpand.content = directions.container;
       directionsHandle.remove();
