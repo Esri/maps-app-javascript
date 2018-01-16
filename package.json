@@ -79,7 +79,6 @@
   },
   "dependencies": {
     "@dojo/loader": "^2.0.0-beta3.1",
-    "dojo": "github:dojo/dojo#master",
     "intern": "^4.1.2",
     "moment": "^2.19.2",
     "testdouble": "^3.1.1"
