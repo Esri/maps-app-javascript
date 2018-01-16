@@ -5,4 +5,5 @@ import "./app/utils/dateUtils";
 import "./app/widgets/Alert";
 import "./app/widgets/Authenticate/AuthenticateViewModel";
 import "./app/widgets/Authenticate/components/AuthComponents";
+import "./app/widgets/Browser/BrowserViewModel";
 import "./app/widgets/UserNav/components/UserMenu";

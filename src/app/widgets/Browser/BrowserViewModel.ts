@@ -16,6 +16,8 @@
 /// <amd-dependency path="esri/core/tsSupport/generatorHelper" name="__generator" />
 /// <amd-dependency path="esri/core/tsSupport/awaiterHelper" name="__awaiter" />
 
+import esri = __esri;
+
 import Accessor = require("esri/core/Accessor");
 import Collection = require("esri/core/Collection");
 import Portal = require("esri/portal/Portal");
@@ -26,11 +28,13 @@ import WebMap = require("esri/WebMap");
 import { aliasOf, declared, property, subclass } from "esri/core/accessorSupport/decorators";
 import { watch, whenOnce } from "esri/core/watchUtils";
 
-export interface BrowserParams {
+export interface BrowserParams extends esri.WidgetProperties {
   appId: string;
 }
 
 const WebMapCollection = Collection.ofType(WebMap);
+
+const fst: (xs: string[]) => string = xs => xs[0] || "1";
 
 @subclass("app.widgets.Browser.BrowserViewModel")
 class BrowserViewModel extends declared(Accessor) {
@@ -50,7 +54,7 @@ class BrowserViewModel extends declared(Accessor) {
     const webmap = this.webmaps.find(({ portalItem }) => portalItem.id === id);
     await webmap.load();
     const version = (webmap as any).resourceInfo.version;
-    const majorVersion = version.split(".")[0];
+    const majorVersion = fst(version.split("."));
     if (majorVersion === "1") {
       return;
     }

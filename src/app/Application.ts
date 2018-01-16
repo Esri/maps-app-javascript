@@ -36,7 +36,7 @@ import Search = require("esri/widgets/Search");
 import Track = require("esri/widgets/Track");
 
 import Alert from "./widgets/Alert";
-import Browser from "./widgets/Bowser";
+import Browser from "./widgets/Browser";
 import UserNav from "./widgets/UserNav";
 
 import { declared, property, subclass } from "esri/core/accessorSupport/decorators";
