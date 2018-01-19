@@ -24,10 +24,10 @@ export const now = () => moment();
 /**
  * Calculates the duration between two moments
  * @param n
- * @param t
+ * @param m
  */
-export const dateDuration: (n: number, t: Moment) => Duration = (n, t) =>
-  moment.duration(moment(n).diff(t));
+export const dateDuration: (n: number, m: Moment) => Duration = (n, m) =>
+  moment.duration(moment(n).diff(m));
 
 /**
  * Returns a Function provide a string representation of a fixed number value
@@ -46,10 +46,10 @@ export const fixedOne: (n: number) => string = fixedN(1);
 /**
  * Calculates the expiration time in Days or Hours between moments
  * @param n
- * @param t
+ * @param m
  */
-export const expiration: (n: number, t?: Moment) => string = (n, t = now()) => {
-  const duration = dateDuration(n, t);
+export const expiration: (n: number, m?: Moment) => string = (n, m = now()) => {
+  const duration = dateDuration(n, m);
   return duration.asDays() > 1
     ? `${fixedZero(duration.asDays())} days`
     : `${fixedOne(duration.asHours())} hours`;

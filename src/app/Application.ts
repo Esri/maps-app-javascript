@@ -69,7 +69,7 @@ export const collapseAll = (widgets: Collection<Expand>) => () => {
 @subclass("app.widgets.Application")
 class Application extends declared(Accessor) {
   @property({ readOnly: true })
-  webmap: WebMap = new WebMap(webMapItem);
+  webmap = new WebMap(webMapItem);
 
   @property() signedIn = false;
 
