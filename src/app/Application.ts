@@ -148,6 +148,10 @@ class Application extends declared(Accessor) {
     const locate = new Locate({ view });
     const track = new Track({ view });
 
+    // Temporary scale fixes
+    (locate.viewModel as any).scale = 1000;
+    (track.viewModel as any).scale = 1000;
+
     // we want to collaplse all expand widgets when search gets focus
     // because the suggestions list will cover the widgets anyway
     search.on("search-focus", collapseAll(expandWidgets));
