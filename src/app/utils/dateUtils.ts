@@ -12,9 +12,9 @@
 */
 
 import moment = require("esri/moment");
-import { Moment } from "moment";
 
 type Duration = moment.Duration;
+type Moment = moment.Moment;
 
 /**
  * Simply returns the current moment
