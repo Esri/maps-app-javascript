@@ -1,3 +1,4 @@
+import intern from "intern";
 import "./app/Application";
 import "./app/mapactions/navRotation";
 import "./app/mapactions/reverseGeocode";

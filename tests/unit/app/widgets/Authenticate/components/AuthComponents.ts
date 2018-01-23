@@ -1,5 +1,3 @@
-import {} from "intern";
-
 import {
   AuthStatus,
   SignIn,

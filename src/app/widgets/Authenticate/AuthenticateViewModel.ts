@@ -93,7 +93,7 @@ class AuthenticateViewModel extends declared(Accessor) {
   }
 
   /**
-   * Check if there is a current OAuthInfo and take
+   * Check if there has a current OAuthInfo and take
    * user through the steps of signing in.
    */
   signIn() {
