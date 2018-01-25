@@ -21,7 +21,7 @@
     "arcgis",
     "typescript"
   ],
-  "author": "Rene Rubalcava <rrubalcava@esri.com",
+  "author": "Rene Rubalcava <rrubalcava@esri.com>",
   "license": "Apache-2.0",
   "devDependencies": {
     "@theintern/istanbul-loader": "^1.0.0-beta.1",
