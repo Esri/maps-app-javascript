@@ -36,8 +36,8 @@ import Search = require("esri/widgets/Search");
 import Track = require("esri/widgets/Track");
 
 import Alert from "./widgets/Alert";
-import Browser from "./widgets/Browser";
 import UserNav from "./widgets/UserNav";
+import WebMapBrowser from "./widgets/WebMapBrowser";
 
 import { declared, property, subclass } from "esri/core/accessorSupport/decorators";
 
@@ -138,7 +138,7 @@ class Application extends declared(Accessor) {
 
     expandWidgets.addMany([directionsExpand, basemapExpand]);
 
-    const browser = new Browser({
+    const browser = new WebMapBrowser({
       container: element(),
       view
     });

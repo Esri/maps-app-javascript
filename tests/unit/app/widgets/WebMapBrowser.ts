@@ -1,11 +1,11 @@
-import Browser from "../../../../src/app/widgets/Browser";
+import WebMapBrowser from "../../../../src/app/widgets/WebMapBrowser";
 
 import td = require("testdouble");
 
 const { suite, test } = intern.getInterface("tdd");
 const { assert } = intern.getPlugin("chai");
 
-suite("app/widgets/Browser", () => {
+suite("app/widgets/WebMapBrowser", () => {
   test("when webmap selected, will ask view model to change it in view", () => {
     const items = [
       {
@@ -22,7 +22,7 @@ suite("app/widgets/Browser", () => {
       }
     ];
     const changeWebmap = td.function();
-    const browser = new Browser({ items });
+    const browser = new WebMapBrowser({ items });
     (browser.viewModel as any).changeWebmap = changeWebmap;
     const mockEvent = {
       currentTarget: {

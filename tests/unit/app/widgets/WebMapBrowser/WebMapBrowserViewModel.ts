@@ -3,18 +3,18 @@
 
 import MapView = require("esri/views/MapView");
 
-import BrowserViewModel from "../../../../../src/app/widgets/Browser/BrowserViewModel";
+import WebMapBrowserViewModel from "../../../../../src/app/widgets/WebMapBrowser/WebMapBrowserViewModel";
 
 import td = require("testdouble");
 
 const { beforeEach, suite, test } = intern.getInterface("tdd");
 const { assert } = intern.getPlugin("chai");
 
-suite("app/widgets/Browser/BrowserViewModel", () => {
-  let vm: BrowserViewModel;
+suite("app/widgets/WebMapBrowser/WebMapBrowserViewModel", () => {
+  let vm: WebMapBrowserViewModel;
 
   beforeEach(() => {
-    vm = new BrowserViewModel({
+    vm = new WebMapBrowserViewModel({
       view: new MapView()
     } as any);
     vm.portal.user = {

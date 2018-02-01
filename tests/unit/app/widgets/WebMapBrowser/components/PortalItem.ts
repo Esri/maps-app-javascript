@@ -1,14 +1,14 @@
 import {
   PortalItem,
   PortalItemProps
-} from "../../../../../../src/app/widgets/Browser/components/PortalItem";
+} from "../../../../../../src/app/widgets/WebMapBrowser/components/PortalItem";
 
 import td = require("testdouble");
 
 const { suite, test } = intern.getInterface("tdd");
 const { assert } = intern.getPlugin("chai");
 
-suite("app/widgets/Browser/components/PortalItem", () => {
+suite("app/widgets/WebMapBrowser/components/PortalItem", () => {
   test("Can create a Portal Item card from Portal Item props given", () => {
     const props: PortalItemProps = {
       key: 42,

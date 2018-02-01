@@ -21,8 +21,8 @@ import { join, renderable, tsx } from "esri/widgets/support/widget";
 import MapView = require("esri/views/MapView");
 import Widget = require("esri/widgets/Widget");
 
-import BrowserViewModel from "./Browser/BrowserViewModel";
-import { PortalItem } from "./Browser/components/PortalItem";
+import { PortalItem } from "./WebMapBrowser/components/PortalItem";
+import WebMapBrowserViewModel from "./WebMapBrowser/WebMapBrowserViewModel";
 
 import { asMonthDayYear } from "../utils/dateUtils";
 
@@ -33,12 +33,12 @@ const CSS = {
   container: "browser__item-container"
 };
 
-@subclass("app.widgets.Browser")
-class Browser extends declared(Widget) {
+@subclass("app.widgets.WebMapBrowser")
+class WebMapBrowser extends declared(Widget) {
   @property({
-    type: BrowserViewModel
+    type: WebMapBrowserViewModel
   })
-  viewModel = new BrowserViewModel();
+  viewModel = new WebMapBrowserViewModel();
 
   @aliasOf("viewModel.view") view: MapView;
 
@@ -72,4 +72,4 @@ class Browser extends declared(Widget) {
   }
 }
 
-export default Browser;
+export default WebMapBrowser;
