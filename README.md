@@ -95,7 +95,7 @@ Anyone and everyone is welcome to [contribute](CONTRIBUTING.md). We do accept pu
 4. Improve documentation
 
 ## Licensing
-Copyright 2017 Esri
+Copyright 2018 Esri
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 
