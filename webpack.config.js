@@ -5,8 +5,12 @@ const moduleConfig = require("./webpack/module.config");
 const plugins = require("./webpack/plugins.config");
 const devServer = require("./webpack/devserver.config");
 const externals = require("./webpack/externals.config");
+const testConfig = require("./webpack/test.config");
 
 module.exports = function(env, options) {
+  if (env.test) {
+    return testConfig;
+  }
   const config = {
     entry: [
       "./src/app/main.ts",
@@ -26,7 +30,7 @@ module.exports = function(env, options) {
 
     resolve: {
       modules: [path.resolve(__dirname, "/src"), "node_modules/"],
-      extensions: [".ts", ".tsx", ".js", ".css"]
+      extensions: [".ts", ".tsx", ".js", ".css", "scss"]
     },
 
     module: moduleConfig(...arguments),
