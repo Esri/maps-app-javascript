@@ -36,7 +36,7 @@ please use the provided issue template when creating your issue.
 Please read the instructions provided in the [readme](https://github.com/Esri/maps-app-javascript/blob/master/README.md) to set up your development environment.
 
 #### Fork the repo
-If you haven't already, got to https://github.com/Esri/maps-app-javascript and click the [Fork](https://github.com/Esri/maps-app-javascript/fork) button.
+If you haven't already, go to https://github.com/Esri/maps-app-javascript and click the [Fork](https://github.com/Esri/maps-app-javascript/fork) button.
 
 #### Clone the repo
 Clone the repo and run `npm install`.
