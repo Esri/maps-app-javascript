@@ -60,4 +60,4 @@ $ git fetch upstream
 # Pulls in changes not present in your local repository, without modifying your files
 ```
 
-* Ask the Esri community on [GeoNet](https://geonet.esri.com/community/developers/web-developers/arcgis-api-for-javascript)
+* Ask the Esri community in the Example Apps Group on [GeoNet](https://community.esri.com/groups/arcgis-example-apps).
