@@ -8,7 +8,6 @@
     "module": "amd",
     "noImplicitAny": true,
     "removeComments": true,
-    "sourceMap": true,
     "jsx": "react",
     "jsxFactory": "tsx",
     "lib": ["dom", "es2015.promise", "es5", "es6"],
@@ -23,19 +22,12 @@
     "suppressImplicitAnyIndexErrors": true,
     "strictNullChecks": true
   },
-  "typeRoots": [
-    "./node_modules/@types",
-    "./node_modules/intern/types"
-  ],
   "types": [
     "arcgis-js-api",
-    "moment",
-    "chai",
-    "intern"
+    "moment"
   ],
   "include": [
-    "./src/app/**/*",
-    "./tests/**/*"
+    "src/**/*.ts"
   ],
   "exclude": [
     "./node_modules"

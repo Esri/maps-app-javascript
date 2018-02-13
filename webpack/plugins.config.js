@@ -15,6 +15,7 @@ const WebPWebpackPlugin = require("webp-webpack-plugin");
 const workboxPlugin = require("workbox-webpack-plugin");
 const WebpackPwaManifest = require("webpack-pwa-manifest");
 const PrettierPlugin = require("prettier-webpack-plugin");
+const HardSourceWebpackPlugin = require("hard-source-webpack-plugin");
 
 const html = require("./html.config");
 const sw = require("./sw.config");
@@ -23,6 +24,7 @@ const dist = path.resolve(__dirname, "../dist");
 module.exports = function(env, options) {
   let htmls = html(env, options).map(x => new HtmlWebpackPlugin(x));
   let plugins = [
+    new HardSourceWebpackPlugin(),
     ...htmls,
     new WebpackPwaManifest({
       name: "ArcGIS Maps App JavaScript",

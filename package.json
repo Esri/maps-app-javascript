@@ -45,6 +45,7 @@
     "cssnano": "^4.0.0-rc.2",
     "del-cli": "^1.0.0",
     "extract-text-webpack-plugin": "^3.0.2",
+    "hard-source-webpack-plugin": "^0.5.18",
     "html-webpack-plugin": "^2.30.1",
     "http-server": "^0.11.1",
     "husky": "^0.14.3",

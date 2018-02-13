@@ -10,8 +10,7 @@ module.exports = function() {
         test: /\.tsx?$/,
         loader: "awesome-typescript-loader",
         options: {
-          transpileOnly: true,
-          configFileName: "tsconfig.build.json"
+          transpileOnly: true
         }
       },
       {
