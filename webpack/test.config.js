@@ -1,5 +1,6 @@
 const path = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const externals = require("./externals.config");
 
 module.exports = {
   entry: {
@@ -39,15 +40,5 @@ module.exports = {
     ])
   ],
 
-  externals: [
-    (context, request, callback) => {
-      if (/^dojo/.test(request) || /^esri/.test(request)) {
-        if (request.includes("dojo/i18n!.")) {
-          request = request.replace(/^dojo\/i18n!\./, "dojo/i18n!./widgets");
-        }
-        return callback(null, "amd " + request);
-      }
-      callback();
-    }
-  ]
+  externals: externals
 };
