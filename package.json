@@ -6,7 +6,7 @@
     "precommit": "lint-staged",
     "copy:js": "cpx './src/**/*.js' ./~tmp/src",
     "build": "del-cli dist && webpack --env.NODE_ENV=local --env.production --progress && http-server ./dist -p 9000 -g --cors -o",
-    "start": "del-cli dist && webpack --env.dev && webpack-dev-server --env.dev --hot",
+    "start": "webpack-dev-server --env.dev --hot",
     "test": "del-cli ~tmp && webpack --env.test && intern && del-cli ~tmp"
   },
   "lint-staged": {
