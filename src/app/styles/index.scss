@@ -1,5 +1,5 @@
 :root {
-  --color-theme: $light-gray;
+  --color-theme: #767676;
   --color-theme-font: $white;
 }
 
@@ -13,7 +13,7 @@ body {
   flex-direction: column;
   letter-spacing: 0em;
   font-family: "Avenir Next", "Helvetica Neue", sans-serif;
-  line-height: 1.55rem;
+  font-size: 14px;
   font-feature-settings: "liga" 1, "calt" 0;
 }
 
