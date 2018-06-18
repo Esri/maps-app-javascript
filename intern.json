@@ -1,55 +1,4 @@
 {
-  "loader": {
-    "script": "dojo2",
-    "options": {
-      "packages": [
-        { "name": "dist", "location": "~tmp" },
-        {
-          "name": "dojo",
-          "location": "https://js.arcgis.com/4.6/dojo"
-        },
-        {
-          "name": "dijit",
-          "location": "https://js.arcgis.com/4.6/dijit"
-        },
-        {
-          "name": "dojox",
-          "location": "https://js.arcgis.com/4.6/dojox"
-        },
-        {
-          "name": "dgrid",
-          "location": "https://js.arcgis.com/4.6/dgrid"
-        },
-        {
-          "name": "dstore",
-          "location": "https://js.arcgis.com/4.6/dstore"
-        },
-        {
-          "name": "moment",
-          "location": "https://js.arcgis.com/4.6/moment"
-        },
-        {
-          "name": "esri",
-          "location": "https://js.arcgis.com/4.6/esri"
-        },
-        {
-          "name": "chai",
-          "location": "node_modules/chai",
-          "main": "chai"
-        },
-        {
-          "name": "sinon",
-          "location": "node_modules/sinon/pkg",
-          "main": "sinon"
-        },
-        {
-          "name": "testdouble",
-          "location": "node_modules/testdouble/dist",
-          "main": "testdouble"
-        }
-      ]
-    }
-  },
   "environments": [
     {
       "browserName": "chrome",
@@ -57,16 +6,5 @@
       "fixSessionCapabilities": "no-detect"
     }
   ],
-  "suites": "~tmp/tests.js",
-  "instrumenterOptions": {
-    "esModules": true
-  },
-  "reporters": ["pretty", "lcov"],
-  "coverage": [
-    "~tmp/app/init.js",
-    "!node_modules/*",
-    "!tests/*",
-    "!~tmp/webpack:*"
-  ],
-  "maxConcurrency": 2
+  "suites": "~tmp/tests.js"
 }

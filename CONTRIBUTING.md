@@ -43,11 +43,12 @@ Clone the repo and run `npm install`.
 
 * _NOTE FOR WINDOWS USERS_ - You will need to install the [Windows-Build-Tools](https://github.com/felixrieseberg/windows-build-tools) to compile npm modules for this project. `npm install --global --production windows-build-tools`
 
-* `npm start` - compile application and run it in a local server at `http://127.0.0.1:8080`.
-* `npm run build` - compile application for deployment that can be viewed at `http://127.0.0.1:9000`.
-* `npm test` - run unit tests and code coverage with local chrome driver.
+* `npm start` - compile application and run it in a local server at `http://localhost:8080/`.
+* `npm run build` - compile application for deployment.
+* `npm test` - run unit tests with local chrome driver.
+* `npm run serve` - Run a production build of the application, but serve it up locally to see how the built app will behave.
 
-The ports for running the local server can be updated in `webpack/devserver.config.js` for dev and `package.json` for build.
+Use `npm run serve` to full test that Service Workers are working correctly with `webpack-dev-server` self signed certifcates. Refer to [this article](https://deanhume.com/testing-service-workers-locally-with-self-signed-certificates/) on how to run Chrome with proper flags enabled for development purposes. 
 
 #### Configure remotes
 Move into the directory the cloning process just created (should be maps-app-javascript), then make sure your local git knows about all the remotes and branches.

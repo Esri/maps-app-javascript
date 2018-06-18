@@ -11,6 +11,7 @@
       "no-public"
     ],
     "no-empty": false,
+    "no-unused-expression": false,
     "no-submodule-imports": false,
     "object-literal-sort-keys": false,
     "one-line": [false],

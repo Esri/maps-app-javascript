@@ -9,6 +9,7 @@ html-report/*
 .tscache
 npm-debug.log
 yarn.lock
+package-lock.json
 coverage-final.*
 .firebaserc
 firebase.json

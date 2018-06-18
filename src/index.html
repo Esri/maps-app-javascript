@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>ArcGIS Maps App</title>
+  <script>
+    // Check that service workers are registered
+    if ('serviceWorker' in navigator) {
+      // Use the window load event to keep the page load performant
+      window.addEventListener("load", function() {
+        navigator.serviceWorker.register("./service-worker.js");
+      });
+    }
+  </script>
+</head>
+<body>
+  <header class="top-nav fade-in">
+    <span class="top-nav-title margin-left-1">ArcGIS <span class="phone-hide">Maps App</span></span>
+    <user-nav></user-nav>
+  </header>
+
+  <noscript> JavaScript is required in order to use this app </noscript>
+
+  <main class="main">
+    <webmap>
+      <div class="loader is-active padding-leader-3 padding-trailer-3">
+        <div class="loader-bars"></div>
+      </div>
+    </webmap>
+  </main>
+  <alert></alert>
+</body>
+</html>
+

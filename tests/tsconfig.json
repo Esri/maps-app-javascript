@@ -2,7 +2,7 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
       "baseUrl": "..",
-      "types": [ "intern" ]
+      "types": [ "arcgis-js-api", "intern", "sinon" ]
   },
   "include": [
       "./**/*.ts"
