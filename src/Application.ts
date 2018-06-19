@@ -117,10 +117,7 @@ class Application extends declared(Accessor) {
 
     const search = new Search({ view });
 
-    const basemapGallery = new BasemapGallery({
-      container: element(),
-      view
-    });
+    const basemapGallery = new BasemapGallery({ view });
 
     const directionsExpand = new Expand({
       view,
@@ -130,18 +127,14 @@ class Application extends declared(Accessor) {
 
     const basemapExpand = new Expand({
       view,
-      content: basemapGallery.container,
+      content: basemapGallery,
       expandIconClass: "esri-icon-basemap",
       group: "right"
     });
 
     expandWidgets.addMany([directionsExpand, basemapExpand]);
 
-    const browser = new WebMapBrowser({
-      container: element(),
-      view
-    });
-
+    const browser = new WebMapBrowser({ view });
     const compass = new Compass({ view });
     const home = new Home({ view });
     const locate = new Locate({ view, scale: 1000 });
@@ -167,18 +160,17 @@ class Application extends declared(Accessor) {
     // add the Directions widget to the application
     whenTrueOnce(this, "signedIn").then(() => {
       const directions = new Directions({
-        container: element(),
         view,
         searchProperties: {
           popupEnabled: true
         }
       });
-      directionsExpand.content = directions.container;
+      directionsExpand.content = directions;
       directionsHandle.remove();
       alertMessage.close();
       const browserExpand = new Expand({
         view,
-        content: browser.container,
+        content: browser,
         expandIconClass: "esri-icon-collection",
         group: "right"
       });

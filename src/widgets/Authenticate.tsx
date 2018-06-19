@@ -121,4 +121,4 @@ class Authenticate extends declared(Widget) {
   }
 }
 
-export = Authenticate;
+export default Authenticate;

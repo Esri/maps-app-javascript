@@ -5,6 +5,7 @@
     "@theintern/istanbul-loader": "^1.0.0-beta.2",
     "@types/arcgis-js-api": "^4.7.0",
     "@types/sinon": "^5.0.1",
+    "appcache-webpack-plugin": "^1.4.0",
     "clean-webpack-plugin": "^0.1.19",
     "copy-webpack-plugin": "4.5.1",
     "css-loader": "^0.28.11",

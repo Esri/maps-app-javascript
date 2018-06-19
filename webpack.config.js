@@ -1,3 +1,4 @@
+const AppCachePlugin = require("appcache-webpack-plugin");
 const ArcGISPlugin = require("@arcgis/webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
@@ -95,6 +96,12 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(["dist"]),
+
+    new AppCachePlugin({
+      network: ["*"],
+      settings: ["prefer-online"],
+      output: "manifest.appcache"
+    }),
 
     new ArcGISPlugin({
       // disable provided asset loaders
