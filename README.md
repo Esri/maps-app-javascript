@@ -3,7 +3,7 @@
 
 # Maps App JavaScipt
 
-This repo provides an example app called Maps App that can be used as as starter for your organizations mapping app built with [ArcGIS API 4 for JavaScript](https://developers.arcgis.com/javascript/). You can use the Maps App as is, or extend it using the ArcGIS API for JavaScript.
+This repo provides an example app called [Maps App](https://developers.arcgis.com/example-apps/maps-app-javascript/?utm_source=github&utm_medium=web&utm_campaign=example_apps_maps_app_javascript) that can be used as as starter for your organizations mapping app built with [ArcGIS API 4 for JavaScript](https://developers.arcgis.com/javascript/). You can use the Maps App as is, or extend it using the ArcGIS API for JavaScript.
 
 ## Features
  * Dynamically switch basemaps
