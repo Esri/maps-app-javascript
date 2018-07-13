@@ -54,7 +54,7 @@
     ]
   },
   "dependencies": {
-    "@arcgis/webpack-plugin": "^4.7.9",
+    "@arcgis/webpack-plugin": "^4.8.1",
     "calcite-web": "github:Esri/calcite-web#v1.0.1",
     "tslib": "^1.9.2"
   },
