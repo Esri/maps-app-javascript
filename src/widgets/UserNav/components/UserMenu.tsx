@@ -13,7 +13,7 @@
 
 import { tsx } from "esri/widgets/support/widget";
 
-import i18n from "dojo/i18n!./../nls/UserMenu.js";
+import i18n from "dojo/i18n!./../nls/UserMenu";
 
 export const upper: (s: string) => string = s => s.toUpperCase();
 

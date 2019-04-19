@@ -5,7 +5,7 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const HtmlWebpackInlineSourcePlugin = require("html-webpack-inline-source-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 const WebpackPwaManifest = require("webpack-pwa-manifest");
 const WorkboxPlugin = require("workbox-webpack-plugin");
 
@@ -26,10 +26,15 @@ module.exports = function(_, arg) {
     },
     optimization: {
       minimizer: [
-        new UglifyJsPlugin({
+        new TerserPlugin({
           cache: true,
           parallel: true,
-          sourceMap: false
+          sourceMap: false,
+          terserOptions: {
+            output: {
+              comments: false
+            }
+          }
         }),
         new OptimizeCSSAssetsPlugin({
           cssProcessorOptions: {
@@ -96,7 +101,7 @@ module.exports = function(_, arg) {
       ]
     },
     plugins: [
-      new CleanWebpackPlugin(["dist"]),
+      new CleanWebpackPlugin(),
   
       new ArcGISPlugin({
         // disable provided asset loaders

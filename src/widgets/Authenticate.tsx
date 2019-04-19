@@ -28,7 +28,7 @@ import {
   SignOut
 } from "./Authenticate/components/AuthComponents";
 
-import i18n from "dojo/i18n!./Authenticate/nls/Authenticate.js";
+import i18n from "dojo/i18n!./Authenticate/nls/Authenticate";
 
 import esri = __esri;
 
