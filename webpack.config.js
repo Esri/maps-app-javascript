@@ -161,7 +161,7 @@ module.exports = function(_, arg) {
   };
 
   if (arg.mode === "production") {
-    config.plugins.puch(
+    config.plugins.push(
       new AppCachePlugin({
         network: ["*"],
         settings: ["prefer-online"],
