@@ -1,6 +1,6 @@
 {
-  "name": "awesome",
-  "version": "0.0.1",
+  "name": "maps-app-javascript",
+  "version": "1.0.2",
   "devDependencies": {
     "@types/arcgis-js-api": "~4.11.0",
     "@types/sinon": "^7.0.11",
