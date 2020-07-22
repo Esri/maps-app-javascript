@@ -4,6 +4,19 @@ Get your organization's authoritative map data into the hands of your workers wi
 
 This example application is open source so grab the code and either configure the app for your organization, or just learn how to integrate similar capabilities into your own app!
 
+<!-- MDTOC maxdepth:6 firsth1:0 numbering:0 flatten:0 bullets:1 updateOnSave:1 -->
+
+- [Functionality showcased](#functionality-showcased)   
+- [Using web maps](#using-web-maps)   
+- [Accessing your organization's basemaps](#accessing-your-organizations-basemaps)   
+- [Identity](#identity)   
+- [Place search](#place-search)   
+- [Reverse geocoding](#reverse-geocoding)   
+- [Route](#route)   
+
+<!-- /MDTOC -->
+---
+
 ## Functionality showcased
 
 - Switching basemaps
@@ -15,7 +28,7 @@ This example application is open source so grab the code and either configure th
 
 ![Application](./images/application.png)
 
-# Using web maps
+## Using web maps
 
 You can author your own web maps from ArcGIS Online or ArcGIS Pro and share them in your app via your ArcGIS Online organization. This is the central power of the Web GIS model built into ArcGIS. Building an app which uses a web map allows the cartography and map configuration to be completed in ArcGIS Online rather than in code. This then allows the map to change over time, without any code changes or app updates. Learn more about the benefits of developing with web maps [here](https://developers.arcgis.com/web-map-specification/). Also, learn about authoring web maps in [ArcGIS Online](http://doc.arcgis.com/en/arcgis-online/create-maps/make-your-first-map.htm) and [ArcGIS Pro](http://pro.arcgis.com/en/pro-app/help/mapping/map-authoring/author-a-basemap.htm).
 
@@ -41,7 +54,7 @@ class Application extends declared(Accessor) {
 
 ![Webmap Browser](./images/webmap-browser.png)
 
-# Accessing your organization's basemaps
+## Accessing your organization's basemaps
 
 As an administrator of an ArcGIS Online organization or Portal you can configure the basemaps that your users can switch between via a [group](http://doc.arcgis.com/en/arcgis-online/share-maps/share-items.htm). Applications can leverage this configuration using the [Portal API](https://developers.arcgis.com/javascript/latest/api-reference/esri-portal-Portal.html). The Maps App uses the [BasemapGallery](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-BasemapGallery.html) widget from the ArcGIS API 4 for JavaScript.
 
@@ -54,7 +67,7 @@ const basemapGallery = new BasemapGallery({
 });
 ```
 
-# Identity
+## Identity
 
 The Maps App leverages the ArcGIS [identity](https://developers.arcgis.com/authentication/) model to provide access to resources via the [named user](https://developers.arcgis.com/authentication/#named-user-login) login pattern.
 
@@ -83,7 +96,7 @@ export const appId = "<APP-ID>";
 export const portalUrl = "https://arcgis.com"; // default Portal URL
 ```
 
-# Place search
+## Place search
 
 The [Search](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Search.html) widget is utilized to let you transform an address or a place name to a specific geographic location. The reverse lets you use a geographic location to find a description of the location, like a postal address or place name. The Search widget performs geocoding and reverse geocoding functions provided by [Esri's World Geocoding Service](https://developers.arcgis.com/features/geocoding/).
 
@@ -91,7 +104,7 @@ You can customize the [sources](https://developers.arcgis.com/javascript/latest/
 
 [Suggestions](https://developers.arcgis.com/rest/geocode/api-reference/geocoding-suggest.htm) are supported out-of-the-box with the [Search widget](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Search.html#suggestions). You can customize the [min](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Search.html#minSuggestCharacters) and [max](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Search.html#maxSuggestions) suggestions returned if not defined by custom sources you provide.
 
-# Reverse geocoding
+## Reverse geocoding
 
 The Map App uses the [`"hold"`](https://developers.arcgis.com/javascript/latest/api-reference/esri-views-MapView.html#event:hold) event of the [MapView](https://developers.arcgis.com/javascript/latest/api-reference/esri-views-MapView.html) and sends the selected location to the [search](https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Search.html#search) method of the of the Search widget to reverse geocode the selected location..
 
@@ -126,7 +139,7 @@ export class ReverseGeocode extends declared(MapAction)<esri.SearchResponse> {
 
 ```
 
-# Route
+## Route
 
 Getting navigation [directions](https://developers.arcgis.com/features/directions/) in the maps-app is just as easy in the [ArcGIS API for JavaScript](https://developers.arcgis.com/javascript/latest/index.html) as it is on [ArcGIS Online](http://doc.arcgis.com/en/arcgis-online/use-maps/get-directions.htm). You can [customize](http://doc.arcgis.com/en/arcgis-online/administer/configure-services.htm#ESRI_SECTION1_567C344D5DEE444988CA2FE5193F3CAD) your navigation services for your organization, add new travel modes that better reflect your organization’s workflows, or remove travel modes that are not suitable for your organization’s workflows.
 
