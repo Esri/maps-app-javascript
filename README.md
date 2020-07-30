@@ -116,7 +116,7 @@ Anyone and everyone is welcome to [contribute](CONTRIBUTING.md). We do accept pu
 
 ## MDTOC
 
-Generation a table of contents in this repository was performed using the [MDTOC package for Atom](https://atom.io/packages/atom-mdtoc).
+Generation of this and other documents' table of contents in this repository was performed using the [MDTOC package for Atom](https://atom.io/packages/atom-mdtoc).
 
 ## Licensing
 
