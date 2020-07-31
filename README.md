@@ -1,11 +1,25 @@
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
-
 # Maps App JavaScipt
 
 This repo provides an example app called [Maps App](https://developers.arcgis.com/example-apps/maps-app-javascript/?utm_source=github&utm_medium=web&utm_campaign=example_apps_maps_app_javascript) that can be used as as starter for your organizations mapping app built with [ArcGIS API 4 for JavaScript](https://developers.arcgis.com/javascript/). You can use the Maps App as is, or extend it using the ArcGIS API for JavaScript.
 
+<!-- MDTOC maxdepth:6 firsth1:0 numbering:0 flatten:0 bullets:1 updateOnSave:1 -->
+
+- [Features](#features)   
+- [Detailed Documentation](#detailed-documentation)   
+- [Usage](#usage)   
+- [Demo](#demo)   
+- [Issues](#issues)   
+- [Contributing](#contributing)   
+- [MDTOC](#mdtoc)   
+- [Licensing](#licensing)   
+
+<!-- /MDTOC -->
+---
+
 ## Features
+
  * Dynamically switch basemaps
  * Place search
  * Directions
@@ -23,6 +37,10 @@ This application also uses [Workbox for Webpack](https://developers.google.com/w
 
 Feel free to use this project as a starting point for your own applications!
 
+## Detailed Documentation
+
+Read the [docs](./docs/README.md) for a detailed explanation of the application, including its architecture and how it leverages the ArcGIS platform, as well as how you can begin using the app right away.
+
 ## Usage
 
 Clone the repo and run `npm install`.
@@ -34,7 +52,7 @@ Clone the repo and run `npm install`.
 * `npm test` - run unit tests with local chrome driver.
 * `npm run serve` - Run a production build of the application, but serve it up locally to see how the built app will behave.
 
-Use `npm run serve` to full test that Service Workers are working correctly with `webpack-dev-server` self signed certifcates. Refer to [this article](https://deanhume.com/testing-service-workers-locally-with-self-signed-certificates/) on how to run Chrome with proper flags enabled for development purposes. 
+Use `npm run serve` to full test that Service Workers are working correctly with `webpack-dev-server` self signed certifcates. Refer to [this article](https://deanhume.com/testing-service-workers-locally-with-self-signed-certificates/) on how to run Chrome with proper flags enabled for development purposes.
 
 * Login to [ArcGIS for Developers](https://developers.arcgis.com/) and [register](https://developers.arcgis.com/applications/#/) your app to create an Client ID.
 
@@ -84,9 +102,11 @@ When you deploy your application, do not use the same Application ID for develop
 ![application](images/maps-app.gif)
 
 ## Issues
+
 Find a bug or want to request a new feature enhancement?  Let us know by submitting an issue.
 
 ## Contributing
+
 Anyone and everyone is welcome to [contribute](CONTRIBUTING.md). We do accept pull requests.
 
 1. Get involved
@@ -94,7 +114,12 @@ Anyone and everyone is welcome to [contribute](CONTRIBUTING.md). We do accept pu
 3. Contribute code
 4. Improve documentation
 
+## MDTOC
+
+Generating table of contents for documents in this repository was performed using the [MDTOC package for Atom](https://atom.io/packages/atom-mdtoc).
+
 ## Licensing
+
 Copyright 2018 Esri
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
